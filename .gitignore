@@ -1,0 +1,24 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+#mac os
+*.DS_Store
+
+#windows
+*.exe
+
+#XCode 
+QingLibCocos2dx.xcodeproj/project.xcworkspace/
+QingLibCocos2dx.xcodeproj/xcuserdata/
+

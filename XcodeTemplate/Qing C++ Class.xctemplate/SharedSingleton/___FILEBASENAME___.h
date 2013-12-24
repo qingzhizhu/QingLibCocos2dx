@@ -1,0 +1,32 @@
+//
+//  ___FILENAME___
+//  ___PROJECTNAME___
+//
+//  Created by ___FULLUSERNAME___ on ___DATE___.
+//___COPYRIGHT___
+//
+/// 单利类
+
+#ifndef _____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____
+#define _____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____
+
+#include "Common.h"
+
+NS_QING_BEGIN
+
+class ___FILEBASENAMEASIDENTIFIER___
+{
+public:
+	static ___FILEBASENAMEASIDENTIFIER___ * shared();
+	void purge();
+
+private:
+	___FILEBASENAMEASIDENTIFIER___();
+	virtual ~___FILEBASENAMEASIDENTIFIER___();
+	___FILEBASENAMEASIDENTIFIER___(const ___FILEBASENAMEASIDENTIFIER___ &);
+    ___FILEBASENAMEASIDENTIFIER___ &operator=(const ___FILEBASENAMEASIDENTIFIER___ &);
+};
+
+NS_QING_END
+
+#endif /* defined(_____PROJECTNAMEASIDENTIFIER________FILEBASENAMEASIDENTIFIER_____) */
