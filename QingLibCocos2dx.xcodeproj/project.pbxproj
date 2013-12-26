@@ -284,6 +284,7 @@
 		0A1EA237186BFEDE00C50BCE /* TestBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA235186BFEDE00C50BCE /* TestBaseObject.cpp */; };
 		0A1EA23C186C076900C50BCE /* TestController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23A186C076800C50BCE /* TestController.cpp */; };
 		0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23D186C0BDF00C50BCE /* VisibleRect.cpp */; };
+		0A1EA242186C3B6100C50BCE /* TestBaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA240186C3B6100C50BCE /* TestBaseLayer.cpp */; };
 		0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B1E0F18686E580088924F /* TestDemo.cpp */; };
 /* End PBXBuildFile section */
 
@@ -887,6 +888,8 @@
 		0A1EA23B186C076800C50BCE /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		0A1EA23D186C0BDF00C50BCE /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VisibleRect.cpp; sourceTree = "<group>"; };
 		0A1EA23E186C0BDF00C50BCE /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisibleRect.h; sourceTree = "<group>"; };
+		0A1EA240186C3B6100C50BCE /* TestBaseLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestBaseLayer.cpp; sourceTree = "<group>"; };
+		0A1EA241186C3B6100C50BCE /* TestBaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestBaseLayer.h; sourceTree = "<group>"; };
 		0A4B1E0F18686E580088924F /* TestDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDemo.cpp; sourceTree = "<group>"; };
 		0ADB53E2186834AD002E8DC3 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		0ADB53E918683B4E002E8DC3 /* TestDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDemo.h; sourceTree = "<group>"; };
@@ -2143,6 +2146,8 @@
 				0A1EA239186C033D00C50BCE /* test.h */,
 				0A1EA23A186C076800C50BCE /* TestController.cpp */,
 				0A1EA23B186C076800C50BCE /* TestController.h */,
+				0A1EA240186C3B6100C50BCE /* TestBaseLayer.cpp */,
+				0A1EA241186C3B6100C50BCE /* TestBaseLayer.h */,
 			);
 			name = demo;
 			path = Classes/demo;
@@ -2475,6 +2480,7 @@
 				0A1EA237186BFEDE00C50BCE /* TestBaseObject.cpp in Sources */,
 				0A1EA23C186C076900C50BCE /* TestController.cpp in Sources */,
 				0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */,
+				0A1EA242186C3B6100C50BCE /* TestBaseLayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

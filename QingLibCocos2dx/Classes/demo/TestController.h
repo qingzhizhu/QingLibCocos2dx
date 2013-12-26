@@ -10,6 +10,7 @@
 #define __QingLibCocos2dx__TestController__
 
 #include "Common.h"
+#include "VisibleRect.h"
 
 NS_QING_BEGIN
 

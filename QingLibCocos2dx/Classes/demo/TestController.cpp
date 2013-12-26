@@ -8,13 +8,32 @@
 
 #include "TestController.h"
 #include "test.h"
-#include "VisibleRect.h"
+#include "TestBaseLayer.h"
 
 #define LINE_SPACE          40
 
 USING_NS_QING;
 
 
+static TestBaseLayer* CreateTestScene(int index){
+    CCDirector::sharedDirector()->purgeCachedData();
+    
+    TestBaseLayer* layer = NULL;
+    switch (index) {
+        case TESTS_MYDEMO:
+            layer = TestBaseLayer::create();
+            break;
+            
+        default:
+            break;
+    }
+    
+    return layer;
+}
+
+
+
+//---------------
 static CCPoint s_tCurPos = CCPointZero;
 
 
@@ -47,9 +66,13 @@ TestController::TestController()
     
     //add menu ites for tests
     m_pItemMenu = CCMenu::create();
-    for (int i=0; i < TESTS_COUNT; i++) {
-        
+    for (int i=0; i < TESTS_COUNT; i++) {        
+        //add the menu item for back to main menu
+        //#if (CC_TARGET_PLATFORM == CC_PLATFORM_MARMALADE)
+        //CCLabelBMFont* label = CCLabelBMFont::create("MainMenu",  "fonts/arial16.fnt");
+        //#else
         CCLabelTTF* label = CCLabelTTF::create(g_aTestNames[i].c_str(), "Arial", 24);
+        //#endif
         
         CCMenuItemLabel* pMenuItemLabel = CCMenuItemLabel::create(label, this, menu_selector(TestController::menuCallback));
         
@@ -84,7 +107,12 @@ void TestController::menuCallback(cocos2d::CCObject *pSender)
     CCMenuItem* pMenuItem = (CCMenuItem *)(pSender);
     int nIdx = pMenuItem->getTag() - 10000;
     CCLOG("click menu index = %d", nIdx);
-    
+    // create the test scene and run it
+    TestBaseLayer* layer = CreateTestScene(nIdx);
+    if (layer)
+    {
+        layer->runThisLayer();
+    }
     
 }
 
