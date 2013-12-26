@@ -53,6 +53,7 @@
 			<key>Values</key>
 			<array>
 				<string>None</string>
+				<string>BaseObject</string>
 				<string>WithCreateFunc</string>
 				<string>SharedSingleton</string>
 				

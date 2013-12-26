@@ -11,6 +11,7 @@
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "HelloWorldScene.h"
+#include "TestController.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -37,7 +38,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     pDirector->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    CCScene *pScene = HelloWorld::scene();
+//    CCScene *pScene = HelloWorld::scene();
+    //测试demo
+    CCScene * pScene = CCScene::create();
+    pScene->addChild(QingCocos2dx::TestController::create());
 
     // run
     pDirector->runWithScene(pScene);

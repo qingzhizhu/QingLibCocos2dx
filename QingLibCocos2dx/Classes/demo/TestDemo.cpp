@@ -7,6 +7,7 @@
 //
 
 #include "TestDemo.h"
+#include "TestBaseObject.h"
 
 //using namespace QingCocos2dx;
 USING_NS_QING;
