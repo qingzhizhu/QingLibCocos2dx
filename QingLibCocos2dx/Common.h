@@ -30,4 +30,8 @@ using namespace std;
 
 
 
+#define FONT_NAME "Arial"
+#define FONT_SIZE 24
+
+
 #endif

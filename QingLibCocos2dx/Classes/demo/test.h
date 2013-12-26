@@ -10,6 +10,8 @@
 #ifndef QingLibCocos2dx_test_h
 #define QingLibCocos2dx_test_h
 
+#include "TestMyDemo.h"
+
 enum{
     TESTS_MYDEMO = 0,
     TESTS_MYDEMO1,

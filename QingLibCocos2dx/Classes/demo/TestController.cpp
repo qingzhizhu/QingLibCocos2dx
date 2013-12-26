@@ -21,7 +21,7 @@ static TestBaseLayer* CreateTestScene(int index){
     TestBaseLayer* layer = NULL;
     switch (index) {
         case TESTS_MYDEMO:
-            layer = TestBaseLayer::create();
+            layer = TestMyDemo::create();
             break;
             
         default:
