@@ -281,7 +281,6 @@
 		0A00B2D51864417B00775320 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B2D41864417B00775320 /* AppDelegate.cpp */; };
 		0A00B2D81864417B00775320 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B2D71864417B00775320 /* HelloWorldScene.cpp */; };
 		0A1EA22B186BF7C800C50BCE /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA229186BF7C800C50BCE /* BaseObject.cpp */; };
-		0A1EA237186BFEDE00C50BCE /* TestBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA235186BFEDE00C50BCE /* TestBaseObject.cpp */; };
 		0A1EA23C186C076900C50BCE /* TestController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23A186C076800C50BCE /* TestController.cpp */; };
 		0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23D186C0BDF00C50BCE /* VisibleRect.cpp */; };
 		0A1EA242186C3B6100C50BCE /* TestBaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA240186C3B6100C50BCE /* TestBaseLayer.cpp */; };
@@ -881,8 +880,6 @@
 		0A00B2D71864417B00775320 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
 		0A1EA229186BF7C800C50BCE /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
 		0A1EA22A186BF7C800C50BCE /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
-		0A1EA235186BFEDE00C50BCE /* TestBaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestBaseObject.cpp; sourceTree = "<group>"; };
-		0A1EA236186BFEDE00C50BCE /* TestBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestBaseObject.h; sourceTree = "<group>"; };
 		0A1EA239186C033D00C50BCE /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		0A1EA23A186C076800C50BCE /* TestController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestController.cpp; sourceTree = "<group>"; };
 		0A1EA23B186C076800C50BCE /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
@@ -2141,8 +2138,6 @@
 			children = (
 				0ADB53E918683B4E002E8DC3 /* TestDemo.h */,
 				0A4B1E0F18686E580088924F /* TestDemo.cpp */,
-				0A1EA235186BFEDE00C50BCE /* TestBaseObject.cpp */,
-				0A1EA236186BFEDE00C50BCE /* TestBaseObject.h */,
 				0A1EA239186C033D00C50BCE /* test.h */,
 				0A1EA23A186C076800C50BCE /* TestController.cpp */,
 				0A1EA23B186C076800C50BCE /* TestController.h */,
@@ -2477,7 +2472,6 @@
 				0A00B2D81864417B00775320 /* HelloWorldScene.cpp in Sources */,
 				0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */,
 				0A1EA22B186BF7C800C50BCE /* BaseObject.cpp in Sources */,
-				0A1EA237186BFEDE00C50BCE /* TestBaseObject.cpp in Sources */,
 				0A1EA23C186C076900C50BCE /* TestController.cpp in Sources */,
 				0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */,
 				0A1EA242186C3B6100C50BCE /* TestBaseLayer.cpp in Sources */,
