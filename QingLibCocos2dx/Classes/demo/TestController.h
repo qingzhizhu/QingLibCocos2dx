@@ -21,12 +21,15 @@ public:
     CREATE_FUNC(TestController);
 	~TestController();
     
+    /**如果*/
+    virtual bool init();
+    
     void menuCallback(CCObject * pSender);
     /**关闭按钮事件*/
     void closeCallback(CCObject * pSender);
     
-//    virtual void ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
-//    virtual void ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
+    virtual void ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
+    virtual void ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
     
 private:
     CCPoint m_tBeginPos;

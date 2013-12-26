@@ -41,7 +41,11 @@ bool AppDelegate::applicationDidFinishLaunching()
 //    CCScene *pScene = HelloWorld::scene();
     //测试demo
     CCScene * pScene = CCScene::create();
+    
+    //这里有个坑，使用create方法，必须从写init方法，并且设置m_bTouchEnabled=true,从能滚动
+    
     pScene->addChild(QingCocos2dx::TestController::create());
+//    pScene->addChild(new QingCocos2dx::TestController());
 
     // run
     pDirector->runWithScene(pScene);
