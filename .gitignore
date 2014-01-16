@@ -2,6 +2,7 @@
 *.slo
 *.lo
 *.o
+*.d
 
 # Compiled Dynamic libraries
 *.so
@@ -21,4 +22,21 @@
 #XCode 
 QingLibCocos2dx.xcodeproj/project.xcworkspace/
 QingLibCocos2dx.xcodeproj/xcuserdata/
+
+#java
+*target*
+*.jar
+*.war
+*.ear
+*.class
+
+
+#android 
+proj.android/assets/
+proj.android/jni/Includes.mk
+proj.android/jni/Sources.mk
+
+#proj.android/bin 除了apk全不要
+proj.android/bin/class/
+proj.android/bin/res/
 
