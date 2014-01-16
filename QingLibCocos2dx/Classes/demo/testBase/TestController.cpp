@@ -23,6 +23,9 @@ static TestBaseLayer* CreateTestScene(int index){
         case TESTS_MYDEMO:
             layer = TestMyDemo::create();
             break;
+        case TESTS_FONT:
+            layer = TestFontDemo::create();
+            break;
             
         default:
             break;

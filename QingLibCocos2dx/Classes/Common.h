@@ -27,7 +27,7 @@ using namespace std;
 
 
 #include "BaseObject.h"
-
+#include "VisibleRect.h"
 
 
 #define FONT_NAME "Arial"

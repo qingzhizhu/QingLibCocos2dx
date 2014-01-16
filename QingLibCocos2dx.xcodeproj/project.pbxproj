@@ -281,11 +281,15 @@
 		0A00B2D51864417B00775320 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B2D41864417B00775320 /* AppDelegate.cpp */; };
 		0A00B2D81864417B00775320 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B2D71864417B00775320 /* HelloWorldScene.cpp */; };
 		0A1EA22B186BF7C800C50BCE /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA229186BF7C800C50BCE /* BaseObject.cpp */; };
-		0A1EA23C186C076900C50BCE /* TestController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23A186C076800C50BCE /* TestController.cpp */; };
 		0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23D186C0BDF00C50BCE /* VisibleRect.cpp */; };
-		0A1EA242186C3B6100C50BCE /* TestBaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA240186C3B6100C50BCE /* TestBaseLayer.cpp */; };
 		0A1EA246186C51E800C50BCE /* TestMyDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA244186C51E800C50BCE /* TestMyDemo.cpp */; };
 		0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B1E0F18686E580088924F /* TestDemo.cpp */; };
+		0AFE4C201887CA5800013A32 /* TestFontDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE4C1E1887CA5700013A32 /* TestFontDemo.cpp */; };
+		0AFE4C321887E5E500013A32 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 0AFE4C311887E5E500013A32 /* Images */; };
+		0AFE4C341887E9CA00013A32 /* font in Resources */ = {isa = PBXBuildFile; fileRef = 0AFE4C331887E9CA00013A32 /* font */; };
+		0AFE4C3F1888156700013A32 /* TestBaseDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE4C391888156700013A32 /* TestBaseDemo.cpp */; };
+		0AFE4C401888156700013A32 /* TestBaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE4C3B1888156700013A32 /* TestBaseLayer.cpp */; };
+		0AFE4C411888156700013A32 /* TestController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AFE4C3D1888156700013A32 /* TestController.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -882,17 +886,23 @@
 		0A1EA229186BF7C800C50BCE /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
 		0A1EA22A186BF7C800C50BCE /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
 		0A1EA239186C033D00C50BCE /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
-		0A1EA23A186C076800C50BCE /* TestController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestController.cpp; sourceTree = "<group>"; };
-		0A1EA23B186C076800C50BCE /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 		0A1EA23D186C0BDF00C50BCE /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VisibleRect.cpp; sourceTree = "<group>"; };
 		0A1EA23E186C0BDF00C50BCE /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisibleRect.h; sourceTree = "<group>"; };
-		0A1EA240186C3B6100C50BCE /* TestBaseLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestBaseLayer.cpp; sourceTree = "<group>"; };
-		0A1EA241186C3B6100C50BCE /* TestBaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestBaseLayer.h; sourceTree = "<group>"; };
 		0A1EA244186C51E800C50BCE /* TestMyDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestMyDemo.cpp; sourceTree = "<group>"; };
 		0A1EA245186C51E800C50BCE /* TestMyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMyDemo.h; sourceTree = "<group>"; };
 		0A4B1E0F18686E580088924F /* TestDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDemo.cpp; sourceTree = "<group>"; };
-		0ADB53E2186834AD002E8DC3 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		0ADB53E918683B4E002E8DC3 /* TestDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDemo.h; sourceTree = "<group>"; };
+		0AFE4C1E1887CA5700013A32 /* TestFontDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestFontDemo.cpp; sourceTree = "<group>"; };
+		0AFE4C1F1887CA5800013A32 /* TestFontDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFontDemo.h; sourceTree = "<group>"; };
+		0AFE4C311887E5E500013A32 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images; path = Resources/Images; sourceTree = "<group>"; };
+		0AFE4C331887E9CA00013A32 /* font */ = {isa = PBXFileReference; lastKnownFileType = folder; name = font; path = Resources/font; sourceTree = "<group>"; };
+		0AFE4C371887F4A100013A32 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = Classes/Common.h; sourceTree = "<group>"; };
+		0AFE4C391888156700013A32 /* TestBaseDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestBaseDemo.cpp; sourceTree = "<group>"; };
+		0AFE4C3A1888156700013A32 /* TestBaseDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestBaseDemo.h; sourceTree = "<group>"; };
+		0AFE4C3B1888156700013A32 /* TestBaseLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestBaseLayer.cpp; sourceTree = "<group>"; };
+		0AFE4C3C1888156700013A32 /* TestBaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestBaseLayer.h; sourceTree = "<group>"; };
+		0AFE4C3D1888156700013A32 /* TestController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestController.cpp; sourceTree = "<group>"; };
+		0AFE4C3E1888156700013A32 /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -964,6 +974,8 @@
 		0A00AF421864417400775320 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0AFE4C331887E9CA00013A32 /* font */,
+				0AFE4C311887E5E500013A32 /* Images */,
 				0A00AF431864417400775320 /* CloseNormal.png */,
 				0A00AF451864417400775320 /* CloseSelected.png */,
 				0A00AF471864417400775320 /* Default.png */,
@@ -2113,13 +2125,13 @@
 		0A00B2D21864417B00775320 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0AFE4C371887F4A100013A32 /* Common.h */,
 				0ADB53E718683B1A002E8DC3 /* demo */,
 				0A1EA228186BF6D100C50BCE /* base */,
 				0A00B2D31864417B00775320 /* AppDelegate.h */,
 				0A00B2D41864417B00775320 /* AppDelegate.cpp */,
 				0A00B2D61864417B00775320 /* HelloWorldScene.h */,
 				0A00B2D71864417B00775320 /* HelloWorldScene.cpp */,
-				0ADB53E2186834AD002E8DC3 /* Common.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2141,6 +2153,8 @@
 			children = (
 				0A1EA244186C51E800C50BCE /* TestMyDemo.cpp */,
 				0A1EA245186C51E800C50BCE /* TestMyDemo.h */,
+				0AFE4C1E1887CA5700013A32 /* TestFontDemo.cpp */,
+				0AFE4C1F1887CA5800013A32 /* TestFontDemo.h */,
 			);
 			path = myDemo;
 			sourceTree = "<group>";
@@ -2148,17 +2162,27 @@
 		0ADB53E718683B1A002E8DC3 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				0AFE4C381888156500013A32 /* testBase */,
 				0A1EA243186C51CF00C50BCE /* myDemo */,
 				0ADB53E918683B4E002E8DC3 /* TestDemo.h */,
 				0A4B1E0F18686E580088924F /* TestDemo.cpp */,
 				0A1EA239186C033D00C50BCE /* test.h */,
-				0A1EA23A186C076800C50BCE /* TestController.cpp */,
-				0A1EA23B186C076800C50BCE /* TestController.h */,
-				0A1EA240186C3B6100C50BCE /* TestBaseLayer.cpp */,
-				0A1EA241186C3B6100C50BCE /* TestBaseLayer.h */,
 			);
 			name = demo;
 			path = Classes/demo;
+			sourceTree = "<group>";
+		};
+		0AFE4C381888156500013A32 /* testBase */ = {
+			isa = PBXGroup;
+			children = (
+				0AFE4C391888156700013A32 /* TestBaseDemo.cpp */,
+				0AFE4C3A1888156700013A32 /* TestBaseDemo.h */,
+				0AFE4C3B1888156700013A32 /* TestBaseLayer.cpp */,
+				0AFE4C3C1888156700013A32 /* TestBaseLayer.h */,
+				0AFE4C3D1888156700013A32 /* TestController.cpp */,
+				0AFE4C3E1888156700013A32 /* TestController.h */,
+			);
+			path = testBase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2224,6 +2248,8 @@
 				0A00AF581864417400775320 /* iTunesArtwork in Resources */,
 				0A00AFF71864417500775320 /* ChangeLog in Resources */,
 				0A00B16B1864417800775320 /* project.pbxproj in Resources */,
+				0AFE4C321887E5E500013A32 /* Images in Resources */,
+				0AFE4C341887E9CA00013A32 /* font in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2485,10 +2511,12 @@
 				0A00B2D81864417B00775320 /* HelloWorldScene.cpp in Sources */,
 				0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */,
 				0A1EA22B186BF7C800C50BCE /* BaseObject.cpp in Sources */,
-				0A1EA23C186C076900C50BCE /* TestController.cpp in Sources */,
 				0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */,
-				0A1EA242186C3B6100C50BCE /* TestBaseLayer.cpp in Sources */,
 				0A1EA246186C51E800C50BCE /* TestMyDemo.cpp in Sources */,
+				0AFE4C201887CA5800013A32 /* TestFontDemo.cpp in Sources */,
+				0AFE4C3F1888156700013A32 /* TestBaseDemo.cpp in Sources */,
+				0AFE4C401888156700013A32 /* TestBaseLayer.cpp in Sources */,
+				0AFE4C411888156700013A32 /* TestController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

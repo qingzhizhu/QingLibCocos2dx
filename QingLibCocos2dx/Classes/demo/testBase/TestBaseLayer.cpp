@@ -50,6 +50,7 @@ void TestBaseLayer::onEnter()
     CCLabelTTF* label = CCLabelTTF::create("MainMenu", "Arial", 20);
     //#endif
     CCMenuItemLabel* pMenuItem = CCMenuItemLabel::create(label, this, menu_selector(TestBaseLayer::MainMenuCallback));
+    label->setColor(ccc3(0xCC, 0xCC, 0xCC));
     
     CCMenu* pMenu =CCMenu::create(pMenuItem, NULL);
     
@@ -66,6 +67,13 @@ void TestBaseLayer::runThisLayer()
     scene->removeAllChildren();
     scene->addChild(this);
 }
+
+//{
+//    CCScene* s = new TestScene();
+//    s->addChild( layer () );
+//    CCDirector::sharedDirector()->replaceScene(s);
+//    s->release();
+//}
 
 
 void TestBaseLayer::MainMenuCallback(cocos2d::CCObject *pSender)

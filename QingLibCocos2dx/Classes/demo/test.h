@@ -11,10 +11,11 @@
 #define QingLibCocos2dx_test_h
 
 #include "TestMyDemo.h"
+#include "TestFontDemo.h"
 
 enum{
     TESTS_MYDEMO = 0,
-    TESTS_MYDEMO1,
+    TESTS_FONT,
     TESTS_MYDEMO2,
     TESTS_MYDEMO3,
     TESTS_MYDEMO4,
@@ -45,7 +46,7 @@ enum{
 
 const std::string g_aTestNames[TESTS_COUNT] = {
     "My Demo!",
-    "My Demo====1!",
+    "Font Test",
     "My Demo====2!",
     "My Demo====3!",
     "My Demo====4!",
@@ -76,5 +77,11 @@ const std::string g_aTestNames[TESTS_COUNT] = {
 
 static const char s_pPathClose[]          = "CloseNormal.png";
 static const char s_pPathCloseSelected[]  = "CloseSelected.png";
+static const char s_pPathB1[]             = "Images/b1.png";
+static const char s_pPathB2[]             = "Images/b2.png";
+static const char s_pPathR1[]             = "Images/r1.png";
+static const char s_pPathR2[]             = "Images/r2.png";
+static const char s_pPathF1[]             = "Images/f1.png";
+static const char s_pPathF2[]             = "Images/f2.png";
 
 #endif
