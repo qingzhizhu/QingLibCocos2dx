@@ -42,11 +42,11 @@ protected:
     void showFont(const char *pFont, CCLayer* target);
     
     /**描边1*/
-    void textAddOutline(string titleAdd, CCLayer* target);
+    void textAddOutline(CCLabelTTF* targetLbl, string titleAdd, CCLayer* target);
     /**阴影1*/
-    void textAddShadow(string titleAdd, CCLayer* target, int shadowSize=2, int shadowOpacity=200);
+    void textAddShadow(CCLabelTTF* targetLbl, string titleAdd, CCLayer* target, int shadowSize=2, int shadowOpacity=200);
     /**描边阴影1*/
-    void textAddOutlineAndShadow(string titleAdd, CCLayer* target, int shadowSize=2, int shadowOpacity=200);
+    void textAddOutlineAndShadow(CCLabelTTF* targetLbl, string titleAdd, CCLayer* target, int shadowSize=2, int shadowOpacity=200);
     
 };
 

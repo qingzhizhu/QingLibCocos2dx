@@ -40,3 +40,5 @@ proj.android/jni/Sources.mk
 proj.android/bin/class/
 proj.android/bin/res/
 
+
+proj.android/bin/jarlist.cache

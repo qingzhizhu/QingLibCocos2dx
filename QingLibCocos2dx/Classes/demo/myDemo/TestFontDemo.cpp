@@ -51,11 +51,18 @@ CCLayer* TestFontDemo::getLayerByIndex()
     }
     showFont(str.c_str(), layer);
     if(m_nLayerIndex == 2){
-        textAddOutline(titleAdd, layer);
+        textAddOutline(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel1)), titleAdd, layer);
+        textAddOutline(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel2)), titleAdd, layer);
+        textAddOutline(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel3)), titleAdd, layer);
     }else if(m_nLayerIndex == 3){
-        textAddShadow(titleAdd, layer);  
+        textAddShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel1)), titleAdd, layer);
+        textAddShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel2)), titleAdd, layer);
+        textAddShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel3)), titleAdd, layer);
     }else if(m_nLayerIndex == 4){
-        textAddOutlineAndShadow(titleAdd, layer, 4);
+        textAddOutlineAndShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel1)), titleAdd, layer, 4);
+        textAddOutlineAndShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel2)), titleAdd, layer, 4);
+        textAddOutlineAndShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel3)), titleAdd, layer, 4);
+        
     }
     
     return layer;
@@ -71,7 +78,7 @@ static CCVerticalTextAlignment verticalAlignment[] =
     kCCVerticalTextAlignmentCenter,
     kCCVerticalTextAlignmentBottom,
 };
-static int vAlignCount = sizeof(verticalAlignment) / sizeof(*verticalAlignment);
+//static int vAlignCount = sizeof(verticalAlignment) / sizeof(*verticalAlignment);
 
 void TestFontDemo::showFont(const char *pFont, CCLayer* target)
 {
@@ -132,7 +139,7 @@ void TestFontDemo::showFont(const char *pFont, CCLayer* target)
 
 
 
-void TestFontDemo::textAddOutline(string titleAdd, CCLayer* target)
+void TestFontDemo::textAddOutline(CCLabelTTF* targetLbl, string titleAdd, CCLayer* target)
 {
     CCLabelTTF* top = dynamic_cast<CCLabelTTF*>(target->getChildByTag(kTagLabel4));
     
@@ -141,7 +148,7 @@ void TestFontDemo::textAddOutline(string titleAdd, CCLayer* target)
     top->setString(titleAdd.c_str());
     
     //描边CCLabelTTF 左
-    CCLabelTTF* left = dynamic_cast<CCLabelTTF*>(target->getChildByTag(kTagLabel1));
+    CCLabelTTF* left = targetLbl;//dynamic_cast<CCLabelTTF*>(target->getChildByTag(kTagLabel1));
     temp1 = left->getString();
     const char* string = temp1.c_str();    
     const char* fontName = left->getFontName();
@@ -183,7 +190,7 @@ void TestFontDemo::textAddOutline(string titleAdd, CCLayer* target)
 }
 
 
-void TestFontDemo::textAddShadow(string titleAdd, cocos2d::CCLayer *target, int shadowSize, int shadowOpacity)
+void TestFontDemo::textAddShadow(CCLabelTTF* targetLbl, string titleAdd, cocos2d::CCLayer *target, int shadowSize, int shadowOpacity)
 {
     CCLabelTTF* top = dynamic_cast<CCLabelTTF*>(target->getChildByTag(kTagLabel4));
     string temp1 = top->getString();
@@ -191,7 +198,7 @@ void TestFontDemo::textAddShadow(string titleAdd, cocos2d::CCLayer *target, int 
     top->setString(titleAdd.c_str());
     
     //描边CCLabelTTF 左
-    CCLabelTTF* shadow = dynamic_cast<CCLabelTTF*>(target->getChildByTag(kTagLabel2));
+    CCLabelTTF* shadow = targetLbl;//dynamic_cast<CCLabelTTF*>(target->getChildByTag(kTagLabel2));
     temp1 = shadow->getString();
     const char* string = temp1.c_str();
     const char* fontName = shadow->getFontName();
@@ -212,7 +219,7 @@ void TestFontDemo::textAddShadow(string titleAdd, cocos2d::CCLayer *target, int 
 }
 
 
-void TestFontDemo::textAddOutlineAndShadow(string titleAdd, cocos2d::CCLayer *target, int shadowSize, int shadowOpacity)
+void TestFontDemo::textAddOutlineAndShadow(CCLabelTTF* targetLbl, string titleAdd, cocos2d::CCLayer *target, int shadowSize, int shadowOpacity)
 {
     CCLabelTTF* top = dynamic_cast<CCLabelTTF*>(target->getChildByTag(kTagLabel4));
     
@@ -220,7 +227,7 @@ void TestFontDemo::textAddOutlineAndShadow(string titleAdd, cocos2d::CCLayer *ta
     titleAdd  =  temp1 + " | " + titleAdd;
     top->setString(titleAdd.c_str());
     
-    CCLabelTTF* shadow = dynamic_cast<CCLabelTTF*>(target->getChildByTag(kTagLabel3));
+    CCLabelTTF* shadow = targetLbl;//dynamic_cast<CCLabelTTF*>(target->getChildByTag(kTagLabel3));
     temp1 = shadow->getString();
     const char* string = temp1.c_str();
     const char* fontName = shadow->getFontName();
@@ -229,7 +236,7 @@ void TestFontDemo::textAddOutlineAndShadow(string titleAdd, cocos2d::CCLayer *ta
     CCVerticalTextAlignment vertical =  shadow->getVerticalAlignment();
     CCTextAlignment horizontal = shadow->getHorizontalAlignment();
     CCSize dimensions = shadow->getDimensions();
-    int lineWidth = 2;
+    int lineWidth = 1;
     
     
     shadow->setColor(ccBLACK);
