@@ -7,13 +7,15 @@
 //
 
 #include "TestFontDemo.h"
+#include "LabelUtils.h"
 
 USING_NS_QING;
 
 
 TestFontDemo::TestFontDemo()
 {
-    
+    CCLayer* layer = CCLayerColor::create(ccc4(0xFF, 0x99, 0xCC, 0xEE));
+    addChild(layer, -100);
 }
 
 TestFontDemo::~TestFontDemo()
@@ -46,23 +48,46 @@ CCLayer* TestFontDemo::getLayerByIndex()
             titleAdd = "描边+阴影";
             break;
             
+        case 5:
+            titleAdd = "新阴影描边";
+            break;
+            
         default:
             break;
     }
     showFont(str.c_str(), layer);
+    CCLabelTTF* lbl1 = dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel1));
+    CCLabelTTF* lbl2 = dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel2));
+    CCLabelTTF* lbl3 = dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel3));
     if(m_nLayerIndex == 2){
-        textAddOutline(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel1)), titleAdd, layer);
-        textAddOutline(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel2)), titleAdd, layer);
-        textAddOutline(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel3)), titleAdd, layer);
+        textAddOutline(lbl1, titleAdd, layer);
+        textAddOutline(lbl2, titleAdd, layer);
+        textAddOutline(lbl3, titleAdd, layer);
     }else if(m_nLayerIndex == 3){
-        textAddShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel1)), titleAdd, layer);
-        textAddShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel2)), titleAdd, layer);
-        textAddShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel3)), titleAdd, layer);
+        textAddShadow(lbl1, titleAdd, layer);
+        textAddShadow(lbl2, titleAdd, layer);
+        textAddShadow(lbl3, titleAdd, layer);
     }else if(m_nLayerIndex == 4){
-        textAddOutlineAndShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel1)), titleAdd, layer, 4);
-        textAddOutlineAndShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel2)), titleAdd, layer, 4);
-        textAddOutlineAndShadow(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel3)), titleAdd, layer, 4);
+        textAddOutlineAndShadow(lbl1, titleAdd, layer, 4);
+        textAddOutlineAndShadow(lbl2, titleAdd, layer, 4);
+        textAddOutlineAndShadow(lbl3, titleAdd, layer, 4);
         
+    }else if(m_nLayerIndex == 5){
+        lbl2->getParent()->addChild(createStroke(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel4)), 2, ccBLACK), -1);
+        lbl2->getParent()->addChild(createStroke(lbl2, 2, ccBLACK), -1);
+        lbl2->getParent()->addChild(createStroke(lbl1, 2, ccBLACK), -1);
+        lbl2->getParent()->addChild(createStroke(lbl3, 2, ccBLACK), -1);
+    }else if(m_nLayerIndex == 6){
+//        createStroke2(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel4)), 2, ccBLACK);
+//        createStroke2(lbl2, 2, ccBLACK);
+//        createStroke2(lbl1, 2, ccBLACK);
+//        createStroke2(lbl3, 2, ccBLACK);
+//        createStroke2(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagTest1)), 2, ccBLACK);
+        LabelUtils::createStroke(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagLabel4)), 2, ccBLACK);
+        LabelUtils::createStroke(lbl2, 1, ccBLACK);
+        LabelUtils::createStroke(lbl1);
+        LabelUtils::createStroke(lbl3);
+        LabelUtils::createStroke(dynamic_cast<CCLabelTTF*>(layer->getChildByTag(kTagTest1)), 1, ccGREEN);
     }
     
     return layer;
@@ -120,7 +145,7 @@ void TestFontDemo::showFont(const char *pFont, CCLayer* target)
     right->setAnchorPoint(ccp(0,0.5));
     rightColor->setAnchorPoint(ccp(0,0.5));
     
-    top->setPosition(ccp(s.width/2,s.height-20));
+    top->setPosition(ccp(s.width/2,s.height-40));
     left->setPosition(ccp(0,s.height/2));
     leftColor->setPosition(left->getPosition());
     center->setPosition(ccp(blockSize.width, s.height/2));
@@ -135,6 +160,11 @@ void TestFontDemo::showFont(const char *pFont, CCLayer* target)
     target->addChild(centerColor, -1, kTagColor3);
     target->addChild(center, 0, kTagLabel3);
     target->addChild(top, 0, kTagLabel4);
+    
+    
+    CCLabelTTF* lbl = CCLabelTTF::create("this is test label!", FONT_NAME, fontSize);
+    lbl->setPosition(ccp(s.width/2,s.height-120));
+    target->addChild(lbl, 0, kTagTest1);
 }
 
 
@@ -272,6 +302,82 @@ void TestFontDemo::textAddOutlineAndShadow(CCLabelTTF* targetLbl, string titleAd
 
 
 
+//label 描边
+CCRenderTexture* TestFontDemo::createStroke(CCLabelTTF *label, float size, ccColor3B color)
+{
+    float x=label->getTexture()->getContentSize().width+size*2;
+    float y=label->getTexture()->getContentSize().height+size*2;
+    CCRenderTexture *rt=CCRenderTexture::create(x, y);
+    CCPoint originalPos=label->getPosition();
+    ccColor3B originalColor=label->getColor();
+    label->setColor(color);
+    ccBlendFunc originalBlend=label->getBlendFunc();
+    label->setBlendFunc((ccBlendFunc){GL_SRC_ALPHA,GL_ONE});
+    CCPoint anchorPoint = label->getAnchorPoint();
+    CCPoint center=ccp(x*anchorPoint.x +size, y*anchorPoint.y + size);
+    
+    rt->begin();
+    for (int i=0; i<360; i+=15) {
+        float _x=center.x+sin(CC_DEGREES_TO_RADIANS(i))*size;
+        float _y=center.y+cos(CC_DEGREES_TO_RADIANS(i))*size;
+        
+        label->setPosition(ccp(_x, _y));
+        label->visit();
+        
+    }
+    rt->end();
+    label->setPosition(originalPos);
+    label->setColor(originalColor);
+    label->setBlendFunc(originalBlend);
+    float rtX=originalPos.x-size  + (0.5 - anchorPoint.x) * label->getTexture()->getContentSize().width;
+    float rtY=originalPos.y-size + (0.5 - anchorPoint.y) * label->getTexture()->getContentSize().height;
+    rt->setAnchorPoint(label->getAnchorPoint());
+    rt->setPosition(ccp(rtX, rtY));
+    
+    return rt;
+    
+}
+
+//label 描边
+void TestFontDemo::createStroke2(CCLabelTTF *label, float size, ccColor3B color)
+{
+    CCSize originalSize = label->getTexture()->getContentSize();
+    float wid = originalSize.width + size * 2;
+    float hei = originalSize.height + size * 2;
+    CCPoint originalPos = label->getPosition();
+    CCPoint originalAnchor = label->getAnchorPoint();
+    ccColor3B originalColor = label->getColor();
+    ccBlendFunc originalBlend = label->getBlendFunc();
+    CCRenderTexture* rt = CCRenderTexture::create(wid, hei);
+    
+    label->setColor(color);
+    label->setBlendFunc((ccBlendFunc){GL_SRC_ALPHA, GL_ONE});
+    
+//    rt->setAnchorPoint(originalAnchor); //没用
+    CCPoint center = ccp(wid * originalAnchor.x, hei * originalAnchor.y);
+    rt->beginWithClear(0, 0, 0, 0);
+//    rt->begin();
+    for(int i=0; i<360; i+= 15){
+        float radians = CC_DEGREES_TO_RADIANS(i);
+        label->cocos2d::CCNode::setPosition(center.x + sin(radians)*size, center.y + cos(radians)*size);
+        label->visit();
+    }
+    rt->end();
+    
+    label->setPosition(originalPos);
+    label->setColor(originalColor);
+    label->setBlendFunc(originalBlend);
+    
+    float rtX = originalSize.width / 2 + size;
+    float rtY = originalSize.height / 2 - size;
+    rt->setPosition(rtX, rtY);
+    
+    label->addChild(rt, -1);
+    
+//    CCLayerColor* layer = CCLayerColor::create(ccc4(0, 0, 0, 128), wid, hei);
+//    layer->setPosition(rt->getPosition());
+//    label->addChild(layer);
+}
 
 
 

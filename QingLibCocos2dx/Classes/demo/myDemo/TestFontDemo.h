@@ -23,6 +23,8 @@ enum {
     kTagColor1,
     kTagColor2,
     kTagColor3,
+    
+    kTagTest1,
 };
 
 class TestFontDemo : public TestBaseDemo
@@ -35,7 +37,7 @@ public:
     /**子类复写，根据当前下标显示相应的子demo*/
     virtual CCLayer* getLayerByIndex();
     /**子类复写，返回测试layer的数量*/
-    virtual int getLayerLen() { return 5; }
+    virtual int getLayerLen() { return 7; }
     
     
 protected:
@@ -47,6 +49,13 @@ protected:
     void textAddShadow(CCLabelTTF* targetLbl, string titleAdd, CCLayer* target, int shadowSize=2, int shadowOpacity=200);
     /**描边阴影1*/
     void textAddOutlineAndShadow(CCLabelTTF* targetLbl, string titleAdd, CCLayer* target, int shadowSize=2, int shadowOpacity=200);
+    
+    
+    
+    CCRenderTexture* createStroke(CCLabelTTF *label, float size, ccColor3B color);
+    
+    /**这个是加在lbl里面*/
+    void createStroke2(CCLabelTTF *label, float size, ccColor3B color);
     
 };
 
