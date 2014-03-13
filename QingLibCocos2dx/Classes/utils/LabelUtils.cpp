@@ -36,7 +36,12 @@ void LabelUtils::createStroke(CCLabelTTF *label, float size, ccColor3B color)
     CCRenderTexture* rt = NULL;
     if(node){
         rt = dynamic_cast<CCRenderTexture*>(node);
-        CCLOG("use pre-existing CCrenderTexture!");
+        if(rt){
+//            rt->clear(0, 0, 0, 0);        //这里有问题，会有一个黑色块
+//            CCLOG("use pre-existing CCrenderTexture!");
+            rt->removeFromParentAndCleanup(true);
+            rt = NULL;
+        }
     }
     if(!rt){
         rt = CCRenderTexture::create(wid, hei);
@@ -62,7 +67,7 @@ void LabelUtils::createStroke(CCLabelTTF *label, float size, ccColor3B color)
     float rtY = originalSize.height / 2 - size;
     rt->setPosition(rtX, rtY);
     
-    label->addChild(rt, -100, TAG_STROKE);
+    if(rt->getParent() == NULL) label->addChild(rt, -100, TAG_STROKE);
     
     //测试
     //    CCLayerColor* layer = CCLayerColor::create(ccc4(0, 0, 0, 128), wid, hei);
