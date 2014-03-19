@@ -12,12 +12,14 @@
 
 #include "TestMyDemo.h"
 #include "TestFontDemo.h"
+#include "MyAssetsManagerDemo.h"
+#include "TestLuaDemo.h"
 
 enum{
     TESTS_MYDEMO = 0,
     TESTS_FONT,
-    TESTS_MYDEMO2,
-    TESTS_MYDEMO3,
+    TESTS_MYMANAGER,
+    TESTS_LUA,
     TESTS_MYDEMO4,
     TESTS_MYDEMO5,
     TESTS_MYDEMO6,
@@ -47,8 +49,8 @@ enum{
 const std::string g_aTestNames[TESTS_COUNT] = {
     "My Demo!",
     "Font Test",
-    "My Demo====2!",
-    "My Demo====3!",
+    "MyAssetsManager",
+    "Lua & AssetsManager",
     "My Demo====4!",
     "My Demo====5!",
     "My Demo====6!",

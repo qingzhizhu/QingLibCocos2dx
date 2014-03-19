@@ -12,10 +12,10 @@
 
 //------------------------------------- 系统级 ------------------------------------
 #include "cocos2d.h"
-//#include "cocos-ext.h"
+#include "cocos-ext.h"
 
 USING_NS_CC;
-//USING_NS_CC_EXT;
+USING_NS_CC_EXT;
 using namespace std;
 
 //------------------------------------- 项目级 ------------------------------------

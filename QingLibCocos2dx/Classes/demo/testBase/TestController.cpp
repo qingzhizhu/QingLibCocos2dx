@@ -26,6 +26,13 @@ static TestBaseLayer* CreateTestScene(int index){
         case TESTS_FONT:
             layer = TestFontDemo::create();
             break;
+        case TESTS_MYMANAGER:
+            layer = MyAssetsManagerDemo::create();
+            break;
+            
+        case TESTS_LUA:
+            layer = TestLuaDemo::create();
+            break;
             
         default:
             break;
