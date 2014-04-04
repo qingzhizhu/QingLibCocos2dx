@@ -36,6 +36,7 @@
 		0A1EA246186C51E800C50BCE /* TestMyDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA244186C51E800C50BCE /* TestMyDemo.cpp */; };
 		0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B1E0F18686E580088924F /* TestDemo.cpp */; };
 		0A882A7318AA3CC1000CC715 /* LabelUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */; };
+		0ABE378918E42CFE007E2B67 /* LuaEngineUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */; };
 		0AF4225C18D9D173001F800D /* AssetsManagerDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4225618D9D173001F800D /* AssetsManagerDemo.cpp */; };
 		0AF4225D18D9D173001F800D /* QingSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4225818D9D173001F800D /* QingSprite.cpp */; };
 		0AF4225E18D9D173001F800D /* MyAssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4225A18D9D173001F800D /* MyAssetsManager.cpp */; };
@@ -373,6 +374,8 @@
 		0A4B1E0F18686E580088924F /* TestDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDemo.cpp; sourceTree = "<group>"; };
 		0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LabelUtils.cpp; sourceTree = "<group>"; };
 		0A882A7218AA3CC1000CC715 /* LabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelUtils.h; sourceTree = "<group>"; };
+		0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaEngineUtils.cpp; sourceTree = "<group>"; };
+		0ABE378818E42CFE007E2B67 /* LuaEngineUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaEngineUtils.h; sourceTree = "<group>"; };
 		0ADB53E918683B4E002E8DC3 /* TestDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDemo.h; sourceTree = "<group>"; };
 		0AF4225618D9D173001F800D /* AssetsManagerDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetsManagerDemo.cpp; sourceTree = "<group>"; };
 		0AF4225718D9D173001F800D /* AssetsManagerDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsManagerDemo.h; sourceTree = "<group>"; };
@@ -1169,6 +1172,8 @@
 				0AF4225518D9D173001F800D /* demo */,
 				0AF4225A18D9D173001F800D /* MyAssetsManager.cpp */,
 				0AF4225B18D9D173001F800D /* MyAssetsManager.h */,
+				0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */,
+				0ABE378818E42CFE007E2B67 /* LuaEngineUtils.h */,
 			);
 			name = luaUtils;
 			path = Classes/luaUtils;
@@ -2680,6 +2685,7 @@
 				0AF425EB18D9D1C0001F800D /* Atlas.cpp in Sources */,
 				0AF425E618D9D1C0001F800D /* CCPhysicsDebugNode.cpp in Sources */,
 				0AF4258C18D9D1BF001F800D /* CCProfiling.cpp in Sources */,
+				0ABE378918E42CFE007E2B67 /* LuaEngineUtils.cpp in Sources */,
 				0AF4250A18D9D1BF001F800D /* cpGrooveJoint.c in Sources */,
 				0AF425EE18D9D1C0001F800D /* AttachmentLoader.cpp in Sources */,
 				0AF425FF18D9D1C0001F800D /* CCLuaBridge.cpp in Sources */,
@@ -2893,7 +2899,6 @@
 					"-lxml2",
 					"-lz",
 					"-lsqlite3",
-					"-websockets",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"QingLibCocos2dx/libs/Chipmunk/include/chipmunk\"";
@@ -2922,7 +2927,6 @@
 					"-lxml2",
 					"-lz",
 					"-lsqlite3",
-					"-websockets",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"QingLibCocos2dx/libs/Chipmunk/include/chipmunk\"";
