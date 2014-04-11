@@ -34,6 +34,16 @@ static TestBaseLayer* CreateTestScene(int index){
             layer = TestLuaDemo::create();
             break;
             
+        case TESTS_LAYER:
+            layer = TestLayerDemo::create();
+            break;
+        case TESTS_SPRITE:
+            layer = TestSpriteDemo::create();
+            break;
+        case TESTS_CLIPPINGNODE:
+            layer = TestClippingNodeDemo::create();
+            break;
+            
         default:
             break;
     }

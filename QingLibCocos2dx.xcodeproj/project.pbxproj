@@ -34,9 +34,13 @@
 		0A1EA22B186BF7C800C50BCE /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA229186BF7C800C50BCE /* BaseObject.cpp */; };
 		0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23D186C0BDF00C50BCE /* VisibleRect.cpp */; };
 		0A1EA246186C51E800C50BCE /* TestMyDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA244186C51E800C50BCE /* TestMyDemo.cpp */; };
+		0A44ED6018F3A19F0074E948 /* TestSpriteDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A44ED5E18F3A19F0074E948 /* TestSpriteDemo.cpp */; };
 		0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B1E0F18686E580088924F /* TestDemo.cpp */; };
 		0A882A7318AA3CC1000CC715 /* LabelUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */; };
+		0A88DA5A18F3F4A300D73CB4 /* DisplayObjectUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */; };
+		0A89335418EE9CCD001AB17C /* TestLayerDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A89335218EE9CCD001AB17C /* TestLayerDemo.cpp */; };
 		0ABE378918E42CFE007E2B67 /* LuaEngineUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */; };
+		0AC2FCAF18F7EA330069BF0F /* TestClippingNodeDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */; };
 		0AF4225C18D9D173001F800D /* AssetsManagerDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4225618D9D173001F800D /* AssetsManagerDemo.cpp */; };
 		0AF4225D18D9D173001F800D /* QingSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4225818D9D173001F800D /* QingSprite.cpp */; };
 		0AF4225E18D9D173001F800D /* MyAssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4225A18D9D173001F800D /* MyAssetsManager.cpp */; };
@@ -371,11 +375,20 @@
 		0A1EA23E186C0BDF00C50BCE /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisibleRect.h; sourceTree = "<group>"; };
 		0A1EA244186C51E800C50BCE /* TestMyDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestMyDemo.cpp; sourceTree = "<group>"; };
 		0A1EA245186C51E800C50BCE /* TestMyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMyDemo.h; sourceTree = "<group>"; };
+		0A44ED5E18F3A19F0074E948 /* TestSpriteDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestSpriteDemo.cpp; sourceTree = "<group>"; };
+		0A44ED5F18F3A19F0074E948 /* TestSpriteDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSpriteDemo.h; sourceTree = "<group>"; };
 		0A4B1E0F18686E580088924F /* TestDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDemo.cpp; sourceTree = "<group>"; };
 		0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LabelUtils.cpp; sourceTree = "<group>"; };
 		0A882A7218AA3CC1000CC715 /* LabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelUtils.h; sourceTree = "<group>"; };
+		0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayObjectUtils.cpp; sourceTree = "<group>"; };
+		0A88DA5918F3F4A300D73CB4 /* DisplayObjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayObjectUtils.h; sourceTree = "<group>"; };
+		0A89335218EE9CCD001AB17C /* TestLayerDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestLayerDemo.cpp; sourceTree = "<group>"; };
+		0A89335318EE9CCD001AB17C /* TestLayerDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestLayerDemo.h; sourceTree = "<group>"; };
 		0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaEngineUtils.cpp; sourceTree = "<group>"; };
 		0ABE378818E42CFE007E2B67 /* LuaEngineUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaEngineUtils.h; sourceTree = "<group>"; };
+		0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestClippingNodeDemo.cpp; sourceTree = "<group>"; };
+		0AC2FCAE18F7EA330069BF0F /* TestClippingNodeDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestClippingNodeDemo.h; sourceTree = "<group>"; };
+		0AC2FCB018F7F4D90069BF0F /* CommonAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonAssets.h; path = Classes/CommonAssets.h; sourceTree = "<group>"; };
 		0ADB53E918683B4E002E8DC3 /* TestDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDemo.h; sourceTree = "<group>"; };
 		0AF4225618D9D173001F800D /* AssetsManagerDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetsManagerDemo.cpp; sourceTree = "<group>"; };
 		0AF4225718D9D173001F800D /* AssetsManagerDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsManagerDemo.h; sourceTree = "<group>"; };
@@ -1115,6 +1128,7 @@
 				0A00B2D41864417B00775320 /* AppDelegate.cpp */,
 				0A00B2D61864417B00775320 /* HelloWorldScene.h */,
 				0A00B2D71864417B00775320 /* HelloWorldScene.cpp */,
+				0AC2FCB018F7F4D90069BF0F /* CommonAssets.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1142,19 +1156,51 @@
 			path = myDemo;
 			sourceTree = "<group>";
 		};
+		0A44ED5C18F3A1860074E948 /* sprite */ = {
+			isa = PBXGroup;
+			children = (
+				0A44ED5E18F3A19F0074E948 /* TestSpriteDemo.cpp */,
+				0A44ED5F18F3A19F0074E948 /* TestSpriteDemo.h */,
+			);
+			path = sprite;
+			sourceTree = "<group>";
+		};
 		0A882A7018AA3C87000CC715 /* utils */ = {
 			isa = PBXGroup;
 			children = (
 				0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */,
 				0A882A7218AA3CC1000CC715 /* LabelUtils.h */,
+				0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */,
+				0A88DA5918F3F4A300D73CB4 /* DisplayObjectUtils.h */,
 			);
 			name = utils;
 			path = Classes/utils;
 			sourceTree = "<group>";
 		};
+		0A89334B18EE9269001AB17C /* TestLayer */ = {
+			isa = PBXGroup;
+			children = (
+				0A89335218EE9CCD001AB17C /* TestLayerDemo.cpp */,
+				0A89335318EE9CCD001AB17C /* TestLayerDemo.h */,
+			);
+			path = TestLayer;
+			sourceTree = "<group>";
+		};
+		0AC2FCAC18F7EA190069BF0F /* clippingNode */ = {
+			isa = PBXGroup;
+			children = (
+				0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */,
+				0AC2FCAE18F7EA330069BF0F /* TestClippingNodeDemo.h */,
+			);
+			path = clippingNode;
+			sourceTree = "<group>";
+		};
 		0ADB53E718683B1A002E8DC3 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				0AC2FCAC18F7EA190069BF0F /* clippingNode */,
+				0A44ED5C18F3A1860074E948 /* sprite */,
+				0A89334B18EE9269001AB17C /* TestLayer */,
 				0AF4261418D9D2B8001F800D /* AssetsManager */,
 				0AFE4C381888156500013A32 /* testBase */,
 				0A1EA243186C51CF00C50BCE /* myDemo */,
@@ -2605,12 +2651,14 @@
 				0AF4259118D9D1BF001F800D /* CCComponentContainer.cpp in Sources */,
 				0AF4256518D9D1BF001F800D /* CCParticleBatchNode.cpp in Sources */,
 				0AF4250418D9D1BF001F800D /* chipmunk.c in Sources */,
+				0A89335418EE9CCD001AB17C /* TestLayerDemo.cpp in Sources */,
 				0AF4259A18D9D1BF001F800D /* CCIMEDispatcher.cpp in Sources */,
 				0AF4256E18D9D1BF001F800D /* CCAccelerometer.mm in Sources */,
 				0AF4255818D9D1BF001F800D /* CCLabelBMFont.cpp in Sources */,
 				0AF4259718D9D1BF001F800D /* ioapi.cpp in Sources */,
 				0AF425AD18D9D1BF001F800D /* SimpleAudioEngine.mm in Sources */,
 				0AF4251E18D9D1BF001F800D /* cpSpaceStep.c in Sources */,
+				0A44ED6018F3A19F0074E948 /* TestSpriteDemo.cpp in Sources */,
 				0AF425FB18D9D1C0001F800D /* SlotData.cpp in Sources */,
 				0AF4252718D9D1BF001F800D /* CCActionGrid3D.cpp in Sources */,
 				0AF425F418D9D1C0001F800D /* Json.cpp in Sources */,
@@ -2786,6 +2834,7 @@
 				0AF4254E18D9D1BF001F800D /* plane.c in Sources */,
 				0AF425BE18D9D1BF001F800D /* CCLayerLoader.cpp in Sources */,
 				0AF4253918D9D1BF001F800D /* CCDataVisitor.cpp in Sources */,
+				0A88DA5A18F3F4A300D73CB4 /* DisplayObjectUtils.cpp in Sources */,
 				0AF4252518D9D1BF001F800D /* CCActionEase.cpp in Sources */,
 				0AF425B418D9D1BF001F800D /* CCBSequence.cpp in Sources */,
 				0AF4250B18D9D1BF001F800D /* cpPinJoint.c in Sources */,
@@ -2796,6 +2845,7 @@
 				0AF4253F18D9D1BF001F800D /* CCString.cpp in Sources */,
 				0AF4260218D9D1C0001F800D /* CCLuaValue.cpp in Sources */,
 				0AFE4C3F1888156700013A32 /* TestBaseDemo.cpp in Sources */,
+				0AC2FCAF18F7EA330069BF0F /* TestClippingNodeDemo.cpp in Sources */,
 				0AF425BD18D9D1BF001F800D /* CCLayerGradientLoader.cpp in Sources */,
 				0AF4225C18D9D173001F800D /* AssetsManagerDemo.cpp in Sources */,
 				0AF425B218D9D1BF001F800D /* CCBKeyframe.cpp in Sources */,
