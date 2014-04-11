@@ -82,3 +82,22 @@ void TestBaseLayer::MainMenuCallback(cocos2d::CCObject *pSender)
     scene->removeAllChildren();
     scene->addChild(TestController::create());
 }
+
+
+void TestBaseLayer::setTitle(string title)
+{
+    CCLabelTTF* label = NULL;
+    CCNode* node = this->getChildByTag(TAG_TESTBASE_TITLE);
+    if(node){
+        label = dynamic_cast<CCLabelTTF*>(node);
+    }
+    if(label == NULL){
+        label = CCLabelTTF::create("", FONT_NAME, FONT_SIZE);
+        label->setPositionX((CCDirector::sharedDirector()->getWinSize().width)/2);
+        label->setPositionY(CCDirector::sharedDirector()->getWinSize().height - 20);
+        label->setAnchorPoint(ccp(0.5, 1));
+        addChild(label, TAG_TESTBASE_TITLE, TAG_TESTBASE_TITLE);
+    }
+    label->setString(title.c_str());
+}
+

@@ -11,6 +11,9 @@
 #define __QingLibCocos2dx__TestBaseLayer__
 
 #include "Common.h"
+#include "CommonAssets.h"
+
+#define TAG_TESTBASE_TITLE 1000
 
 NS_QING_BEGIN
 
@@ -27,6 +30,8 @@ public:
     
     virtual void runThisLayer();
     
+    
+    virtual void setTitle(string title);
     
 protected:
     virtual void nextAction() { }
