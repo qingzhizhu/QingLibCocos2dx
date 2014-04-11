@@ -14,15 +14,18 @@
 #include "TestFontDemo.h"
 #include "MyAssetsManagerDemo.h"
 #include "TestLuaDemo.h"
+#include "TestLayerDemo.h"
+#include "TestSpriteDemo.h"
+#include "TestClippingNodeDemo.h"
 
 enum{
     TESTS_MYDEMO = 0,
     TESTS_FONT,
     TESTS_MYMANAGER,
     TESTS_LUA,
-    TESTS_MYDEMO4,
-    TESTS_MYDEMO5,
-    TESTS_MYDEMO6,
+    TESTS_LAYER,
+    TESTS_SPRITE,
+    TESTS_CLIPPINGNODE,
     TESTS_MYDEMO11,
     TESTS_MYDEMO12,
     TESTS_MYDEMO13,
@@ -51,9 +54,9 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "Font Test",
     "MyAssetsManager",
     "Lua & AssetsManager",
-    "My Demo====4!",
-    "My Demo====5!",
-    "My Demo====6!",
+    "Layer Tests",
+    "Sprite Tests",
+    "CCClippingNode Tests!",
     "My Demo====11!",
     "My Demo====12!",
     "My Demo====13!",
@@ -74,16 +77,5 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "My Demo====216!",
 };
 
-
-//resource
-
-static const char s_pPathClose[]          = "CloseNormal.png";
-static const char s_pPathCloseSelected[]  = "CloseSelected.png";
-static const char s_pPathB1[]             = "Images/b1.png";
-static const char s_pPathB2[]             = "Images/b2.png";
-static const char s_pPathR1[]             = "Images/r1.png";
-static const char s_pPathR2[]             = "Images/r2.png";
-static const char s_pPathF1[]             = "Images/f1.png";
-static const char s_pPathF2[]             = "Images/f2.png";
 
 #endif
