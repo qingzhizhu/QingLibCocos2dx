@@ -43,6 +43,9 @@ static TestBaseLayer* CreateTestScene(int index){
         case TESTS_CLIPPINGNODE:
             layer = TestClippingNodeDemo::create();
             break;
+        case TESTS_UTILS_STORAGE:
+            layer = StorageUtilsTest::create();
+            break;
             
         default:
             break;

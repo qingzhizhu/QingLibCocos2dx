@@ -17,6 +17,7 @@
 #include "TestLayerDemo.h"
 #include "TestSpriteDemo.h"
 #include "TestClippingNodeDemo.h"
+#include "StorageUtilsTest.h"
 
 enum{
     TESTS_MYDEMO = 0,
@@ -26,7 +27,7 @@ enum{
     TESTS_LAYER,
     TESTS_SPRITE,
     TESTS_CLIPPINGNODE,
-    TESTS_MYDEMO11,
+    TESTS_UTILS_STORAGE,
     TESTS_MYDEMO12,
     TESTS_MYDEMO13,
     TESTS_MYDEMO14,
@@ -57,7 +58,7 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "Layer Tests",
     "Sprite Tests",
     "CCClippingNode Tests!",
-    "My Demo====11!",
+    "Storage Utils Test.",
     "My Demo====12!",
     "My Demo====13!",
     "My Demo====14!",

@@ -41,6 +41,8 @@
 		0A89335418EE9CCD001AB17C /* TestLayerDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A89335218EE9CCD001AB17C /* TestLayerDemo.cpp */; };
 		0ABE378918E42CFE007E2B67 /* LuaEngineUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */; };
 		0AC2FCAF18F7EA330069BF0F /* TestClippingNodeDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */; };
+		0AC38719193C7E6D0039377F /* StorageUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AC38717193C7E6D0039377F /* StorageUtils.cpp */; };
+		0AEF5978193C8CD000CBA049 /* StorageUtilsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF5976193C8CD000CBA049 /* StorageUtilsTest.cpp */; };
 		0AF4225C18D9D173001F800D /* AssetsManagerDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4225618D9D173001F800D /* AssetsManagerDemo.cpp */; };
 		0AF4225D18D9D173001F800D /* QingSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4225818D9D173001F800D /* QingSprite.cpp */; };
 		0AF4225E18D9D173001F800D /* MyAssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4225A18D9D173001F800D /* MyAssetsManager.cpp */; };
@@ -389,7 +391,11 @@
 		0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestClippingNodeDemo.cpp; sourceTree = "<group>"; };
 		0AC2FCAE18F7EA330069BF0F /* TestClippingNodeDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestClippingNodeDemo.h; sourceTree = "<group>"; };
 		0AC2FCB018F7F4D90069BF0F /* CommonAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonAssets.h; path = Classes/CommonAssets.h; sourceTree = "<group>"; };
+		0AC38717193C7E6D0039377F /* StorageUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StorageUtils.cpp; sourceTree = "<group>"; };
+		0AC38718193C7E6D0039377F /* StorageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageUtils.h; sourceTree = "<group>"; };
 		0ADB53E918683B4E002E8DC3 /* TestDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDemo.h; sourceTree = "<group>"; };
+		0AEF5976193C8CD000CBA049 /* StorageUtilsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StorageUtilsTest.cpp; sourceTree = "<group>"; };
+		0AEF5977193C8CD000CBA049 /* StorageUtilsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageUtilsTest.h; sourceTree = "<group>"; };
 		0AF4225618D9D173001F800D /* AssetsManagerDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetsManagerDemo.cpp; sourceTree = "<group>"; };
 		0AF4225718D9D173001F800D /* AssetsManagerDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetsManagerDemo.h; sourceTree = "<group>"; };
 		0AF4225818D9D173001F800D /* QingSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QingSprite.cpp; sourceTree = "<group>"; };
@@ -1172,6 +1178,8 @@
 				0A882A7218AA3CC1000CC715 /* LabelUtils.h */,
 				0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */,
 				0A88DA5918F3F4A300D73CB4 /* DisplayObjectUtils.h */,
+				0AC38717193C7E6D0039377F /* StorageUtils.cpp */,
+				0AC38718193C7E6D0039377F /* StorageUtils.h */,
 			);
 			name = utils;
 			path = Classes/utils;
@@ -1198,6 +1206,7 @@
 		0ADB53E718683B1A002E8DC3 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				0AEF5974193C8C5C00CBA049 /* testUtils */,
 				0AC2FCAC18F7EA190069BF0F /* clippingNode */,
 				0A44ED5C18F3A1860074E948 /* sprite */,
 				0A89334B18EE9269001AB17C /* TestLayer */,
@@ -1210,6 +1219,15 @@
 			);
 			name = demo;
 			path = Classes/demo;
+			sourceTree = "<group>";
+		};
+		0AEF5974193C8C5C00CBA049 /* testUtils */ = {
+			isa = PBXGroup;
+			children = (
+				0AEF5976193C8CD000CBA049 /* StorageUtilsTest.cpp */,
+				0AEF5977193C8CD000CBA049 /* StorageUtilsTest.h */,
+			);
+			path = testUtils;
 			sourceTree = "<group>";
 		};
 		0AF4225418D9D173001F800D /* luaUtils */ = {
@@ -2744,7 +2762,9 @@
 				0AF4251718D9D1BF001F800D /* cpHashSet.c in Sources */,
 				0AF4250618D9D1BF001F800D /* cpConstraint.c in Sources */,
 				0AF425F318D9D1C0001F800D /* extension.cpp in Sources */,
+				0AEF5978193C8CD000CBA049 /* StorageUtilsTest.cpp in Sources */,
 				0AF4254018D9D1BF001F800D /* CCZone.cpp in Sources */,
+				0AC38719193C7E6D0039377F /* StorageUtils.cpp in Sources */,
 				0AF425EF18D9D1C0001F800D /* Bone.cpp in Sources */,
 				0AF4251318D9D1BF001F800D /* cpBB.c in Sources */,
 				0AF4257E18D9D1BF001F800D /* CCScriptSupport.cpp in Sources */,
