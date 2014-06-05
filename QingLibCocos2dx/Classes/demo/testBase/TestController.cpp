@@ -47,6 +47,14 @@ static TestBaseLayer* CreateTestScene(int index){
             layer = StorageUtilsTest::create();
             break;
             
+        case TESTS_IO_XML:
+            layer = TestXMLDemo::create();
+            break;
+            
+        case TESTS_IO_FILE:
+            layer = TestFileUtils::create();
+            break;
+            
         default:
             break;
     }

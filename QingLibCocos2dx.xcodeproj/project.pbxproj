@@ -31,11 +31,15 @@
 		0A00AF621864417400775320 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A00AF611864417400775320 /* main.m */; };
 		0A00B2D51864417B00775320 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B2D41864417B00775320 /* AppDelegate.cpp */; };
 		0A00B2D81864417B00775320 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A00B2D71864417B00775320 /* HelloWorldScene.cpp */; };
+		0A02376719400E5F0085C7F8 /* FileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A02376519400E5F0085C7F8 /* FileUtils.cpp */; };
+		0A02376B194065950085C7F8 /* TestFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A023769194065950085C7F8 /* TestFileUtils.cpp */; };
+		0A02376D19406C260085C7F8 /* ZangHuaYin.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A02376C19406C260085C7F8 /* ZangHuaYin.txt */; };
 		0A1EA22B186BF7C800C50BCE /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA229186BF7C800C50BCE /* BaseObject.cpp */; };
 		0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23D186C0BDF00C50BCE /* VisibleRect.cpp */; };
 		0A1EA246186C51E800C50BCE /* TestMyDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA244186C51E800C50BCE /* TestMyDemo.cpp */; };
 		0A44ED6018F3A19F0074E948 /* TestSpriteDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A44ED5E18F3A19F0074E948 /* TestSpriteDemo.cpp */; };
 		0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B1E0F18686E580088924F /* TestDemo.cpp */; };
+		0A651D93193D6FBB00630E04 /* TestXMLDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */; };
 		0A882A7318AA3CC1000CC715 /* LabelUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */; };
 		0A88DA5A18F3F4A300D73CB4 /* DisplayObjectUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */; };
 		0A89335418EE9CCD001AB17C /* TestLayerDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A89335218EE9CCD001AB17C /* TestLayerDemo.cpp */; };
@@ -370,6 +374,11 @@
 		0A00B2D41864417B00775320 /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		0A00B2D61864417B00775320 /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
 		0A00B2D71864417B00775320 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorldScene.cpp; path = Classes/HelloWorldScene.cpp; sourceTree = "<group>"; };
+		0A02376519400E5F0085C7F8 /* FileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileUtils.cpp; sourceTree = "<group>"; };
+		0A02376619400E5F0085C7F8 /* FileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
+		0A023769194065950085C7F8 /* TestFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestFileUtils.cpp; sourceTree = "<group>"; };
+		0A02376A194065950085C7F8 /* TestFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFileUtils.h; sourceTree = "<group>"; };
+		0A02376C19406C260085C7F8 /* ZangHuaYin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ZangHuaYin.txt; path = Resources/ZangHuaYin.txt; sourceTree = "<group>"; };
 		0A1EA229186BF7C800C50BCE /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
 		0A1EA22A186BF7C800C50BCE /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
 		0A1EA239186C033D00C50BCE /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
@@ -380,6 +389,8 @@
 		0A44ED5E18F3A19F0074E948 /* TestSpriteDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestSpriteDemo.cpp; sourceTree = "<group>"; };
 		0A44ED5F18F3A19F0074E948 /* TestSpriteDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSpriteDemo.h; sourceTree = "<group>"; };
 		0A4B1E0F18686E580088924F /* TestDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDemo.cpp; sourceTree = "<group>"; };
+		0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestXMLDemo.cpp; sourceTree = "<group>"; };
+		0A651D92193D6FBB00630E04 /* TestXMLDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestXMLDemo.h; sourceTree = "<group>"; };
 		0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LabelUtils.cpp; sourceTree = "<group>"; };
 		0A882A7218AA3CC1000CC715 /* LabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelUtils.h; sourceTree = "<group>"; };
 		0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayObjectUtils.cpp; sourceTree = "<group>"; };
@@ -1084,6 +1095,7 @@
 		0A00AF421864417400775320 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0A02376C19406C260085C7F8 /* ZangHuaYin.txt */,
 				0AFE4C331887E9CA00013A32 /* font */,
 				0AFE4C311887E5E500013A32 /* Images */,
 				0A00AF431864417400775320 /* CloseNormal.png */,
@@ -1171,6 +1183,15 @@
 			path = sprite;
 			sourceTree = "<group>";
 		};
+		0A651D8F193D6F6E00630E04 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */,
+				0A651D92193D6FBB00630E04 /* TestXMLDemo.h */,
+			);
+			path = xml;
+			sourceTree = "<group>";
+		};
 		0A882A7018AA3C87000CC715 /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1180,6 +1201,8 @@
 				0A88DA5918F3F4A300D73CB4 /* DisplayObjectUtils.h */,
 				0AC38717193C7E6D0039377F /* StorageUtils.cpp */,
 				0AC38718193C7E6D0039377F /* StorageUtils.h */,
+				0A02376519400E5F0085C7F8 /* FileUtils.cpp */,
+				0A02376619400E5F0085C7F8 /* FileUtils.h */,
 			);
 			name = utils;
 			path = Classes/utils;
@@ -1206,6 +1229,7 @@
 		0ADB53E718683B1A002E8DC3 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				0A651D8F193D6F6E00630E04 /* xml */,
 				0AEF5974193C8C5C00CBA049 /* testUtils */,
 				0AC2FCAC18F7EA190069BF0F /* clippingNode */,
 				0A44ED5C18F3A1860074E948 /* sprite */,
@@ -1226,6 +1250,8 @@
 			children = (
 				0AEF5976193C8CD000CBA049 /* StorageUtilsTest.cpp */,
 				0AEF5977193C8CD000CBA049 /* StorageUtilsTest.h */,
+				0A023769194065950085C7F8 /* TestFileUtils.cpp */,
+				0A02376A194065950085C7F8 /* TestFileUtils.h */,
 			);
 			path = testUtils;
 			sourceTree = "<group>";
@@ -2582,6 +2608,7 @@
 				0A00AF581864417400775320 /* iTunesArtwork in Resources */,
 				0AFE4C321887E5E500013A32 /* Images in Resources */,
 				0AFE4C341887E9CA00013A32 /* font in Resources */,
+				0A02376D19406C260085C7F8 /* ZangHuaYin.txt in Resources */,
 				0AF4260A18D9D1C0001F800D /* AudioEngine.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2716,6 +2743,7 @@
 				0AF425DA18D9D1C0001F800D /* CCEditBoxImplMac.mm in Sources */,
 				0AF425E018D9D1C0001F800D /* CCTableView.cpp in Sources */,
 				0AF425D618D9D1C0001F800D /* CCInvocation.cpp in Sources */,
+				0A651D93193D6FBB00630E04 /* TestXMLDemo.cpp in Sources */,
 				0AF425CD18D9D1BF001F800D /* CCControlButton.cpp in Sources */,
 				0A882A7318AA3CC1000CC715 /* LabelUtils.cpp in Sources */,
 				0AF425F018D9D1C0001F800D /* BoneData.cpp in Sources */,
@@ -2735,6 +2763,7 @@
 				0A00B2D51864417B00775320 /* AppDelegate.cpp in Sources */,
 				0AF425C618D9D1BF001F800D /* CCScrollViewLoader.cpp in Sources */,
 				0AF425F918D9D1C0001F800D /* Skin.cpp in Sources */,
+				0A02376719400E5F0085C7F8 /* FileUtils.cpp in Sources */,
 				0AF425BC18D9D1BF001F800D /* CCLayerColorLoader.cpp in Sources */,
 				0AF425D818D9D1C0001F800D /* CCEditBox.cpp in Sources */,
 				0AF4261A18D9D591001F800D /* TestLuaDemo.cpp in Sources */,
@@ -2782,6 +2811,7 @@
 				0AF4255F18D9D1BF001F800D /* CCMenu.cpp in Sources */,
 				0AF425FA18D9D1C0001F800D /* Slot.cpp in Sources */,
 				0AF4250818D9D1BF001F800D /* cpDampedSpring.c in Sources */,
+				0A02376B194065950085C7F8 /* TestFileUtils.cpp in Sources */,
 				0AF425B318D9D1BF001F800D /* CCBReader.cpp in Sources */,
 				0AF425B018D9D1BF001F800D /* CCBAnimationManager.cpp in Sources */,
 				0AF4254C18D9D1BF001F800D /* mat4.c in Sources */,

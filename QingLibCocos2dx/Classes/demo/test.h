@@ -18,6 +18,8 @@
 #include "TestSpriteDemo.h"
 #include "TestClippingNodeDemo.h"
 #include "StorageUtilsTest.h"
+#include "TestXMLDemo.h"
+#include "TestFileUtils.h"
 
 enum{
     TESTS_MYDEMO = 0,
@@ -28,7 +30,8 @@ enum{
     TESTS_SPRITE,
     TESTS_CLIPPINGNODE,
     TESTS_UTILS_STORAGE,
-    TESTS_MYDEMO12,
+    TESTS_IO_FILE,
+    TESTS_IO_XML,
     TESTS_MYDEMO13,
     TESTS_MYDEMO14,
     TESTS_MYDEMO15,
@@ -59,7 +62,8 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "Sprite Tests",
     "CCClippingNode Tests!",
     "Storage Utils Test.",
-    "My Demo====12!",
+    "IO - File Test!",
+    "IO - XML Test!",
     "My Demo====13!",
     "My Demo====14!",
     "My Demo====15!",
