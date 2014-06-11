@@ -38,7 +38,11 @@ public:
     static CCSprite* maskImg(CCSprite* src, const CCSize& size);
     static CCSprite* maskImg(CCSprite* src, CCBlendProtocol* mask);
     
-#pragma mark-
+#pragma mark- 其他
+    
+    static CCNode* getChildByTagRecursive(CCNode* containerLayer, int tagIdOfChild);
+    
+    
     
 };
 

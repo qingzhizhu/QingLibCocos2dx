@@ -74,3 +74,47 @@ void LabelUtils::createStroke(CCLabelTTF *label, float size, ccColor3B color)
     //    layer->setPosition(rt->getPosition());
     //    label->addChild(layer);
 }
+
+
+void LabelUtils::fitLabelText(cocos2d::CCLabelTTF *label, string tfStr, bool subStr)
+{
+    float wid = label->getDimensions().width;
+    float hei = label->getDimensions().height;
+    if(wid < 1E-5){
+        wid = label->getContentSize().width;
+    }
+    if(hei < 1E-5){
+        hei = label->getContentSize().height;
+    }
+    label->setDimensions(CCSizeZero);
+    label->setString(tfStr.c_str());
+    int conWid = label->getContentSize().width;
+    if(conWid > wid){
+        if(subStr){
+            float widScale = wid / conWid;
+            int len = widScale * tfStr.length();
+            len = len > 3 ? len - 3 : len;
+            string newStr = tfStr.substr(0, len);
+            newStr.append("...");
+            label->setString(newStr.c_str());
+            label->setDimensions(CCSize(wid, hei));
+        }else{
+            int fontSize = label->getFontSize();
+            int adjCount = 0;   //调整的次数,
+            while (label->getContentSize().width > wid && adjCount < 5 ) {
+                label->setFontSize(--fontSize);
+                adjCount++;
+            }
+            label->setDimensions(CCSize(wid, 0));
+        }
+    }
+}
+
+
+
+
+
+
+
+
+

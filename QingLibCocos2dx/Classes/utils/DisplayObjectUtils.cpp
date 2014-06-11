@@ -22,6 +22,7 @@ DisplayObjectUtils::~DisplayObjectUtils()
 }
 
 
+#pragma mark- 图片相关
 
 void DisplayObjectUtils::repeatImg(CCSprite *img, const CCSize &size)
 {
@@ -60,9 +61,33 @@ CCSprite* DisplayObjectUtils::maskImg(CCSprite *src, CCBlendProtocol *mask)
     return result;
 }
 
+#pragma mark- 其他
 
-
-
+CCNode* DisplayObjectUtils::getChildByTagRecursive(CCNode *containerLayer, int tagIdOfChild)
+{
+    if(containerLayer && containerLayer->getChildren()){
+        if(containerLayer->getChildren()->count() > 0){
+            CCObject* child = NULL;
+            CCARRAY_FOREACH(containerLayer->getChildren(), child){
+                CCNode* pChild = (CCNode*) child;
+                if(pChild->getTag() == tagIdOfChild){
+                    CCLOG("get 1 ========================,%d",tagIdOfChild);
+                    return pChild;
+                }else{
+                    CCNode* result = getChildByTagRecursive(pChild, tagIdOfChild);
+                    if(result){
+                        return result;
+                    }
+                }
+            }
+        }else if(containerLayer->getTag() == tagIdOfChild){
+            CCLOG("get 2 ========================,%d",tagIdOfChild);
+            return containerLayer;
+        }
+    }
+    
+    return NULL;
+}
 
 
 

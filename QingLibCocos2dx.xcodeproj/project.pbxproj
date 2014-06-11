@@ -34,12 +34,14 @@
 		0A02376719400E5F0085C7F8 /* FileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A02376519400E5F0085C7F8 /* FileUtils.cpp */; };
 		0A02376B194065950085C7F8 /* TestFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A023769194065950085C7F8 /* TestFileUtils.cpp */; };
 		0A02376D19406C260085C7F8 /* ZangHuaYin.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A02376C19406C260085C7F8 /* ZangHuaYin.txt */; };
+		0A147B321948A4340028B6A7 /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A147B301948A4340028B6A7 /* StringUtils.cpp */; };
 		0A1EA22B186BF7C800C50BCE /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA229186BF7C800C50BCE /* BaseObject.cpp */; };
 		0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23D186C0BDF00C50BCE /* VisibleRect.cpp */; };
 		0A1EA246186C51E800C50BCE /* TestMyDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA244186C51E800C50BCE /* TestMyDemo.cpp */; };
 		0A44ED6018F3A19F0074E948 /* TestSpriteDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A44ED5E18F3A19F0074E948 /* TestSpriteDemo.cpp */; };
 		0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B1E0F18686E580088924F /* TestDemo.cpp */; };
 		0A651D93193D6FBB00630E04 /* TestXMLDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */; };
+		0A68EB8519489C8500D9191B /* CommUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A68EB8319489C8500D9191B /* CommUtils.cpp */; };
 		0A882A7318AA3CC1000CC715 /* LabelUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */; };
 		0A88DA5A18F3F4A300D73CB4 /* DisplayObjectUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */; };
 		0A89335418EE9CCD001AB17C /* TestLayerDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A89335218EE9CCD001AB17C /* TestLayerDemo.cpp */; };
@@ -379,6 +381,8 @@
 		0A023769194065950085C7F8 /* TestFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestFileUtils.cpp; sourceTree = "<group>"; };
 		0A02376A194065950085C7F8 /* TestFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFileUtils.h; sourceTree = "<group>"; };
 		0A02376C19406C260085C7F8 /* ZangHuaYin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ZangHuaYin.txt; path = Resources/ZangHuaYin.txt; sourceTree = "<group>"; };
+		0A147B301948A4340028B6A7 /* StringUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
+		0A147B311948A4340028B6A7 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
 		0A1EA229186BF7C800C50BCE /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
 		0A1EA22A186BF7C800C50BCE /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
 		0A1EA239186C033D00C50BCE /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
@@ -391,6 +395,8 @@
 		0A4B1E0F18686E580088924F /* TestDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDemo.cpp; sourceTree = "<group>"; };
 		0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestXMLDemo.cpp; sourceTree = "<group>"; };
 		0A651D92193D6FBB00630E04 /* TestXMLDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestXMLDemo.h; sourceTree = "<group>"; };
+		0A68EB8319489C8500D9191B /* CommUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommUtils.cpp; sourceTree = "<group>"; };
+		0A68EB8419489C8500D9191B /* CommUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommUtils.h; sourceTree = "<group>"; };
 		0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LabelUtils.cpp; sourceTree = "<group>"; };
 		0A882A7218AA3CC1000CC715 /* LabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelUtils.h; sourceTree = "<group>"; };
 		0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayObjectUtils.cpp; sourceTree = "<group>"; };
@@ -1203,6 +1209,10 @@
 				0AC38718193C7E6D0039377F /* StorageUtils.h */,
 				0A02376519400E5F0085C7F8 /* FileUtils.cpp */,
 				0A02376619400E5F0085C7F8 /* FileUtils.h */,
+				0A68EB8319489C8500D9191B /* CommUtils.cpp */,
+				0A68EB8419489C8500D9191B /* CommUtils.h */,
+				0A147B301948A4340028B6A7 /* StringUtils.cpp */,
+				0A147B311948A4340028B6A7 /* StringUtils.h */,
 			);
 			name = utils;
 			path = Classes/utils;
@@ -2662,6 +2672,7 @@
 				0AF4256B18D9D1BF001F800D /* CCImageCommonWebp.cpp in Sources */,
 				0A00AF5D1864417400775320 /* AppController.mm in Sources */,
 				0AF425C218D9D1BF001F800D /* CCNodeLoader.cpp in Sources */,
+				0A147B321948A4340028B6A7 /* StringUtils.cpp in Sources */,
 				0AF425D918D9D1C0001F800D /* CCEditBoxImplIOS.mm in Sources */,
 				0A00AF601864417400775320 /* RootViewController.mm in Sources */,
 				0AF425EA18D9D1C0001F800D /* AnimationStateData.cpp in Sources */,
@@ -2763,6 +2774,7 @@
 				0A00B2D51864417B00775320 /* AppDelegate.cpp in Sources */,
 				0AF425C618D9D1BF001F800D /* CCScrollViewLoader.cpp in Sources */,
 				0AF425F918D9D1C0001F800D /* Skin.cpp in Sources */,
+				0A68EB8519489C8500D9191B /* CommUtils.cpp in Sources */,
 				0A02376719400E5F0085C7F8 /* FileUtils.cpp in Sources */,
 				0AF425BC18D9D1BF001F800D /* CCLayerColorLoader.cpp in Sources */,
 				0AF425D818D9D1C0001F800D /* CCEditBox.cpp in Sources */,

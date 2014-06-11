@@ -30,6 +30,19 @@ public:
      * @param color 描边颜色，默认黑色
      */
     static void createStroke(CCLabelTTF *label, float size = 2, ccColor3B color = ccBLACK);
+    
+    
+    /**
+     * 对文本进行自适应
+     * @param tfStr 文本
+     * @param subStr 是否截取字符串显示 如 文字...,false 是缩小字体显示
+     */
+    static void fitLabelText(CCLabelTTF* label, string tfStr, bool subStr=false);
+    
+    
+    
+    
+    
 };
 
 NS_QING_END

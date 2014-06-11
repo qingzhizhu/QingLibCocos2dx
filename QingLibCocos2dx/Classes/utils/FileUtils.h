@@ -51,8 +51,10 @@ public:
      */
     static bool loadFile(string& path, string& strResult, FILE_PATH_TYPE pathType);
     
-    
-    
+    /**
+     * 读取zip的数据
+     */
+    static string getFileDataFromZip(string& strZipStream, string fileName);
     
 
 private:

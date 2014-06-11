@@ -8,6 +8,8 @@
 
 #include "FileUtils.h"	
 
+#include "support/zip_support/ZipUtils.h"
+
 USING_NS_QING;
 
 /*
@@ -107,6 +109,26 @@ bool FileUtils::loadFile(string &path, string &strResult, FILE_PATH_TYPE pathTyp
 
 
 
+
+
+string FileUtils::getFileDataFromZip(string& strZipStream, string fileName)
+{
+	if(save(fileName, strZipStream)) {
+		string filePath = CCFileUtils::sharedFileUtils()->getWritablePath() + fileName;
+		unsigned long size = 0;
+		ZipFile zip(filePath);
+		unsigned char* data = zip.getFileData(fileName, &size);
+		if(data) {
+			string ret;
+			if(size > 0) {
+				ret.append((char*)data, size);
+			}
+			delete[] data;
+			return ret;
+		}
+	}
+	return "";
+}
 
 
 
