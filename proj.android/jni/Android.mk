@@ -15,10 +15,14 @@ LOCAL_MODULE_FILENAME := libgame
 include $(LOCAL_PATH)/Sources.mk
 include $(LOCAL_PATH)/Includes.mk
 
-LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static cocosdenshion_static cocos_extension_static
-            
+LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static
+LOCAL_WHOLE_STATIC_LIBRARIES += cocosdenshion_static
+LOCAL_WHOLE_STATIC_LIBRARIES += cocos_lua_static
+LOCAL_WHOLE_STATIC_LIBRARIES += cocos_extension_static
+
 include $(BUILD_SHARED_LIBRARY)
 
-$(call import-module,CocosDenshion/android) \
-$(call import-module,cocos2dx) \
+$(call import-module,cocos2dx)
+$(call import-module,CocosDenshion/android)
+$(call import-module,scripting/lua/proj.android)
 $(call import-module,extensions)
