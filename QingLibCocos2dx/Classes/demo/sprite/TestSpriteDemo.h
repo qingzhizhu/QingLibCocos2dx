@@ -27,7 +27,7 @@ public:
 	/**子类复写，根据当前下标显示相应的子demo*/
     virtual CCLayer* getLayerByIndex();
     /**子类复写，返回测试layer的数量*/
-    virtual int getLayerLen() { return 3; }
+    virtual int getLayerLen() { return 5; }
 
 };
 

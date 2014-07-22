@@ -33,7 +33,12 @@ static const char s_pPathTip1[]             = "Images/tip.png";
 /**士兵图片*/
 static const char s_pPathSoldier1[]         = "Images/1_s.png";
 
+/**grossini dance*/
+static const char s_pPathGrossiniDance[]    = "Images/grossini_dance_atlas.png";
 
+/** grossini 序列图*/
+static const char s_pPathGrossini[]         = "Images/grossini.png";
+static const char s_pPathGrossni_plist[]    = "Images/grossini.plist";
 
 
 #endif

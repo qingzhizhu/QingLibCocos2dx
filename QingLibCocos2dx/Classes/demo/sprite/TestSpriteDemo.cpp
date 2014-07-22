@@ -37,6 +37,31 @@ TestSpriteDemo::~TestSpriteDemo()
 	// TODO: auto generated code
 }
 
+
+void playAction(CCNode* node)
+{
+    if(!node) return;
+    CCActionInterval* action = NULL;
+    float random = CCRANDOM_0_1();
+    if (random < 0.2) {
+        action = CCScaleBy::create(3, 2);
+    }else if(random < 0.4){
+        action = CCRotateBy::create(3, 360);
+    }else if(random < 0.6){
+        action = CCBlink::create(1, 3);
+    }else if(random < 0.8){
+        action = CCTintBy::create(2, 0, -255, -255);
+    }else{
+        action = CCFadeOut::create(2);
+    }
+    CCActionInterval* action_back = action->reverse();
+    CCActionInterval* seq = CCSequence::create(action, action_back, NULL);
+    
+    node->runAction(CCRepeatForever::create(seq));
+}
+
+
+
 CCLayer* TestSpriteDemo::getLayerByIndex()
 {
 	CCLayer * layer = CCLayer::create();
@@ -147,6 +172,45 @@ CCLayer* TestSpriteDemo::getLayerByIndex()
             
         }
             
+            break;
+        case 3: //sprite
+        {
+            setTitle("Sprite 图片");
+            int wid = 85, hei = 121;
+            CCSpriteBatchNode* batchNode = CCSpriteBatchNode::create(s_pPathGrossiniDance, 30);
+            CCSize size = CCDirector::sharedDirector()->getWinSize();
+            CCLayer* layer2 = CCLayer::create();
+            for (int i=0; i<10; i++) {
+                int idx = CCRANDOM_0_1() * 1400 / 100;
+                int x = idx % 5 * wid;
+                int y = idx / 5 * hei;
+                CCSprite* sprite = CCSprite::createWithTexture(batchNode->getTexture(), CCRectMake(x, y, wid, hei));
+                sprite->cocos2d::CCNode::setPosition(CCRANDOM_0_1() * size.width, CCRANDOM_0_1() * size.height);
+                layer2->addChild(sprite);
+                playAction(sprite);
+            }
+            layer->addChild(layer2);
+        }
+            break;
+            
+        case 4: //SpriteBatchNode
+        {
+            setTitle("SpriteBatchNode 批绘制，提高效率");
+            int wid = 85, hei = 121;
+            CCSpriteBatchNode* batchNode = CCSpriteBatchNode::create(s_pPathGrossiniDance, 30);
+            CCSize size = CCDirector::sharedDirector()->getWinSize();
+            for (int i=0; i<10; i++) {
+                int idx = CCRANDOM_0_1() * 1400 / 100;
+                int x = idx % 5 * wid;
+                int y = idx / 5 * hei;
+                CCSprite* sprite = CCSprite::createWithTexture(batchNode->getTexture(), CCRectMake(x, y, wid, hei));
+                sprite->cocos2d::CCNode::setPosition(CCRANDOM_0_1() * size.width, CCRANDOM_0_1() * size.height);
+                batchNode->addChild(sprite);
+                playAction(sprite);
+            }
+            layer->addChild(batchNode);
+            
+        }
             break;
             
 		default:
