@@ -42,3 +42,17 @@ proj.android/bin/res/
 
 
 proj.android/bin/jarlist.cache
+
+proj.android/bin/build.prop
+
+proj.android/bin/proguard.txt
+
+proj.android/bin/QingLibCocos2dx-release-unsigned.apk
+
+proj.android/bin/QingLibCocos2dx-release-unaligned.apk
+
+proj.android/libs/armeabi/gdb.setup
+
+proj.android/bin/QingLibCocos2dx.ap_
+
+proj.android/bin/classes.dex
