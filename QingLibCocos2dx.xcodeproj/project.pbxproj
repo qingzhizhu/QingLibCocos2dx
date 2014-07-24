@@ -42,6 +42,10 @@
 		0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B1E0F18686E580088924F /* TestDemo.cpp */; };
 		0A651D93193D6FBB00630E04 /* TestXMLDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */; };
 		0A68EB8519489C8500D9191B /* CommUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A68EB8319489C8500D9191B /* CommUtils.cpp */; };
+		0A84E316197FC69D00D80D64 /* lua in Resources */ = {isa = PBXBuildFile; fileRef = 0A84E315197FC69D00D80D64 /* lua */; };
+		0A84E31A197FC6EA00D80D64 /* TestLocalLuaDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A84E318197FC6EA00D80D64 /* TestLocalLuaDemo.cpp */; };
+		0A84E31C197FD06C00D80D64 /* mobdebug.lua in Resources */ = {isa = PBXBuildFile; fileRef = 0A84E31B197FD06C00D80D64 /* mobdebug.lua */; };
+		0A84E31F1980D97400D80D64 /* socket.lua in Resources */ = {isa = PBXBuildFile; fileRef = 0A84E31E1980D97400D80D64 /* socket.lua */; };
 		0A882A7318AA3CC1000CC715 /* LabelUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */; };
 		0A88DA5A18F3F4A300D73CB4 /* DisplayObjectUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */; };
 		0A89335418EE9CCD001AB17C /* TestLayerDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A89335218EE9CCD001AB17C /* TestLayerDemo.cpp */; };
@@ -436,6 +440,11 @@
 		0A651D92193D6FBB00630E04 /* TestXMLDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestXMLDemo.h; sourceTree = "<group>"; };
 		0A68EB8319489C8500D9191B /* CommUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommUtils.cpp; sourceTree = "<group>"; };
 		0A68EB8419489C8500D9191B /* CommUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommUtils.h; sourceTree = "<group>"; };
+		0A84E315197FC69D00D80D64 /* lua */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lua; path = Resources/lua; sourceTree = "<group>"; };
+		0A84E318197FC6EA00D80D64 /* TestLocalLuaDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestLocalLuaDemo.cpp; sourceTree = "<group>"; };
+		0A84E319197FC6EA00D80D64 /* TestLocalLuaDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestLocalLuaDemo.h; sourceTree = "<group>"; };
+		0A84E31B197FD06C00D80D64 /* mobdebug.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mobdebug.lua; path = Resources/mobdebug.lua; sourceTree = "<group>"; };
+		0A84E31E1980D97400D80D64 /* socket.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = socket.lua; path = Resources/socket.lua; sourceTree = "<group>"; };
 		0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LabelUtils.cpp; sourceTree = "<group>"; };
 		0A882A7218AA3CC1000CC715 /* LabelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelUtils.h; sourceTree = "<group>"; };
 		0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DisplayObjectUtils.cpp; sourceTree = "<group>"; };
@@ -1205,6 +1214,9 @@
 		0A00AF421864417400775320 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0A84E31E1980D97400D80D64 /* socket.lua */,
+				0A84E31B197FD06C00D80D64 /* mobdebug.lua */,
+				0A84E315197FC69D00D80D64 /* lua */,
 				0A02376C19406C260085C7F8 /* ZangHuaYin.txt */,
 				0AFE4C331887E9CA00013A32 /* font */,
 				0AFE4C311887E5E500013A32 /* Images */,
@@ -2730,6 +2742,8 @@
 				0AF4261618D9D306001F800D /* MyAssetsManagerDemo.h */,
 				0AF4261818D9D591001F800D /* TestLuaDemo.cpp */,
 				0AF4261918D9D591001F800D /* TestLuaDemo.h */,
+				0A84E318197FC6EA00D80D64 /* TestLocalLuaDemo.cpp */,
+				0A84E319197FC6EA00D80D64 /* TestLocalLuaDemo.h */,
 			);
 			path = AssetsManager;
 			sourceTree = "<group>";
@@ -2830,15 +2844,18 @@
 				0AE2F4BB195AAC88004E91A2 /* build_mac.sh in Resources */,
 				0AE2F4B8195AAC88004E91A2 /* Android.mk in Resources */,
 				0A00AF501864417400775320 /* Icon-Small.png in Resources */,
+				0A84E316197FC69D00D80D64 /* lua in Resources */,
 				0AF4254818D9D1BF001F800D /* CMakeLists.txt in Resources */,
 				0A00AF521864417400775320 /* Icon-Small@2x.png in Resources */,
 				0A00AF541864417400775320 /* Icon.png in Resources */,
+				0A84E31F1980D97400D80D64 /* socket.lua in Resources */,
 				0A00AF561864417400775320 /* Icon@2x.png in Resources */,
 				0AE2F4BD195AAC88004E91A2 /* Android.mk in Resources */,
 				0A00AF581864417400775320 /* iTunesArtwork in Resources */,
 				0AFE4C321887E5E500013A32 /* Images in Resources */,
 				0AE2F4BF195AAC88004E91A2 /* CCBReaderLoad.lua in Resources */,
 				0AFE4C341887E9CA00013A32 /* font in Resources */,
+				0A84E31C197FD06C00D80D64 /* mobdebug.lua in Resources */,
 				0A02376D19406C260085C7F8 /* ZangHuaYin.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2945,6 +2962,7 @@
 				0AF425FB18D9D1C0001F800D /* SlotData.cpp in Sources */,
 				0AF4252718D9D1BF001F800D /* CCActionGrid3D.cpp in Sources */,
 				0AF425F418D9D1C0001F800D /* Json.cpp in Sources */,
+				0A84E31A197FC6EA00D80D64 /* TestLocalLuaDemo.cpp in Sources */,
 				0AF4258018D9D1BF001F800D /* ccGLStateCache.cpp in Sources */,
 				0A00AF621864417400775320 /* main.m in Sources */,
 				0AF4256F18D9D1BF001F800D /* CCApplication.mm in Sources */,

@@ -14,6 +14,7 @@
 #include "TestFontDemo.h"
 #include "MyAssetsManagerDemo.h"
 #include "TestLuaDemo.h"
+#include "TestLocalLuaDemo.h"
 #include "TestLayerDemo.h"
 #include "TestSpriteDemo.h"
 #include "TestClippingNodeDemo.h"
@@ -24,8 +25,8 @@
 enum{
     TESTS_MYDEMO = 0,
     TESTS_FONT,
-    TESTS_MYMANAGER,
     TESTS_LUA,
+    TESTS_MYMANAGER,
     TESTS_LAYER,
     TESTS_SPRITE,
     TESTS_CLIPPINGNODE,
@@ -56,7 +57,7 @@ enum{
 const std::string g_aTestNames[TESTS_COUNT] = {
     "My Demo!",
     "Font Test",
-    "MyAssetsManager",
+    "Lua Demo",
     "Lua & AssetsManager",
     "Layer Tests",
     "Sprite Tests",

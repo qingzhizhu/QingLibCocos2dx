@@ -31,7 +31,7 @@ static TestBaseLayer* CreateTestScene(int index){
             break;
             
         case TESTS_LUA:
-            layer = TestLuaDemo::create();
+            layer = TestLocalLuaDemo::create();
             break;
             
         case TESTS_LAYER:

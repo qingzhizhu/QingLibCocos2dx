@@ -10,18 +10,6 @@
 
 #include "CCLuaEngine.h"
 
-//extern "C" {
-//#include "lua.h"
-//#include "lualib.h"
-//#include "lauxlib.h"
-//};
-
-extern "C" {
-//#include "lua.h"
-//#include "lualib.h"
-#include "lauxlib.h"
-};
-
 USING_NS_QING;
 
 
@@ -37,9 +25,9 @@ LuaEngineUtils::~LuaEngineUtils()
 
 bool LuaEngineUtils::sm_bInited = false;
 
-string LuaEngineUtils::fullPathForFilename(const char *fileName)
+const char * LuaEngineUtils::fullPathForFilename(const char *fileName)
 {
-    return CCFileUtils::sharedFileUtils()->fullPathForFilename(fileName);
+    return CCFileUtils::sharedFileUtils()->fullPathForFilename(fileName).c_str();
 }
 
 
@@ -51,7 +39,7 @@ lua_State* LuaEngineUtils::getLuaState()
 
 bool LuaEngineUtils::isOpenLua(const char *luaFileName)
 {
-    int result = luaL_dofile(getLuaState(), fullPathForFilename(luaFileName).c_str());
+    int result = luaL_dofile(getLuaState(), fullPathForFilename(luaFileName));
     if(result != 0){
         CCLOG("Open lua error = %d ", result);
     }
@@ -67,7 +55,19 @@ int LuaEngineUtils::executeLua(const char *luaFileName)
         // register lua engine
         CCScriptEngineManager::sharedManager()->setScriptEngine(pEngine);
     }
-    return pEngine->executeScriptFile(fullPathForFilename(luaFileName).c_str());
+    return pEngine->executeScriptFile(fullPathForFilename(luaFileName));
+}
+
+
+lua_State * LuaEngineUtils::getLuaStateByFunName(const char *luaFileName, const char *funName)
+{
+    lua_State* ls = getLuaState();
+    if(isOpenLua(luaFileName)){
+        lua_getglobal(ls, funName);
+        return ls;
+    }
+    CCLOG("Open Lua Error  getLuaStateByFunName: file = %s, fun = %s", luaFileName, funName);
+    return NULL;
 }
 
 
@@ -135,6 +135,8 @@ const char* LuaEngineUtils::callLuaFunc(const char *luaFileName, const char *fun
     if(isOpenLua(luaFileName)){
         lua_State* ls = getLuaState();
         lua_getglobal(ls, funcName);
+        
+        //TODO: 需要解析类型 [type,value...]
         
         lua_pushstring(ls, "?");
         lua_pushnumber(ls, 1);
