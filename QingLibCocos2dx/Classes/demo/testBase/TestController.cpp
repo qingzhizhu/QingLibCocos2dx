@@ -29,6 +29,9 @@ static TestBaseLayer* CreateTestScene(int index){
         case TESTS_MYMANAGER:
             layer = MyAssetsManagerDemo::create();
             break;
+        case TESTS_MULTI_MANAGER:
+            layer = TestMultiAssetsManager::create();
+            break;
             
         case TESTS_LUA:
             layer = TestLocalLuaDemo::create();

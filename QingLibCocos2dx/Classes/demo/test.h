@@ -21,12 +21,14 @@
 #include "StorageUtilsTest.h"
 #include "TestXMLDemo.h"
 #include "TestFileUtils.h"
+#include "TestMultiAssetsManager.h"
 
 enum{
     TESTS_MYDEMO = 0,
     TESTS_FONT,
     TESTS_LUA,
     TESTS_MYMANAGER,
+    TESTS_MULTI_MANAGER,
     TESTS_LAYER,
     TESTS_SPRITE,
     TESTS_CLIPPINGNODE,
@@ -59,6 +61,7 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "Font Test",
     "Lua Demo",
     "Lua & AssetsManager",
+    "Multi AssetsManager!",
     "Layer Tests",
     "Sprite Tests",
     "CCClippingNode Tests!",

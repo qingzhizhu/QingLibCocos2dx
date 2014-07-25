@@ -49,6 +49,9 @@
 		0A882A7318AA3CC1000CC715 /* LabelUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */; };
 		0A88DA5A18F3F4A300D73CB4 /* DisplayObjectUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */; };
 		0A89335418EE9CCD001AB17C /* TestLayerDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A89335218EE9CCD001AB17C /* TestLayerDemo.cpp */; };
+		0A91AAFF1981F21C00A30051 /* 1_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A91AAFE1981F21C00A30051 /* 1_s.png */; };
+		0A91AB0519820F2B00A30051 /* MultiAssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A91AB0319820F2B00A30051 /* MultiAssetsManager.cpp */; };
+		0A91AB0819822DAC00A30051 /* TestMultiAssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A91AB0619822DAC00A30051 /* TestMultiAssetsManager.cpp */; };
 		0ABE378918E42CFE007E2B67 /* LuaEngineUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */; };
 		0AC2FCAF18F7EA330069BF0F /* TestClippingNodeDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */; };
 		0AC38719193C7E6D0039377F /* StorageUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AC38717193C7E6D0039377F /* StorageUtils.cpp */; };
@@ -451,6 +454,11 @@
 		0A88DA5918F3F4A300D73CB4 /* DisplayObjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayObjectUtils.h; sourceTree = "<group>"; };
 		0A89335218EE9CCD001AB17C /* TestLayerDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestLayerDemo.cpp; sourceTree = "<group>"; };
 		0A89335318EE9CCD001AB17C /* TestLayerDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestLayerDemo.h; sourceTree = "<group>"; };
+		0A91AAFE1981F21C00A30051 /* 1_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1_s.png; path = Resources/1_s.png; sourceTree = "<group>"; };
+		0A91AB0319820F2B00A30051 /* MultiAssetsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiAssetsManager.cpp; sourceTree = "<group>"; };
+		0A91AB0419820F2B00A30051 /* MultiAssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiAssetsManager.h; sourceTree = "<group>"; };
+		0A91AB0619822DAC00A30051 /* TestMultiAssetsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestMultiAssetsManager.cpp; sourceTree = "<group>"; };
+		0A91AB0719822DAC00A30051 /* TestMultiAssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMultiAssetsManager.h; sourceTree = "<group>"; };
 		0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaEngineUtils.cpp; sourceTree = "<group>"; };
 		0ABE378818E42CFE007E2B67 /* LuaEngineUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaEngineUtils.h; sourceTree = "<group>"; };
 		0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestClippingNodeDemo.cpp; sourceTree = "<group>"; };
@@ -1214,6 +1222,7 @@
 		0A00AF421864417400775320 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0A91AAFE1981F21C00A30051 /* 1_s.png */,
 				0A84E31E1980D97400D80D64 /* socket.lua */,
 				0A84E31B197FD06C00D80D64 /* mobdebug.lua */,
 				0A84E315197FC69D00D80D64 /* lua */,
@@ -1608,6 +1617,8 @@
 				0AF4225B18D9D173001F800D /* MyAssetsManager.h */,
 				0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */,
 				0ABE378818E42CFE007E2B67 /* LuaEngineUtils.h */,
+				0A91AB0319820F2B00A30051 /* MultiAssetsManager.cpp */,
+				0A91AB0419820F2B00A30051 /* MultiAssetsManager.h */,
 			);
 			name = luaUtils;
 			path = Classes/luaUtils;
@@ -1620,6 +1631,8 @@
 				0AF4225718D9D173001F800D /* AssetsManagerDemo.h */,
 				0AF4225818D9D173001F800D /* QingSprite.cpp */,
 				0AF4225918D9D173001F800D /* QingSprite.h */,
+				0A91AB0619822DAC00A30051 /* TestMultiAssetsManager.cpp */,
+				0A91AB0719822DAC00A30051 /* TestMultiAssetsManager.h */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -2843,6 +2856,7 @@
 				0AE2F4BE195AAC88004E91A2 /* AudioEngine.lua in Resources */,
 				0AE2F4BB195AAC88004E91A2 /* build_mac.sh in Resources */,
 				0AE2F4B8195AAC88004E91A2 /* Android.mk in Resources */,
+				0A91AAFF1981F21C00A30051 /* 1_s.png in Resources */,
 				0A00AF501864417400775320 /* Icon-Small.png in Resources */,
 				0A84E316197FC69D00D80D64 /* lua in Resources */,
 				0AF4254818D9D1BF001F800D /* CMakeLists.txt in Resources */,
@@ -2999,6 +3013,7 @@
 				0AF4258718D9D1BF001F800D /* CCSpriteFrame.cpp in Sources */,
 				0AF4255A18D9D1BF001F800D /* CCLayer.cpp in Sources */,
 				0AF425E818D9D1C0001F800D /* Animation.cpp in Sources */,
+				0A91AB0519820F2B00A30051 /* MultiAssetsManager.cpp in Sources */,
 				0AE2F49B195AAC88004E91A2 /* ldebug.c in Sources */,
 				0AF4255518D9D1BF001F800D /* CCKeypadDelegate.cpp in Sources */,
 				0AF4225E18D9D173001F800D /* MyAssetsManager.cpp in Sources */,
@@ -3025,6 +3040,7 @@
 				0AF4259C18D9D1BF001F800D /* CCTexture2D.cpp in Sources */,
 				0AF4257F18D9D1BF001F800D /* CCGLProgram.cpp in Sources */,
 				0A00B2D51864417B00775320 /* AppDelegate.cpp in Sources */,
+				0A91AB0819822DAC00A30051 /* TestMultiAssetsManager.cpp in Sources */,
 				0AF425C618D9D1BF001F800D /* CCScrollViewLoader.cpp in Sources */,
 				0AF425F918D9D1C0001F800D /* Skin.cpp in Sources */,
 				0AE2F496195AAC88004E91A2 /* lapi.c in Sources */,
