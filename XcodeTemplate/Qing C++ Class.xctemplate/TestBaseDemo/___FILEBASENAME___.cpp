@@ -8,7 +8,7 @@
 
 #include "___FILEBASENAME___.h"
 
-USING_NS_QING;
+NS_QING_BEGIN
 
 bool ___FILEBASENAMEASIDENTIFIER___::init()
 {
@@ -49,3 +49,4 @@ CCLayer* ___FILEBASENAMEASIDENTIFIER___::getLayerByIndex()
 	return layer;
 }
 
+NS_QING_END

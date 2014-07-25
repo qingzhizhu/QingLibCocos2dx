@@ -8,7 +8,7 @@
 
 #include "___FILEBASENAME___.h"
 
-USING_NS_QING;
+NS_QING_BEGIN
 
 bool ___FILEBASENAMEASIDENTIFIER___::init()
 {
@@ -37,3 +37,4 @@ ___FILEBASENAMEASIDENTIFIER___::~___FILEBASENAMEASIDENTIFIER___()
 	// TODO: auto generated code
 }
 
+NS_QING_END
