@@ -65,11 +65,11 @@ void createDownloadedDir(string end)
 void TestMultiAssetsManager::onEnter()
 {
 	TestBaseLayer::onEnter();
-    string storeStr = CCFileUtils::sharedFileUtils()->getWritablePath() + "aaaa";
-    createDownloadedDir("aaaa");
-    MultiAssetsManager *manager = new MultiAssetsManager("http://localhost/demo/package.zip", "http://localhost/demo/version", storeStr);
+    MultiAssetsManager *manager = new MultiAssetsManager("http://localhost/demo/");
+    manager->removeDownload();
     manager->update();
 //    CC_SAFE_DELETE(manager);
+    
 }
 
 void TestMultiAssetsManager::onExit()

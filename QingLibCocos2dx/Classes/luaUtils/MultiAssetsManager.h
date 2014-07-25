@@ -84,9 +84,21 @@ public:
      * @param versionFileUrl URL of version file. It should contain version code of new package.
      * @param storagePath The path to store downloaded resources.
      */
-    MultiAssetsManager(const char* packageUrl = NULL, const char* versionFileUrl = NULL, string storagePath = NULL);
+    
+    
+    /**
+     * @param assetsServerUrl 资源服务器url
+     * @param packagePrefix 资源包前缀
+     * @param versionFileName 版本文件名称
+     * @param storagePath 保存路径
+     */
+    MultiAssetsManager(string assetsServerUrl="http://localhost/demo/", string packagePrefix="package", string versionFileName="version", string storagePath = ".Elextech_RAM/");
+    
     
     virtual ~MultiAssetsManager();
+    
+    /**删除所有下载内容*/
+    void removeDownload();
     
     /* @brief Check out if there is a new version resource.
      *        You may use this method before updating, then let user determine whether
@@ -103,9 +115,6 @@ public:
      */
     const char* getPackageUrl() const;
     
-    /* @brief Sets package url.
-     */
-    void setPackageUrl(const char* packageUrl);
     
     /* @brief Gets version file url.
      */
@@ -126,7 +135,7 @@ public:
     /* @brief Gets storage path.
      */
     const char* getStoragePath() const;
-    
+        
     /* @brief Sets storage path.
      *
      * @param storagePath The path to store downloaded resources.
@@ -157,7 +166,7 @@ protected:
     bool downLoad();
     void checkStoragePath();
     bool uncompress();
-    bool createDirectory(const char *path);
+    bool createDirectory(string path);
     void setSearchPath();
     void sendErrorMessage(ErrorCode code);
     
@@ -185,6 +194,20 @@ private:
         std::list<Message*> *_messageQueue;
         pthread_mutex_t _messageQueueMutex;
     };
+    
+private:
+    string _assetsServerUrl;
+    string _packagePerfix;
+    string _versionFileName;
+    
+    uint _nLocalVersion;
+    uint _nTotalVersion;
+    /**下载的下标*/
+    uint _nDownloadVersion;
+    /**string 获得下一个版本号*/
+    string getDownloadVersion();
+    
+    bool needDownload() { return _nDownloadVersion < _nTotalVersion; }
     
 private:
     //! The path to store downloaded resources.

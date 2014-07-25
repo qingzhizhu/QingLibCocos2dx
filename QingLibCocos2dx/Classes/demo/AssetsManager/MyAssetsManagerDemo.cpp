@@ -16,7 +16,7 @@ static MyAssetsManager* manager;
 MyAssetsManagerDemo::MyAssetsManagerDemo()
 {
     manager = new MyAssetsManager("http://localhost/demo/package.zip", "http://localhost/demo/version", this, callfunc_selector(MyAssetsManagerDemo::callBack));
-//    manager->removeDownload();        //若主动删除文件内容，version信息不会更新
+    manager->removeDownload();        //若主动删除文件内容，version信息不会更新
     manager->startDownload();
 }
 

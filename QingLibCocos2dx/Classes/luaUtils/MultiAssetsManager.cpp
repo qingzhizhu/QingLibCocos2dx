@@ -27,7 +27,8 @@ NS_QING_BEGIN
 
 #define KEY_OF_VERSION   "current-version-code"
 #define KEY_OF_DOWNLOADED_VERSION    "downloaded-version-code"
-#define TEMP_PACKAGE_FILE_NAME    "cocos2dx-update-temp-package.zip"
+#define TEMP_PACKAGE_FILE_NAME    "elex-update-temp-package"
+#define TEMP_PACKAGE_FILE_FORMAT    ".zip"
 #define BUFFER_SIZE    8192
 #define MAX_FILENAME   512
 
@@ -53,17 +54,23 @@ struct ProgressMessage
 
 // Implementation of MultiAssetsManager
 
-MultiAssetsManager::MultiAssetsManager(const char* packageUrl/* =NULL */, const char* versionFileUrl/* =NULL */, string storagePath/* =NULL */)
+MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePrefix, string versionFileName, string storagePath)
 :  _storagePath(storagePath)
+, _assetsServerUrl(assetsServerUrl)
 , _version("")
-, _packageUrl(packageUrl)
-, _versionFileUrl(versionFileUrl)
+, _packagePerfix(packagePrefix)
+, _versionFileName(versionFileName)
 , _downloadedVersion("")
 , _curl(NULL)
 , _tid(NULL)
 , _connectionTimeout(0)
 , _delegate(NULL)
+, _nLocalVersion(0)
+, _nTotalVersion(0)
+, _nDownloadVersion(0)
+, _schedule(NULL)
 {
+    _versionFileUrl = assetsServerUrl + versionFileName;
     checkStoragePath();
     _schedule = new Helper();
 }
@@ -73,8 +80,75 @@ MultiAssetsManager::~MultiAssetsManager()
     CC_SAFE_DELETE(_schedule);
 }
 
+/**
+ * 删除路径的最后一个斜杠
+ */
+const char * getPathRemoveLastSlash(string pathStr)
+{
+    if (pathStr.size() > 0 && pathStr[pathStr.size() - 1] == '/')
+    {
+        pathStr.replace(pathStr.size() - 1, pathStr.size(), "");
+    }
+    return pathStr.c_str();
+}
+
+
+/*
+ * Create a direcotry is platform depended.
+ */
+bool MultiAssetsManager::createDirectory(string pathStr)
+{
+    const char *path = getPathRemoveLastSlash(pathStr);
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
+    mode_t processMask = umask(0);
+    int ret = mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO);
+    umask(processMask);
+    if (ret != 0 && (errno != EEXIST))
+    {
+        return false;
+    }
+    
+    return true;
+#else
+    BOOL ret = CreateDirectoryA(path, NULL);
+	if (!ret && ERROR_ALREADY_EXISTS != GetLastError())
+	{
+		return false;
+	}
+    return true;
+#endif
+}
+
+void MultiAssetsManager::removeDownload()
+{
+    string pathStr = getPathRemoveLastSlash(_storagePath);
+    // Remove downloaded files
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
+    string command = "rm -r ";
+    // Path may include space.
+    command += "\"" + pathStr + "\"";
+    system(command.c_str());
+#else
+    string command = "rd /s /q ";
+    // Path may include space.
+    command += "\"" + pathStr + "\"";
+    system(command.c_str());
+#endif
+    // Delete recorded version codes.
+    deleteVersion();
+    
+    //re create storage dir if not exists
+    createDirectory(pathStr);
+}
+
+
 void MultiAssetsManager::checkStoragePath()
 {
+    string temp = CCFileUtils::sharedFileUtils()->fullPathForFilename(_storagePath.c_str());
+    string writablePath = CCFileUtils::sharedFileUtils()->getWritablePath();
+    if(_storagePath.find(writablePath.c_str()) == string::npos){
+        _storagePath = writablePath + _storagePath;
+    }
     if (_storagePath.size() > 0 && _storagePath[_storagePath.size() - 1] != '/')
     {
         _storagePath.append("/");
@@ -121,7 +195,9 @@ bool MultiAssetsManager::checkUpdate()
     }
     
     string recordedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
-    if (recordedVersion == _version)
+    _nLocalVersion = atoi(recordedVersion.c_str());
+    _nTotalVersion = atoi(_version.c_str());
+    if (recordedVersion == _version || _nLocalVersion >= _nTotalVersion)
     {
         sendErrorMessage(kNoNewVersion);
         CCLOG("there is not new version");
@@ -129,8 +205,12 @@ bool MultiAssetsManager::checkUpdate()
         setSearchPath();
         return false;
     }
+    _nDownloadVersion = _nLocalVersion + 1;
+    //auto create download directory
+    createDirectory(_storagePath);
     
     CCLOG("there is a new version: %s", _version.c_str());
+    CCLOG("Need Download %d new assets packages.", (_nTotalVersion - _nLocalVersion));
     
     return true;
 }
@@ -142,7 +222,8 @@ void* assetsManagerDownloadAndUncompress(void *data)
     
     do
     {
-        if (self->_downloadedVersion != self->_version)
+//        if (self->_downloadedVersion != self->_version)
+        if (self->_downloadedVersion != self->getDownloadVersion())
         {
             if (! self->downLoad()) break;
             
@@ -182,10 +263,7 @@ void MultiAssetsManager::update()
     if (_tid) return;
     
     // 1. Urls of package and version should be valid;
-    // 2. Package should be a zip file.
-    if (_versionFileUrl.size() == 0 ||
-        _packageUrl.size() == 0 ||
-        std::string::npos == _packageUrl.find(".zip"))
+    if (_versionFileUrl.size() == 0)
     {
         CCLOG("no version file url, or no package url, or the package is not a zip file");
         return;
@@ -205,7 +283,7 @@ bool MultiAssetsManager::uncompress()
 {
     CCLOG("[MultiAssetsManager] 5 uncompress");
     // Open the zip file
-    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME;     //TODO: 加上版本号
+    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME + getDownloadVersion() + TEMP_PACKAGE_FILE_FORMAT;     //TODO: 加上版本号
     unzFile zipfile = unzOpen(outFileName.c_str());
     if (! zipfile)
     {
@@ -257,7 +335,7 @@ bool MultiAssetsManager::uncompress()
         {
             // Entry is a direcotry, so create it.
             // If the directory exists, it will failed scilently.
-            if (!createDirectory(fullPath.c_str()))
+            if (!createDirectory(fullPath))
             {
                 CCLOG("can not create directory %s", fullPath.c_str());
                 unzClose(zipfile);
@@ -327,31 +405,6 @@ bool MultiAssetsManager::uncompress()
     return true;
 }
 
-/*
- * Create a direcotry is platform depended.
- */
-bool MultiAssetsManager::createDirectory(const char *path)
-{
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
-    mode_t processMask = umask(0);
-    int ret = mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO);
-    umask(processMask);
-    if (ret != 0 && (errno != EEXIST))
-    {
-        return false;
-    }
-    
-    return true;
-#else
-    BOOL ret = CreateDirectoryA(path, NULL);
-	if (!ret && ERROR_ALREADY_EXISTS != GetLastError())
-	{
-		return false;
-	}
-    return true;
-#endif
-}
-
 void MultiAssetsManager::setSearchPath()
 {
     vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
@@ -387,11 +440,19 @@ int assetsManagerProgressFunc(void *ptr, double totalToDownload, double nowDownl
     return 0;
 }
 
+string MultiAssetsManager::getDownloadVersion()
+{
+    char nextVersion[32];
+    sprintf(nextVersion, "%d", _nDownloadVersion);
+    return nextVersion;
+}
+
 bool MultiAssetsManager::downLoad()
 {
     CCLOG("[MultiAssetsManager] 3 downLoad");
     // Create a file to save package.
-    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME;
+    string nextVersion = getDownloadVersion();
+    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME + nextVersion + TEMP_PACKAGE_FILE_FORMAT;
     FILE *fp = fopen(outFileName.c_str(), "wb");
     if (! fp)
     {
@@ -399,6 +460,9 @@ bool MultiAssetsManager::downLoad()
         CCLOG("can not create file %s", outFileName.c_str());
         return false;
     }
+    
+    //reset package url
+    _packageUrl = _assetsServerUrl + _packagePerfix + nextVersion + TEMP_PACKAGE_FILE_FORMAT;
     
     // Download pacakge
     CURLcode res;
@@ -427,11 +491,6 @@ bool MultiAssetsManager::downLoad()
 const char* MultiAssetsManager::getPackageUrl() const
 {
     return _packageUrl.c_str();
-}
-
-void MultiAssetsManager::setPackageUrl(const char *packageUrl)
-{
-    _packageUrl = packageUrl;
 }
 
 const char* MultiAssetsManager::getStoragePath() const
@@ -541,8 +600,9 @@ void MultiAssetsManager::Helper::update(float dt)
             break;
         case MultiAssetsManager_MESSAGE_RECORD_DOWNLOADED_VERSION:
             CCLOG("[MultiAssetsManager] last MESSAGE_RECORD_DOWNLOADED_VERSION");
+            //set download version
             CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_DOWNLOADED_VERSION,
-                                                                ((MultiAssetsManager*)msg->obj)->_version.c_str());
+                                                                ((MultiAssetsManager*)msg->obj)->getDownloadVersion().c_str());
             CCUserDefault::sharedUserDefault()->flush();
             
             break;
@@ -577,8 +637,7 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
     CCLOG("[MultiAssetsManager] Helper::handleUpdateSucceed");
     MultiAssetsManager* manager = (MultiAssetsManager*)msg->obj;
     
-    // Record new version code.
-    CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, manager->_version.c_str());
+    
     
     // Unrecord downloaded version code.
     CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_DOWNLOADED_VERSION, "");
@@ -588,13 +647,28 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
     manager->setSearchPath();
     
     // Delete unloaded zip file.
-    string zipfileName = manager->_storagePath + TEMP_PACKAGE_FILE_NAME;
+    string zipfileName = manager->_storagePath + TEMP_PACKAGE_FILE_NAME + manager->getDownloadVersion() + TEMP_PACKAGE_FILE_FORMAT;
     if (remove(zipfileName.c_str()) != 0)
     {
         CCLOG("can not remove downloaded zip file %s", zipfileName.c_str());
     }
     
-    if (manager) manager->_delegate->onSuccess();
+    if (manager){
+        if(manager->needDownload()){
+            //？？
+//            assetsManagerDownloadAndUncompress
+//            manager->downLoad(); //?
+            CCLOG("[MultiAssetsManager] 下载下一个version");
+            //下载下一个资源包
+            manager->_nDownloadVersion++;
+            manager->downLoad();
+        }else{
+            // Record new version code.
+            CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, manager->_version.c_str());
+            if(manager->_delegate) manager->_delegate->onSuccess();
+            CCLOG("全部下载成功！");
+        }
+    }
 }
 
 NS_QING_END
