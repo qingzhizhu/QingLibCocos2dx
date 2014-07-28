@@ -22,7 +22,6 @@
 
 #include "support/zip_support/unzip.h"
 
-//USING_NS_QING;
 NS_QING_BEGIN
 
 #define KEY_OF_VERSION   "current-version-code"
@@ -153,6 +152,7 @@ void MultiAssetsManager::checkStoragePath()
     {
         _storagePath.append("/");
     }
+    CCLog("[MultiAssetsManager] Device Storage : %s", _storagePath.c_str());
 }
 
 static size_t getVersionCode(void *ptr, size_t size, size_t nmemb, void *userdata)
@@ -179,10 +179,16 @@ bool MultiAssetsManager::checkUpdate()
     _version.clear();
     
     CURLcode res;
+    //句柄上最经常设置的属性是URL
     curl_easy_setopt(_curl, CURLOPT_URL, _versionFileUrl.c_str());
     curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, 0L);
+    //指定URL上的远程主机的数据资源到本地
+//    如果你想自己处理得到的数据而不是直接显示在标准输出里，你可以写一个符合下面原型的函数
+//    size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp);
     curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, getVersionCode);
+    //回调函数第四个参数得到的数据
     curl_easy_setopt(_curl, CURLOPT_WRITEDATA, &_version);
+//    curl_easy_setopt(_curl, CURLOPT_VERBOSE, 1);
     if (_connectionTimeout) curl_easy_setopt(_curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
     res = curl_easy_perform(_curl);
     
@@ -283,7 +289,7 @@ bool MultiAssetsManager::uncompress()
 {
     CCLOG("[MultiAssetsManager] 5 uncompress");
     // Open the zip file
-    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME + getDownloadVersion() + TEMP_PACKAGE_FILE_FORMAT;     //TODO: 加上版本号
+    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME + getDownloadVersion() + TEMP_PACKAGE_FILE_FORMAT;
     unzFile zipfile = unzOpen(outFileName.c_str());
     if (! zipfile)
     {
@@ -415,7 +421,7 @@ void MultiAssetsManager::setSearchPath()
 
 static size_t downLoadPackage(void *ptr, size_t size, size_t nmemb, void *userdata)
 {
-    CCLOG("[MultiAssetsManager] downLoadPackage");
+    CCLOG("[MultiAssetsManager] downLoadPackage size=%lu, nmemb=%lu", size, nmemb);
     FILE *fp = (FILE*)userdata;
     size_t written = fwrite(ptr, size, nmemb, fp);
     return written;
@@ -473,7 +479,7 @@ bool MultiAssetsManager::downLoad()
     curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, assetsManagerProgressFunc);
     curl_easy_setopt(_curl, CURLOPT_PROGRESSDATA, this);
     res = curl_easy_perform(_curl);
-    curl_easy_cleanup(_curl);
+    CCLOG("aa %p", _curl);
     if (res != 0)
     {
         sendErrorMessage(kNetwork);
@@ -655,17 +661,16 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
     
     if (manager){
         if(manager->needDownload()){
-            //？？
-//            assetsManagerDownloadAndUncompress
-//            manager->downLoad(); //?
             CCLOG("[MultiAssetsManager] 下载下一个version");
             //下载下一个资源包
             manager->_nDownloadVersion++;
-            manager->downLoad();
+//            manager->downLoad();
+            assetsManagerDownloadAndUncompress(manager);
         }else{
             // Record new version code.
             CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, manager->_version.c_str());
             if(manager->_delegate) manager->_delegate->onSuccess();
+            curl_easy_cleanup(manager->_curl);
             CCLOG("全部下载成功！");
         }
     }
