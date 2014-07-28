@@ -32,8 +32,10 @@ NS_QING_BEGIN
 #define MAX_FILENAME   512
 
 // Message type
-#define MultiAssetsManager_MESSAGE_UPDATE_SUCCEED                0
+/**每下载完成一个zip发送此msg*/
 #define MultiAssetsManager_MESSAGE_RECORD_DOWNLOADED_VERSION     1
+/**下载完成并解压成功发送此msg*/
+#define MultiAssetsManager_MESSAGE_UPDATE_SUCCEED                0
 #define MultiAssetsManager_MESSAGE_PROGRESS                      2
 #define MultiAssetsManager_MESSAGE_ERROR                         3
 
@@ -76,6 +78,7 @@ MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePre
 
 MultiAssetsManager::~MultiAssetsManager()
 {
+    CC_SAFE_DELETE(_delegate);
     CC_SAFE_DELETE(_schedule);
 }
 
@@ -155,6 +158,89 @@ void MultiAssetsManager::checkStoragePath()
     CCLog("[MultiAssetsManager] Device Storage : %s", _storagePath.c_str());
 }
 
+
+void MultiAssetsManager::setSearchPath()
+{
+    vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
+    vector<string>::iterator iter = searchPaths.begin();
+    searchPaths.insert(iter, _storagePath);
+    CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
+}
+
+
+#pragma mark  ------------------------ download ---------------------
+
+void MultiAssetsManager::startDownload(MultiAssetsManagerDelegateProtocol *delegate)
+{
+    setDelegate(delegate);
+    update();
+}
+
+void* assetsManagerDownloadAndUncompress(void *data)
+{
+    CCLOG("[MultiAssetsManager] 2 assetsManagerDownloadAndUncompress");
+    MultiAssetsManager* self = (MultiAssetsManager*)data;
+    
+    do
+    {
+        //        if (self->_downloadedVersion != self->_version)
+        if (self->_downloadedVersion != self->getDownloadVersion())
+        {
+            if (! self->downLoad()) break;
+            
+            // Record downloaded version.
+            MultiAssetsManager::Message *msg1 = new MultiAssetsManager::Message();
+            msg1->what = MultiAssetsManager_MESSAGE_RECORD_DOWNLOADED_VERSION;
+            msg1->obj = self;
+            self->_schedule->sendMessage(msg1);
+        }
+        
+        // Uncompress zip file.
+        if (! self->uncompress())
+        {
+            self->sendErrorMessage(MultiAssetsManager::kUncompress);
+            break;
+        }
+        
+        // Record updated version and remove downloaded zip file
+        MultiAssetsManager::Message *msg2 = new MultiAssetsManager::Message();
+        msg2->what = MultiAssetsManager_MESSAGE_UPDATE_SUCCEED;
+        msg2->obj = self;
+        self->_schedule->sendMessage(msg2);
+    } while (0);
+    
+    if (self->_tid)
+    {
+        delete self->_tid;
+        self->_tid = NULL;
+    }
+    
+    return NULL;
+}
+
+
+void MultiAssetsManager::update()
+{
+    CCLOG("[MultiAssetsManager] 0 update");
+    if (_tid) return;
+    
+    // 1. Urls of package and version should be valid;
+    if (_versionFileUrl.size() == 0)
+    {
+        CCLOG("no version file url, or no package url, or the package is not a zip file");
+        return;
+    }
+    
+    // Check if there is a new version.
+    if (! checkUpdate()) return;
+    
+    // Is package already downloaded?
+    _downloadedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_DOWNLOADED_VERSION);
+    
+    _tid = new pthread_t();
+    pthread_create(&(*_tid), NULL, assetsManagerDownloadAndUncompress, this);
+}
+
 static size_t getVersionCode(void *ptr, size_t size, size_t nmemb, void *userdata)
 {
     string *version = (string*)userdata;
@@ -221,68 +307,76 @@ bool MultiAssetsManager::checkUpdate()
     return true;
 }
 
-void* assetsManagerDownloadAndUncompress(void *data)
+
+static size_t downLoadPackage(void *ptr, size_t size, size_t nmemb, void *userdata)
 {
-    CCLOG("[MultiAssetsManager] 2 assetsManagerDownloadAndUncompress");
-    MultiAssetsManager* self = (MultiAssetsManager*)data;
-    
-    do
-    {
-//        if (self->_downloadedVersion != self->_version)
-        if (self->_downloadedVersion != self->getDownloadVersion())
-        {
-            if (! self->downLoad()) break;
-            
-            // Record downloaded version.
-            MultiAssetsManager::Message *msg1 = new MultiAssetsManager::Message();
-            msg1->what = MultiAssetsManager_MESSAGE_RECORD_DOWNLOADED_VERSION;
-            msg1->obj = self;
-            self->_schedule->sendMessage(msg1);
-        }
-        
-        // Uncompress zip file.
-        if (! self->uncompress())
-        {
-            self->sendErrorMessage(MultiAssetsManager::kUncompress);
-            break;
-        }
-        
-        // Record updated version and remove downloaded zip file
-        MultiAssetsManager::Message *msg2 = new MultiAssetsManager::Message();
-        msg2->what = MultiAssetsManager_MESSAGE_UPDATE_SUCCEED;
-        msg2->obj = self;
-        self->_schedule->sendMessage(msg2);
-    } while (0);
-    
-    if (self->_tid)
-    {
-        delete self->_tid;
-        self->_tid = NULL;
-    }
-    
-    return NULL;
+    CCLOG("[MultiAssetsManager] downLoadPackage size=%lu, nmemb=%lu", size, nmemb);
+    FILE *fp = (FILE*)userdata;
+    size_t written = fwrite(ptr, size, nmemb, fp);
+    return written;
 }
 
-void MultiAssetsManager::update()
+int assetsManagerProgressFunc(void *ptr, double totalToDownload, double nowDownloaded, double totalToUpLoad, double nowUpLoaded)
 {
-    CCLOG("[MultiAssetsManager] 0 update");
-    if (_tid) return;
+    CCLOG("[MultiAssetsManager] 4+ assetsManagerProgressFunc");
+    MultiAssetsManager* manager = (MultiAssetsManager*)ptr;
+    MultiAssetsManager::Message *msg = new MultiAssetsManager::Message();
+    msg->what = MultiAssetsManager_MESSAGE_PROGRESS;
     
-    // 1. Urls of package and version should be valid;
-    if (_versionFileUrl.size() == 0)
+    ProgressMessage *progressData = new ProgressMessage();
+    progressData->percent = (int)(nowDownloaded/totalToDownload*100);
+    progressData->manager = manager;
+    msg->obj = progressData;
+    
+    manager->_schedule->sendMessage(msg);
+    
+    CCLOG("downloading... %d%%", (int)(nowDownloaded/totalToDownload*100));
+    
+    return 0;
+}
+
+
+bool MultiAssetsManager::downLoad()
+{
+    CCLOG("[MultiAssetsManager] 3 downLoad");
+    // Create a file to save package.
+    string nextVersion = getDownloadVersion();
+    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME + nextVersion + TEMP_PACKAGE_FILE_FORMAT;
+    //这就是w 和 wb的区别，w是以文本方式打开文件，wb是二进制方式打开文件，以文本方式打开文件时，fwrite函数每碰到一个0x0A时，就在它的前面加入0x0D.其它内容不做添加操作
+    FILE *fp = fopen(outFileName.c_str(), "wb");
+    if (! fp)
     {
-        CCLOG("no version file url, or no package url, or the package is not a zip file");
-        return;
+        sendErrorMessage(kCreateFile);
+        CCLOG("can not create file %s", outFileName.c_str());
+        return false;
     }
     
-    // Check if there is a new version.
-    if (! checkUpdate()) return;
+    //reset package url
+    _packageUrl = _assetsServerUrl + _packagePerfix + nextVersion + TEMP_PACKAGE_FILE_FORMAT;
     
-    // Is package already downloaded?
-    _downloadedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_DOWNLOADED_VERSION);
+    //TODO: need send NEW_FILE_START_DOWNLOAD msg?
     
-    _tid = new pthread_t();
-    pthread_create(&(*_tid), NULL, assetsManagerDownloadAndUncompress, this);
+    // Download pacakge
+    CURLcode res;
+    curl_easy_setopt(_curl, CURLOPT_URL, _packageUrl.c_str());
+    curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, downLoadPackage);
+    curl_easy_setopt(_curl, CURLOPT_WRITEDATA, fp);
+    curl_easy_setopt(_curl, CURLOPT_NOPROGRESS, false);
+    curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, assetsManagerProgressFunc);
+    curl_easy_setopt(_curl, CURLOPT_PROGRESSDATA, this);
+    res = curl_easy_perform(_curl);
+    if (res != 0)
+    {
+        sendErrorMessage(kNetwork);
+        CCLOG("error when download package");
+        fclose(fp);
+        return false;
+    }
+    
+    CCLOG("succeed downloading package %s", _packageUrl.c_str());
+    
+    fclose(fp);
+    return true;
 }
 
 bool MultiAssetsManager::uncompress()
@@ -411,139 +505,6 @@ bool MultiAssetsManager::uncompress()
     return true;
 }
 
-void MultiAssetsManager::setSearchPath()
-{
-    vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
-    vector<string>::iterator iter = searchPaths.begin();
-    searchPaths.insert(iter, _storagePath);
-    CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
-}
-
-static size_t downLoadPackage(void *ptr, size_t size, size_t nmemb, void *userdata)
-{
-    CCLOG("[MultiAssetsManager] downLoadPackage size=%lu, nmemb=%lu", size, nmemb);
-    FILE *fp = (FILE*)userdata;
-    size_t written = fwrite(ptr, size, nmemb, fp);
-    return written;
-}
-
-int assetsManagerProgressFunc(void *ptr, double totalToDownload, double nowDownloaded, double totalToUpLoad, double nowUpLoaded)
-{
-    CCLOG("[MultiAssetsManager] 4+ assetsManagerProgressFunc");
-    MultiAssetsManager* manager = (MultiAssetsManager*)ptr;
-    MultiAssetsManager::Message *msg = new MultiAssetsManager::Message();
-    msg->what = MultiAssetsManager_MESSAGE_PROGRESS;
-    
-    ProgressMessage *progressData = new ProgressMessage();
-    progressData->percent = (int)(nowDownloaded/totalToDownload*100);
-    progressData->manager = manager;
-    msg->obj = progressData;
-    
-    manager->_schedule->sendMessage(msg);
-    
-    CCLOG("downloading... %d%%", (int)(nowDownloaded/totalToDownload*100));
-    
-    return 0;
-}
-
-string MultiAssetsManager::getDownloadVersion()
-{
-    char nextVersion[32];
-    sprintf(nextVersion, "%d", _nDownloadVersion);
-    return nextVersion;
-}
-
-bool MultiAssetsManager::downLoad()
-{
-    CCLOG("[MultiAssetsManager] 3 downLoad");
-    // Create a file to save package.
-    string nextVersion = getDownloadVersion();
-    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME + nextVersion + TEMP_PACKAGE_FILE_FORMAT;
-    FILE *fp = fopen(outFileName.c_str(), "wb");
-    if (! fp)
-    {
-        sendErrorMessage(kCreateFile);
-        CCLOG("can not create file %s", outFileName.c_str());
-        return false;
-    }
-    
-    //reset package url
-    _packageUrl = _assetsServerUrl + _packagePerfix + nextVersion + TEMP_PACKAGE_FILE_FORMAT;
-    
-    // Download pacakge
-    CURLcode res;
-    curl_easy_setopt(_curl, CURLOPT_URL, _packageUrl.c_str());
-    curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, downLoadPackage);
-    curl_easy_setopt(_curl, CURLOPT_WRITEDATA, fp);
-    curl_easy_setopt(_curl, CURLOPT_NOPROGRESS, false);
-    curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, assetsManagerProgressFunc);
-    curl_easy_setopt(_curl, CURLOPT_PROGRESSDATA, this);
-    res = curl_easy_perform(_curl);
-    CCLOG("aa %p", _curl);
-    if (res != 0)
-    {
-        sendErrorMessage(kNetwork);
-        CCLOG("error when download package");
-        fclose(fp);
-        return false;
-    }
-    
-    CCLOG("succeed downloading package %s", _packageUrl.c_str());
-    
-    fclose(fp);
-    return true;
-}
-
-const char* MultiAssetsManager::getPackageUrl() const
-{
-    return _packageUrl.c_str();
-}
-
-const char* MultiAssetsManager::getStoragePath() const
-{
-    return _storagePath.c_str();
-}
-
-void MultiAssetsManager::setStoragePath(const char *storagePath)
-{
-    _storagePath = storagePath;
-    checkStoragePath();
-}
-
-const char* MultiAssetsManager::getVersionFileUrl() const
-{
-    return _versionFileUrl.c_str();
-}
-
-void MultiAssetsManager::setVersionFileUrl(const char *versionFileUrl)
-{
-    _versionFileUrl = versionFileUrl;
-}
-
-string MultiAssetsManager::getVersion()
-{
-    return CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
-}
-
-void MultiAssetsManager::deleteVersion()
-{
-    CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, "");
-}
-
-void MultiAssetsManager::setDelegate(MultiAssetsManagerDelegate *delegate)
-{
-    _delegate = delegate;
-}
-
-void MultiAssetsManager::setConnectionTimeout(unsigned int timeout)
-{
-    _connectionTimeout = timeout;
-}
-
-unsigned int MultiAssetsManager::getConnectionTimeout()
-{
-    return _connectionTimeout;
-}
 
 void MultiAssetsManager::sendErrorMessage(MultiAssetsManager::ErrorCode code)
 {
@@ -582,7 +543,7 @@ void MultiAssetsManager::Helper::sendMessage(Message *msg)
 
 void MultiAssetsManager::Helper::update(float dt)
 {
-    CCLOG("[MultiAssetsManager] Helpe::update");
+//    CCLOG("[MultiAssetsManager] Helpe::update");  //不销毁manager 会每帧调用
     Message *msg = NULL;
     
     // Returns quickly if no message
@@ -664,7 +625,6 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
             CCLOG("[MultiAssetsManager] 下载下一个version");
             //下载下一个资源包
             manager->_nDownloadVersion++;
-//            manager->downLoad();
             assetsManagerDownloadAndUncompress(manager);
         }else{
             // Record new version code.
@@ -675,5 +635,70 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
         }
     }
 }
+
+
+#pragma mark  ------------------------ getter & setter ---------------------
+
+
+string MultiAssetsManager::getDownloadVersion()
+{
+    char nextVersion[32];
+    sprintf(nextVersion, "%d", _nDownloadVersion);
+    return nextVersion;
+}
+
+
+
+const char* MultiAssetsManager::getPackageUrl() const
+{
+    return _packageUrl.c_str();
+}
+
+const char* MultiAssetsManager::getStoragePath() const
+{
+    return _storagePath.c_str();
+}
+
+void MultiAssetsManager::setStoragePath(const char *storagePath)
+{
+    _storagePath = storagePath;
+    checkStoragePath();
+}
+
+const char* MultiAssetsManager::getVersionFileUrl() const
+{
+    return _versionFileUrl.c_str();
+}
+
+void MultiAssetsManager::setVersionFileUrl(const char *versionFileUrl)
+{
+    _versionFileUrl = versionFileUrl;
+}
+
+string MultiAssetsManager::getVersion()
+{
+    return CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
+}
+
+void MultiAssetsManager::deleteVersion()
+{
+    CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, "");
+}
+
+void MultiAssetsManager::setDelegate(MultiAssetsManagerDelegateProtocol *delegate)
+{
+    _delegate = delegate;
+}
+
+void MultiAssetsManager::setConnectionTimeout(unsigned int timeout)
+{
+    _connectionTimeout = timeout;
+}
+
+unsigned int MultiAssetsManager::getConnectionTimeout()
+{
+    return _connectionTimeout;
+}
+
 
 NS_QING_END

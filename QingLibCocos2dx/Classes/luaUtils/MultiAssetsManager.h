@@ -59,31 +59,24 @@ public:
 //        void onSuccess();
 //    };
     
-    class MultiAssetsManagerDelegate
+    class MultiAssetsManagerDelegateProtocol
     {
     public:
         /* @brief Call back function for error
          @param errorCode Type of error
          */
-        virtual void onError(ErrorCode errorCode) {};
+        virtual void onError(ErrorCode errorCode) { };
         /** @brief Call back function for recording downloading percent
          @param percent How much percent downloaded
          @warn This call back function just for recording downloading percent.
          AssetsManager will do some other thing after downloading, you should
          write code in onSuccess() after downloading.
          */
-        virtual void onProgress(int percent) {};
+        virtual void onProgress(int percent) { };
         /** @brief Call back function for success
          */
-        virtual void onSuccess() {};
+        virtual void onSuccess() { };
     };
-    
-    /* @brief Creates a AssetsManager with new package url, version code url and storage path.
-     *
-     * @param packageUrl URL of new package, the package should be a zip file.
-     * @param versionFileUrl URL of version file. It should contain version code of new package.
-     * @param storagePath The path to store downloaded resources.
-     */
     
     
     /**
@@ -97,24 +90,22 @@ public:
     
     virtual ~MultiAssetsManager();
     
+    
+    
     /**删除所有下载内容*/
     void removeDownload();
     
-    /* @brief Check out if there is a new version resource.
-     *        You may use this method before updating, then let user determine whether
-     *        he wants to update resources.
+    /* @brief Deletes recorded version code.
      */
-    virtual bool checkUpdate();
+    void deleteVersion();
     
-    /* @brief Download new package if there is a new version, and uncompress downloaded zip file.
-     *        Ofcourse it will set search path that stores downloaded files.
-     */
-    virtual void update();
+#pragma mark  ------------------------ getter & setter ---------------------
+    /**是否下载完成*/
+    bool needDownload() { return _nDownloadVersion < _nTotalVersion; }
     
     /* @brief Gets url of package.
      */
     const char* getPackageUrl() const;
-    
     
     /* @brief Gets version file url.
      */
@@ -128,14 +119,10 @@ public:
      */
     std::string getVersion();
     
-    /* @brief Deletes recorded version code.
-     */
-    void deleteVersion();
-    
     /* @brief Gets storage path.
      */
     const char* getStoragePath() const;
-        
+    
     /* @brief Sets storage path.
      *
      * @param storagePath The path to store downloaded resources.
@@ -145,9 +132,9 @@ public:
     
     /** @brief Sets delegate, the delegate will receive messages
      */
-    void setDelegate(MultiAssetsManagerDelegate *delegate);
+    void setDelegate(MultiAssetsManagerDelegateProtocol *delegate);
     
-//    MultiAssetsManagerDelegate *getDelegate() { return _schedule; }
+    //    MultiAssetsManagerDelegate *getDelegate() { return _schedule; }
     
     /** @brief Sets connection time out in seconds
      */
@@ -157,17 +144,41 @@ public:
      */
     unsigned int getConnectionTimeout();
     
+    
+#pragma mark  ------------------------ download ---------------------
+    
+    /**
+     * 开始下载资源
+     * @param callbackTarget 
+     * @param callbackFun 回调函数
+     * @param delegate 默认使用自己的
+     */
+    void startDownload(MultiAssetsManagerDelegateProtocol *delegate);
+    
+    /* @brief Download new package if there is a new version, and uncompress downloaded zip file.
+     *        Ofcourse it will set search path that stores downloaded files.
+     */
+    virtual void update();
+    
+    /* @brief Check out if there is a new version resource.
+     *        You may use this method before updating, then let user determine whether
+     *        he wants to update resources.
+     */
+    virtual bool checkUpdate();
+    
     /* downloadAndUncompress is the entry of a new thread
      */
     friend void* assetsManagerDownloadAndUncompress(void*);
     friend int assetsManagerProgressFunc(void *, double, double, double, double);
     
 protected:
-    bool downLoad();
     void checkStoragePath();
-    bool uncompress();
     bool createDirectory(string path);
     void setSearchPath();
+    
+    //-------- download ----------
+    bool downLoad();
+    bool uncompress();
     void sendErrorMessage(ErrorCode code);
     
 private:
@@ -196,6 +207,9 @@ private:
     };
     
 private:
+    /**string 获得下一个版本号*/
+    string getDownloadVersion();
+    
     string _assetsServerUrl;
     string _packagePerfix;
     string _versionFileName;
@@ -204,10 +218,8 @@ private:
     uint _nTotalVersion;
     /**下载的下标*/
     uint _nDownloadVersion;
-    /**string 获得下一个版本号*/
-    string getDownloadVersion();
     
-    bool needDownload() { return _nDownloadVersion < _nTotalVersion; }
+    
     
 private:
     //! The path to store downloaded resources.
@@ -226,7 +238,7 @@ private:
     pthread_t *_tid;
     unsigned int _connectionTimeout;
     
-    MultiAssetsManagerDelegate *_delegate; // weak reference
+    MultiAssetsManagerDelegateProtocol *_delegate; // weak reference
 };
 
 NS_QING_END

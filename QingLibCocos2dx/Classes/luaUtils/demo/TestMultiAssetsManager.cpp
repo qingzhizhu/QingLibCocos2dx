@@ -7,7 +7,6 @@
 //
 
 #include "TestMultiAssetsManager.h"
-#include "MultiAssetsManager.h"
 
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
 #include <dirent.h>
@@ -21,7 +20,7 @@ bool TestMultiAssetsManager::init()
 	bool bRet = false;
 	do
 	{
-		// TODO: auto generated code
+        
         m_bTouchEnabled = false;
         m_bAccelerometerEnabled = false;
 		bRet = true;
@@ -30,13 +29,19 @@ bool TestMultiAssetsManager::init()
 }
 
 TestMultiAssetsManager::TestMultiAssetsManager()
+: m_nPercent(0)
+, m_bIsSuccessed(false)
+, m_nErrorCode(0)
+, m_pCallbackTarget(NULL)
+, m_pCallbackFun(NULL)
+, m_pManager(NULL)
 {
-	// TODO: auto generated code
+    
 }
 
 TestMultiAssetsManager::~TestMultiAssetsManager()
 {
-	// TODO: auto generated code
+    
 }
 
 
@@ -66,8 +71,13 @@ void TestMultiAssetsManager::onEnter()
 {
 	TestBaseLayer::onEnter();
     MultiAssetsManager *manager = new MultiAssetsManager("http://localhost/demo/");
-    manager->removeDownload();
-    manager->update();
+//    manager->removeDownload();
+    m_pManager = manager;
+    //===== 外部设置 ===========
+    setCallback(this, callfunc_selector(TestMultiAssetsManager::onSuccessTest));
+    
+    manager->startDownload(this);
+    
 //    CC_SAFE_DELETE(manager);
     
 }
@@ -75,7 +85,85 @@ void TestMultiAssetsManager::onEnter()
 void TestMultiAssetsManager::onExit()
 {
 	TestBaseLayer::onExit();
-	// TODO: auto generated code
+
 }
+
+
+void TestMultiAssetsManager::setCallback(cocos2d::CCObject *callbackTarget, SEL_CallFunc callbackFun)
+{
+    this->m_pCallbackTarget = callbackTarget;
+    this->m_pCallbackFun = callbackFun;
+}
+
+void TestMultiAssetsManager::onSuccessTest()
+{
+    CCLOG("下载成功了！做点什么。。。。");
+}
+
+
+
+#pragma mark------------------------- 回调函数 -------------------------
+
+
+void TestMultiAssetsManager::onProgress(int percent)
+{
+    m_nPercent = percent;
+    CCLOG("下载进度 %d%%", percent);
+}
+
+void TestMultiAssetsManager::onSuccess()
+{
+    CCLOG("MyAssetsManager::onSuccess ");
+    m_bIsSuccessed = true;
+    callBack();
+}
+
+void TestMultiAssetsManager::onError(MultiAssetsManager::ErrorCode errorCode)
+{
+    m_nErrorCode = errorCode;
+    CCLOG("MyAssetsManager::onError %d", errorCode);
+    switch (errorCode) {
+        case MultiAssetsManager::kNoNewVersion:
+            CCLOG("无新版本不需要更新,调用 onSuccess 函数");
+            onSuccess();
+            return;
+            break;
+            
+        case MultiAssetsManager::kNetwork:
+            CCLOG("网络 错误");
+            break;
+            
+        case MultiAssetsManager::kCreateFile:
+            CCLOG("文件IO 错误");
+            break;
+            
+        case MultiAssetsManager::kUncompress:
+            CCLOG("解压缩 错误！");
+            break;
+        default:
+            break;
+    }
+    m_bIsSuccessed = false;
+    callBack();
+}
+
+void TestMultiAssetsManager::callBack()
+{
+    CCLOG("回调函数");
+//    CC_SAFE_DELETE(m_pManager);           //manager 会销毁delegate，但delegate 指向自己
+    if(m_pCallbackTarget && m_pCallbackFun){
+        (m_pCallbackTarget->*m_pCallbackFun)();
+    }
+}
+
+#pragma mark -
+
+
+
+
+
+
+
+
 
 NS_QING_END
