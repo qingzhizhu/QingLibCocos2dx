@@ -11,7 +11,7 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
+#*.a
 
 #mac os
 *.DS_Store
