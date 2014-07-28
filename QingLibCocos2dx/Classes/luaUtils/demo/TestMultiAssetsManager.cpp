@@ -67,11 +67,19 @@ void createDownloadedDir(string end)
 #endif
 }
 
+
+void createLabel(CCNode *parent, string txt)
+{
+    CCLabelTTF *label = CCLabelTTF::create(txt.c_str(), FONT_NAME, FONT_SIZE);
+    label->setPosition(VisibleRect::center());
+    parent->addChild(label);
+}
+
 void TestMultiAssetsManager::onEnter()
 {
 	TestBaseLayer::onEnter();
-    MultiAssetsManager *manager = new MultiAssetsManager("http://localhost/demo/");
-//    manager->removeDownload();
+    MultiAssetsManager *manager = new MultiAssetsManager("http://10.1.21.107/demo/");
+    manager->removeDownload();
     m_pManager = manager;
     //===== 外部设置 ===========
     setCallback(this, callfunc_selector(TestMultiAssetsManager::onSuccessTest));
@@ -98,6 +106,9 @@ void TestMultiAssetsManager::setCallback(cocos2d::CCObject *callbackTarget, SEL_
 void TestMultiAssetsManager::onSuccessTest()
 {
     CCLOG("下载成功了！做点什么。。。。");
+    CCSprite* img = CCSprite::create("1_s.png");
+    img->cocos2d::CCNode::setPosition(200, 300);
+    addChild(img);
 }
 
 
@@ -113,6 +124,11 @@ void TestMultiAssetsManager::onProgress(int percent)
 
 void TestMultiAssetsManager::onSuccess()
 {
+    string str = "下载成功！";
+    str += "\n";
+    str += m_pManager->getStoragePath();
+    str += m_pManager->getVersion();
+    createLabel(this, str);
     CCLOG("MyAssetsManager::onSuccess ");
     m_bIsSuccessed = true;
     callBack();
@@ -120,31 +136,39 @@ void TestMultiAssetsManager::onSuccess()
 
 void TestMultiAssetsManager::onError(MultiAssetsManager::ErrorCode errorCode)
 {
+    string str = "下载失败！";
+    str += "\n";
+    str += m_pManager->getStoragePath();
+    str += m_pManager->getVersion();
+    char errStr[32];
+    sprintf(errStr, "%d", errorCode);
+    str += errStr;
     m_nErrorCode = errorCode;
     CCLOG("MyAssetsManager::onError %d", errorCode);
     switch (errorCode) {
         case MultiAssetsManager::kNoNewVersion:
-            CCLOG("无新版本不需要更新,调用 onSuccess 函数");
+            str += ("无新版本不需要更新,调用 onSuccess 函数");
             onSuccess();
             return;
             break;
             
         case MultiAssetsManager::kNetwork:
-            CCLOG("网络 错误");
+            str += ("网络 错误");
             break;
             
         case MultiAssetsManager::kCreateFile:
-            CCLOG("文件IO 错误");
+            str += ("文件IO 错误");
             break;
             
         case MultiAssetsManager::kUncompress:
-            CCLOG("解压缩 错误！");
+            str += ("解压缩 错误！");
             break;
         default:
             break;
     }
     m_bIsSuccessed = false;
     callBack();
+    createLabel(this, str);
 }
 
 void TestMultiAssetsManager::callBack()

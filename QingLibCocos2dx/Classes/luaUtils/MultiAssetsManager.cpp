@@ -281,7 +281,7 @@ bool MultiAssetsManager::checkUpdate()
     if (res != 0)
     {
         sendErrorMessage(kNetwork);
-        CCLOG("can not get version file content, error code is %d", res);
+        CCLOG("can not get version file content, error code is %d, %s", res, _versionFileUrl.c_str());
         curl_easy_cleanup(_curl);
         return false;
     }
