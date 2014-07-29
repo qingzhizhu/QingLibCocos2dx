@@ -101,3 +101,11 @@ void TestBaseLayer::setTitle(string title)
     label->setString(title.c_str());
 }
 
+
+void TestBaseLayer::createLabel(CCNode *parent, string txt)
+{
+    CCLabelTTF *label = CCLabelTTF::create(txt.c_str(), FONT_NAME, FONT_SIZE);
+    label->setPosition(VisibleRect::center());
+    parent->addChild(label);
+}
+

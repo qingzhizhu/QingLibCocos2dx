@@ -58,6 +58,10 @@ static TestBaseLayer* CreateTestScene(int index){
             layer = TestFileUtils::create();
             break;
             
+        case TESTS_NETWORK:
+            layer = TestNetworkDemo::create();
+            break;
+            
         default:
             break;
     }

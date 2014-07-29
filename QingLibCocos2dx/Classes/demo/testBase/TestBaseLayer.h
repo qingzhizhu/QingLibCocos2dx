@@ -38,6 +38,8 @@ protected:
     
     // The CallBack for back to the main menu scene
     virtual void MainMenuCallback(CCObject* pSender);
+    
+    virtual void createLabel(CCNode *parent, string txt);
 
 };
 

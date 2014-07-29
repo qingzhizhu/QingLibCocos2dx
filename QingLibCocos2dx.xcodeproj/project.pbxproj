@@ -52,6 +52,7 @@
 		0A91AAFF1981F21C00A30051 /* 1_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A91AAFE1981F21C00A30051 /* 1_s.png */; };
 		0A91AB0519820F2B00A30051 /* MultiAssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A91AB0319820F2B00A30051 /* MultiAssetsManager.cpp */; };
 		0A91AB0819822DAC00A30051 /* TestMultiAssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A91AB0619822DAC00A30051 /* TestMultiAssetsManager.cpp */; };
+		0A963361198669740096AD98 /* TestNetworkDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A96335F198669740096AD98 /* TestNetworkDemo.cpp */; };
 		0ABE378918E42CFE007E2B67 /* LuaEngineUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */; };
 		0AC2FCAF18F7EA330069BF0F /* TestClippingNodeDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */; };
 		0AC38719193C7E6D0039377F /* StorageUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AC38717193C7E6D0039377F /* StorageUtils.cpp */; };
@@ -459,6 +460,8 @@
 		0A91AB0419820F2B00A30051 /* MultiAssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiAssetsManager.h; sourceTree = "<group>"; };
 		0A91AB0619822DAC00A30051 /* TestMultiAssetsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestMultiAssetsManager.cpp; sourceTree = "<group>"; };
 		0A91AB0719822DAC00A30051 /* TestMultiAssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMultiAssetsManager.h; sourceTree = "<group>"; };
+		0A96335F198669740096AD98 /* TestNetworkDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestNetworkDemo.cpp; sourceTree = "<group>"; };
+		0A963360198669740096AD98 /* TestNetworkDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestNetworkDemo.h; sourceTree = "<group>"; };
 		0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaEngineUtils.cpp; sourceTree = "<group>"; };
 		0ABE378818E42CFE007E2B67 /* LuaEngineUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaEngineUtils.h; sourceTree = "<group>"; };
 		0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestClippingNodeDemo.cpp; sourceTree = "<group>"; };
@@ -1352,6 +1355,15 @@
 			path = TestLayer;
 			sourceTree = "<group>";
 		};
+		0A96335B198661A30096AD98 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				0A96335F198669740096AD98 /* TestNetworkDemo.cpp */,
+				0A963360198669740096AD98 /* TestNetworkDemo.h */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
 		0AC2FCAC18F7EA190069BF0F /* clippingNode */ = {
 			isa = PBXGroup;
 			children = (
@@ -1364,6 +1376,7 @@
 		0ADB53E718683B1A002E8DC3 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				0A96335B198661A30096AD98 /* network */,
 				0A651D8F193D6F6E00630E04 /* xml */,
 				0AEF5974193C8C5C00CBA049 /* testUtils */,
 				0AC2FCAC18F7EA190069BF0F /* clippingNode */,
@@ -2946,6 +2959,7 @@
 				0AF425E718D9D1C0001F800D /* CCPhysicsSprite.cpp in Sources */,
 				0AF425EC18D9D1C0001F800D /* AtlasAttachmentLoader.cpp in Sources */,
 				0AF4255C18D9D1BF001F800D /* CCTransition.cpp in Sources */,
+				0A963361198669740096AD98 /* TestNetworkDemo.cpp in Sources */,
 				0AF4257518D9D1BF001F800D /* CCFileUtilsIOS.mm in Sources */,
 				0AF425A818D9D1BF001F800D /* CCTouchDispatcher.cpp in Sources */,
 				0AF425A518D9D1BF001F800D /* CCTMXTiledMap.cpp in Sources */,

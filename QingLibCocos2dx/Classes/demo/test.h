@@ -22,6 +22,7 @@
 #include "TestXMLDemo.h"
 #include "TestFileUtils.h"
 #include "TestMultiAssetsManager.h"
+#include "TestNetworkDemo.h"
 
 enum{
     TESTS_MYDEMO = 0,
@@ -35,7 +36,7 @@ enum{
     TESTS_UTILS_STORAGE,
     TESTS_IO_FILE,
     TESTS_IO_XML,
-    TESTS_MYDEMO13,
+    TESTS_NETWORK,
     TESTS_MYDEMO14,
     TESTS_MYDEMO15,
     TESTS_MYDEMO16,
@@ -68,7 +69,7 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "Storage Utils Test.",
     "IO - File Test!",
     "IO - XML Test!",
-    "My Demo====13!",
+    "NetWork Demo!",
     "My Demo====14!",
     "My Demo====15!",
     "My Demo====16!",
