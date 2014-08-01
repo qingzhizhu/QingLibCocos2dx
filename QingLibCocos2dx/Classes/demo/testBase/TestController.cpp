@@ -62,6 +62,10 @@ static TestBaseLayer* CreateTestScene(int index){
             layer = TestNetworkDemo::create();
             break;
             
+        case TESTS_DEVICE_INFO:
+            layer = TestDeviceInfoDemo::create();
+            break;
+            
         default:
             break;
     }

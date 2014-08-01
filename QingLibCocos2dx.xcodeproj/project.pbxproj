@@ -53,6 +53,10 @@
 		0A91AB0519820F2B00A30051 /* MultiAssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A91AB0319820F2B00A30051 /* MultiAssetsManager.cpp */; };
 		0A91AB0819822DAC00A30051 /* TestMultiAssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A91AB0619822DAC00A30051 /* TestMultiAssetsManager.cpp */; };
 		0A963361198669740096AD98 /* TestNetworkDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A96335F198669740096AD98 /* TestNetworkDemo.cpp */; };
+		0AA68B1F198A297800A40DBB /* DeviceUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AA68B1E198A297800A40DBB /* DeviceUtils.mm */; };
+		0AA68B22198A3B1900A40DBB /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA68B21198A3B1900A40DBB /* Reachability.m */; };
+		0AA68B24198A3B5E00A40DBB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA68B23198A3B5E00A40DBB /* SystemConfiguration.framework */; };
+		0AA68B28198A3E1000A40DBB /* TestDeviceInfoDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AA68B26198A3E1000A40DBB /* TestDeviceInfoDemo.cpp */; };
 		0ABE378918E42CFE007E2B67 /* LuaEngineUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */; };
 		0AC2FCAF18F7EA330069BF0F /* TestClippingNodeDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */; };
 		0AC38719193C7E6D0039377F /* StorageUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AC38717193C7E6D0039377F /* StorageUtils.cpp */; };
@@ -462,6 +466,14 @@
 		0A91AB0719822DAC00A30051 /* TestMultiAssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMultiAssetsManager.h; sourceTree = "<group>"; };
 		0A96335F198669740096AD98 /* TestNetworkDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestNetworkDemo.cpp; sourceTree = "<group>"; };
 		0A963360198669740096AD98 /* TestNetworkDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestNetworkDemo.h; sourceTree = "<group>"; };
+		0AA68B111989F34C00A40DBB /* DeviceUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeviceUtils.cpp; sourceTree = "<group>"; };
+		0AA68B121989F34C00A40DBB /* DeviceUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtils.h; sourceTree = "<group>"; };
+		0AA68B1E198A297800A40DBB /* DeviceUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceUtils.mm; sourceTree = "<group>"; };
+		0AA68B20198A3B1900A40DBB /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		0AA68B21198A3B1900A40DBB /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		0AA68B23198A3B5E00A40DBB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0AA68B26198A3E1000A40DBB /* TestDeviceInfoDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDeviceInfoDemo.cpp; sourceTree = "<group>"; };
+		0AA68B27198A3E1000A40DBB /* TestDeviceInfoDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDeviceInfoDemo.h; sourceTree = "<group>"; };
 		0ABE378718E42CFE007E2B67 /* LuaEngineUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaEngineUtils.cpp; sourceTree = "<group>"; };
 		0ABE378818E42CFE007E2B67 /* LuaEngineUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaEngineUtils.h; sourceTree = "<group>"; };
 		0AC2FCAD18F7EA330069BF0F /* TestClippingNodeDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestClippingNodeDemo.cpp; sourceTree = "<group>"; };
@@ -1157,6 +1169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA68B24198A3B5E00A40DBB /* SystemConfiguration.framework in Frameworks */,
 				0A00AF321864417400775320 /* QuartzCore.framework in Frameworks */,
 				0AF425FD18D9D1C0001F800D /* libwebsockets.a in Frameworks */,
 				0AF4257D18D9D1BF001F800D /* libwebp.a in Frameworks */,
@@ -1198,6 +1211,7 @@
 		0A00AF301864417400775320 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AA68B23198A3B5E00A40DBB /* SystemConfiguration.framework */,
 				0A00AF311864417400775320 /* QuartzCore.framework */,
 				0A00AF331864417400775320 /* OpenGLES.framework */,
 				0A00AF351864417400775320 /* OpenAL.framework */,
@@ -1329,6 +1343,7 @@
 		0A882A7018AA3C87000CC715 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				0AA68B0F1989F32E00A40DBB /* device */,
 				0A882A7118AA3CC1000CC715 /* LabelUtils.cpp */,
 				0A882A7218AA3CC1000CC715 /* LabelUtils.h */,
 				0A88DA5818F3F4A300D73CB4 /* DisplayObjectUtils.cpp */,
@@ -1360,8 +1375,22 @@
 			children = (
 				0A96335F198669740096AD98 /* TestNetworkDemo.cpp */,
 				0A963360198669740096AD98 /* TestNetworkDemo.h */,
+				0AA68B26198A3E1000A40DBB /* TestDeviceInfoDemo.cpp */,
+				0AA68B27198A3E1000A40DBB /* TestDeviceInfoDemo.h */,
 			);
 			path = network;
+			sourceTree = "<group>";
+		};
+		0AA68B0F1989F32E00A40DBB /* device */ = {
+			isa = PBXGroup;
+			children = (
+				0AA68B20198A3B1900A40DBB /* Reachability.h */,
+				0AA68B21198A3B1900A40DBB /* Reachability.m */,
+				0AA68B111989F34C00A40DBB /* DeviceUtils.cpp */,
+				0AA68B121989F34C00A40DBB /* DeviceUtils.h */,
+				0AA68B1E198A297800A40DBB /* DeviceUtils.mm */,
+			);
+			path = device;
 			sourceTree = "<group>";
 		};
 		0AC2FCAC18F7EA190069BF0F /* clippingNode */ = {
@@ -3001,6 +3030,7 @@
 				0AF425ED18D9D1C0001F800D /* Attachment.cpp in Sources */,
 				0AF4252618D9D1BF001F800D /* CCActionGrid.cpp in Sources */,
 				0AF425E118D9D1C0001F800D /* CCTableViewCell.cpp in Sources */,
+				0AA68B28198A3E1000A40DBB /* TestDeviceInfoDemo.cpp in Sources */,
 				0AF425A918D9D1BF001F800D /* CCTouchHandler.cpp in Sources */,
 				0AF425A618D9D1BF001F800D /* CCTMXXMLParser.cpp in Sources */,
 				0AF4225D18D9D173001F800D /* QingSprite.cpp in Sources */,
@@ -3056,6 +3086,7 @@
 				0A00B2D51864417B00775320 /* AppDelegate.cpp in Sources */,
 				0A91AB0819822DAC00A30051 /* TestMultiAssetsManager.cpp in Sources */,
 				0AF425C618D9D1BF001F800D /* CCScrollViewLoader.cpp in Sources */,
+				0AA68B22198A3B1900A40DBB /* Reachability.m in Sources */,
 				0AF425F918D9D1C0001F800D /* Skin.cpp in Sources */,
 				0AE2F496195AAC88004E91A2 /* lapi.c in Sources */,
 				0AE2F4C2195AAC88004E91A2 /* tolua_map.c in Sources */,
@@ -3157,6 +3188,7 @@
 				0AF4257918D9D1BF001F800D /* EAGLView.mm in Sources */,
 				0AF4255918D9D1BF001F800D /* CCLabelTTF.cpp in Sources */,
 				0AF4251118D9D1BF001F800D /* cpArbiter.c in Sources */,
+				0AA68B1F198A297800A40DBB /* DeviceUtils.mm in Sources */,
 				0AF4251418D9D1BF001F800D /* cpBBTree.c in Sources */,
 				0AF4252218D9D1BF001F800D /* CCAction.cpp in Sources */,
 				0AE2F4A7195AAC88004E91A2 /* lopcodes.c in Sources */,
