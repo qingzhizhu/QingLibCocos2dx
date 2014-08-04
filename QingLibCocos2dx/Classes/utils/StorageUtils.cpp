@@ -6,8 +6,7 @@
 //
 //
 
-#include "StorageUtils.h"	
-#include "CCUserDefault.h"
+#include "StorageUtils.h"
 
 USING_NS_QING;
 

@@ -11,7 +11,6 @@
 #define __QingLibCocos2dxLua__MyAssetsManager__
 
 #include "Common.h"
-#include "AssetsManager.h"
 
 NS_QING_BEGIN
 

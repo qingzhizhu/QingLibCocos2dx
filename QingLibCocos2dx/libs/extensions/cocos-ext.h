@@ -3,6 +3,8 @@
 
 #include "ExtensionMacros.h"
 
+#include "AssetsManager/AssetsManager.h"
+
 #include "CCBReader/CCBFileLoader.h"
 #include "CCBReader/CCBMemberVariableAssigner.h"
 #include "CCBReader/CCBReader.h"
