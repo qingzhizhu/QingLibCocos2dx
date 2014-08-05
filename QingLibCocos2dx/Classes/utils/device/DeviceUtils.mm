@@ -7,6 +7,7 @@
 //
 
 #include "DeviceUtils.h"
+//The #import directive was added to Objective-C as an improved version of #include.
 #import "Reachability.h"
 
 NS_QING_BEGIN

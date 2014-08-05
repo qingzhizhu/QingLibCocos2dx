@@ -99,7 +99,13 @@ public:
      */
     void deleteVersion();
     
-#pragma mark  ------------------------ getter & setter ---------------------
+#pragma mark  ------------------------ getter & setter ---------------------    
+    /**正在下载的版本号*/
+    int getDownloadVersionIdx() { return _nDownloadVersion; }
+    
+    /**需要下载的版本数量*/
+    int getDownloadVersionNum() { return _nTotalVersion - _nLocalVersion; }
+    
     /**是否下载完成*/
     bool needDownload() { return _nDownloadVersion < _nTotalVersion; }
     

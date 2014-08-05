@@ -78,7 +78,6 @@ MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePre
 
 MultiAssetsManager::~MultiAssetsManager()
 {
-    CC_SAFE_DELETE(_delegate);
     CC_SAFE_DELETE(_schedule);
 }
 
@@ -517,6 +516,11 @@ void MultiAssetsManager::sendErrorMessage(MultiAssetsManager::ErrorCode code)
     msg->obj = errorMessage;
     
     _schedule->sendMessage(msg);
+    
+    //若果发生错误，将正在下载的版本号重置，预防因服务端没有资源导致客户端版本检查永远失败bug
+    // Unrecord downloaded version code.
+    CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_DOWNLOADED_VERSION, "");
+    CCUserDefault::sharedUserDefault()->flush();
 }
 
 // Implementation of MultiAssetsManagerHelper
@@ -629,6 +633,7 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
         }else{
             // Record new version code.
             CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, manager->_version.c_str());
+            CCUserDefault::sharedUserDefault()->flush();
             if(manager->_delegate) manager->_delegate->onSuccess();
             curl_easy_cleanup(manager->_curl);
             CCLOG("全部下载成功！");
