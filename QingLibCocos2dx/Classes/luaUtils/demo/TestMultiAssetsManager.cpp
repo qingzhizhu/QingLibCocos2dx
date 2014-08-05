@@ -41,7 +41,7 @@ TestMultiAssetsManager::TestMultiAssetsManager()
 
 TestMultiAssetsManager::~TestMultiAssetsManager()
 {
-    
+    CC_SAFE_DELETE(m_pManager);
 }
 
 

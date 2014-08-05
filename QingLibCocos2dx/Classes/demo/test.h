@@ -24,6 +24,7 @@
 #include "TestMultiAssetsManager.h"
 #include "TestNetworkDemo.h"
 #include "TestDeviceInfoDemo.h"
+#include "TestThreadDemo.h"
 
 enum{
     TESTS_MYDEMO = 0,
@@ -39,7 +40,7 @@ enum{
     TESTS_IO_XML,
     TESTS_NETWORK,
     TESTS_DEVICE_INFO,
-    TESTS_MYDEMO15,
+    TESTS_PTHREAD,
     TESTS_MYDEMO16,
     TESTS_MYDEMO21,
     TESTS_MYDEMO22,
@@ -72,7 +73,7 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "IO - XML Test!",
     "NetWork Demo!",
     "Device Info!",
-    "My Demo====15!",
+    "pthread Demo!",
     "My Demo====16!",
     "My Demo====21!",
     "My Demo====22!",

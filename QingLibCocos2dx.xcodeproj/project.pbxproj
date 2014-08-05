@@ -40,6 +40,7 @@
 		0A1EA246186C51E800C50BCE /* TestMyDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA244186C51E800C50BCE /* TestMyDemo.cpp */; };
 		0A44ED6018F3A19F0074E948 /* TestSpriteDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A44ED5E18F3A19F0074E948 /* TestSpriteDemo.cpp */; };
 		0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B1E0F18686E580088924F /* TestDemo.cpp */; };
+		0A595F691990E6E600B9AB80 /* TestThreadDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A595F671990E6E600B9AB80 /* TestThreadDemo.cpp */; };
 		0A651D93193D6FBB00630E04 /* TestXMLDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */; };
 		0A68EB8519489C8500D9191B /* CommUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A68EB8319489C8500D9191B /* CommUtils.cpp */; };
 		0A84E316197FC69D00D80D64 /* lua in Resources */ = {isa = PBXBuildFile; fileRef = 0A84E315197FC69D00D80D64 /* lua */; };
@@ -444,6 +445,8 @@
 		0A44ED5E18F3A19F0074E948 /* TestSpriteDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestSpriteDemo.cpp; sourceTree = "<group>"; };
 		0A44ED5F18F3A19F0074E948 /* TestSpriteDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSpriteDemo.h; sourceTree = "<group>"; };
 		0A4B1E0F18686E580088924F /* TestDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDemo.cpp; sourceTree = "<group>"; };
+		0A595F671990E6E600B9AB80 /* TestThreadDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestThreadDemo.cpp; sourceTree = "<group>"; };
+		0A595F681990E6E600B9AB80 /* TestThreadDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestThreadDemo.h; sourceTree = "<group>"; };
 		0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestXMLDemo.cpp; sourceTree = "<group>"; };
 		0A651D92193D6FBB00630E04 /* TestXMLDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestXMLDemo.h; sourceTree = "<group>"; };
 		0A68EB8319489C8500D9191B /* CommUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommUtils.cpp; sourceTree = "<group>"; };
@@ -1331,6 +1334,15 @@
 			path = sprite;
 			sourceTree = "<group>";
 		};
+		0A595F651990E6C500B9AB80 /* thread */ = {
+			isa = PBXGroup;
+			children = (
+				0A595F671990E6E600B9AB80 /* TestThreadDemo.cpp */,
+				0A595F681990E6E600B9AB80 /* TestThreadDemo.h */,
+			);
+			path = thread;
+			sourceTree = "<group>";
+		};
 		0A651D8F193D6F6E00630E04 /* xml */ = {
 			isa = PBXGroup;
 			children = (
@@ -1405,6 +1417,7 @@
 		0ADB53E718683B1A002E8DC3 /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				0A595F651990E6C500B9AB80 /* thread */,
 				0A96335B198661A30096AD98 /* network */,
 				0A651D8F193D6F6E00630E04 /* xml */,
 				0AEF5974193C8C5C00CBA049 /* testUtils */,
@@ -3183,6 +3196,7 @@
 				0AF425E418D9D1C0001F800D /* HttpClient.cpp in Sources */,
 				0AE2F4AF195AAC88004E91A2 /* ltm.c in Sources */,
 				0AF4252118D9D1BF001F800D /* cpVect.c in Sources */,
+				0A595F691990E6E600B9AB80 /* TestThreadDemo.cpp in Sources */,
 				0AF4253418D9D1BF001F800D /* ccFPSImages.c in Sources */,
 				0AF425DE18D9D1C0001F800D /* CCScrollView.cpp in Sources */,
 				0AF4257918D9D1BF001F800D /* EAGLView.mm in Sources */,
