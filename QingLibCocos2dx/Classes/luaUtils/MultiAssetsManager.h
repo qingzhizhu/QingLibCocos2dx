@@ -22,6 +22,29 @@
 
 NS_QING_BEGIN
 
+#pragma mark  ------------------------ 平台差异资源前缀 ---------------------
+
+#define MULTIASSETSMANAGER_ASSETS_ANDROID   "_a_"
+#define MULTIASSETSMANAGER_ASSETS_IOS       "_i_"
+
+
+#pragma mark  ------------------------ 下载阶段 ---------------------
+
+//enum MULTIASSETSMANAGER_STAGE {
+//    MULTIASSETSMANAGER_STAGE_NONE,
+//    /**正在下载中*/
+//    MULTIASSETSMANAGER_STAGE_DOWNLOADING,
+//    /**下载完成*/
+//    MULTIASSETSMANAGER_STAGE_DOWNLOADED,
+//    /**临时下载文件拷贝到资源storage*/
+//    MULTIASSETSMANAGER_STAGE_TEMP_COPY,
+//    /**完成*/
+//    MULTIASSETSMANAGER_STAGE_OVER
+//};
+
+#pragma mark-
+
+
 
 class MultiAssetsManager
 {
@@ -84,16 +107,18 @@ public:
      * @param packagePrefix 资源包前缀
      * @param versionFileName 版本文件名称
      * @param storagePath 保存路径
+     * @param useAssetsPlatform 是否使用平台差异资源前缀
      */
-    MultiAssetsManager(string assetsServerUrl="http://localhost/demo/", string packagePrefix="package", string versionFileName="version", string storagePath = ".Elextech_RAM/");
+    MultiAssetsManager(string assetsServerUrl="http://localhost/demo/", string packagePrefix="package", string versionFileName="version", string storagePath = ".Elextech_RAM/", bool useAssetsPlatform=true);
     
     
     virtual ~MultiAssetsManager();
     
-    
+    void setSearchPath();
     
     /**删除所有下载内容*/
     void removeDownload();
+    void removeDownloadByPath(string path);
     
     /* @brief Deletes recorded version code.
      */
@@ -172,6 +197,14 @@ public:
      */
     virtual bool checkUpdate();
     
+    
+    
+    /**
+     * 同步临时文件到资源文件中
+     */
+    bool synchTempDir();
+    
+    
     /* downloadAndUncompress is the entry of a new thread
      */
     friend void* assetsManagerDownloadAndUncompress(void*);
@@ -179,8 +212,9 @@ public:
     
 protected:
     void checkStoragePath();
+    
+    bool createDirectorys();
     bool createDirectory(string path);
-    void setSearchPath();
     
     //-------- download ----------
     bool downLoad();
@@ -225,6 +259,10 @@ private:
     /**下载的下标*/
     uint _nDownloadVersion;
     
+    /**临时保存文件夹*/
+    string _tempStoragePath;
+    /**临时文件中的所有路径*/
+    vector<string> _arrTempFilePaths;
     
     
 private:

@@ -33,6 +33,7 @@ TestThreadDemo::TestThreadDemo()
 
 TestThreadDemo::~TestThreadDemo()
 {
+    //前提要保证是解锁状态，否则会返回16的错误，释放失败
     pthread_mutex_destroy(&m_mutex);
 }
 
@@ -40,13 +41,13 @@ void* TestThreadDemo::threadA(void *p)
 {
     TestThreadDemo *self = (TestThreadDemo*)p;
     while(true){
-        pthread_mutex_lock(&self->m_mutex);
+        pthread_mutex_lock(&self->m_mutex);     //枷锁
         if(self->m_nTickets > 0){
             CCLOG("A sell ticket:%d.", self->m_nTickets--);
         }
-        pthread_mutex_unlock(&self->m_mutex);
+        pthread_mutex_unlock(&self->m_mutex);   //解锁
         if(self->m_nTickets <= 0) break;
-        sleep(1);
+//        sleep(1);   //人为干扰线程的运行，增大出错几率
     }
     
     return NULL;
@@ -62,7 +63,7 @@ void* TestThreadDemo::threadB(void *p)
         }
         pthread_mutex_unlock(&self->m_mutex);
         if(self->m_nTickets <= 0) break;
-        sleep(1);
+//        sleep(1);
     }
     return NULL;
 }

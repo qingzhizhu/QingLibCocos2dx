@@ -75,6 +75,19 @@ NETSTATUS DeviceUtils::getNetStatusType()
     return NETSTATUS_NONE;
 }
 
+bool DeviceUtils::removeDir(string path)
+{
+    NSString* fullpath = [NSString stringWithUTF8String:path.c_str()];
+    
+    NSError *error = nil;
+    if ( ! [[NSFileManager defaultManager] removeItemAtPath:fullpath error:&error] ){
+        NSLog(@"Could not delete file: %@", fullpath);
+        NSLog(@"removeItemAtPath error: %@", error);
+        return false;
+    }
+    
+    return true;
+}
 
 
 NS_QING_END

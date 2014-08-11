@@ -58,6 +58,9 @@ public:
     NETSTATUS getNetStatusType();
     
     
+    /**删除文件夹*/
+    bool removeDir(string path);
+    
     
 protected:
 

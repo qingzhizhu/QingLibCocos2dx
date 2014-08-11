@@ -22,14 +22,20 @@
 
 #include "support/zip_support/unzip.h"
 
+#include <fstream>
+#include <iostream>
+
+#include "DeviceUtils.h"
+
 NS_QING_BEGIN
 
-#define KEY_OF_VERSION   "current-version-code"
-#define KEY_OF_DOWNLOADED_VERSION    "downloaded-version-code"
-#define TEMP_PACKAGE_FILE_NAME    "elex-update-temp-package"
+#define KEY_OF_VERSION              "current-version-code"
+#define KEY_OF_DOWNLOADED_VERSION   "downloaded-version-code"
+#define TEMP_PACKAGE_FILE_NAME      "elex-update-temp-package"
 #define TEMP_PACKAGE_FILE_FORMAT    ".zip"
 #define BUFFER_SIZE    8192
 #define MAX_FILENAME   512
+#define DOWNLOAD_TEMP_DIR_SUBFIX    "_TEMP"
 
 // Message type
 /**每下载完成一个zip发送此msg*/
@@ -55,11 +61,11 @@ struct ProgressMessage
 
 // Implementation of MultiAssetsManager
 
-MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePrefix, string versionFileName, string storagePath)
+MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePrefix, string versionFileName, string storagePath, bool useAssetsPlatform)
 :  _storagePath(storagePath)
 , _assetsServerUrl(assetsServerUrl)
 , _version("")
-, _packagePerfix(packagePrefix)
+, _packagePerfix("")
 , _versionFileName(versionFileName)
 , _downloadedVersion("")
 , _curl(NULL)
@@ -70,10 +76,20 @@ MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePre
 , _nTotalVersion(0)
 , _nDownloadVersion(0)
 , _schedule(NULL)
+, _tempStoragePath(DOWNLOAD_TEMP_DIR_SUBFIX)
 {
+    if(useAssetsPlatform){
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        packagePrefix.append(MULTIASSETSMANAGER_ASSETS_ANDROID);
+#else
+        packagePrefix.append(MULTIASSETSMANAGER_ASSETS_IOS);
+#endif
+    }
+    _packagePerfix = packagePrefix;
     _versionFileUrl = assetsServerUrl + versionFileName;
     checkStoragePath();
     _schedule = new Helper();
+    _arrTempFilePaths.clear();
 }
 
 MultiAssetsManager::~MultiAssetsManager()
@@ -94,12 +110,19 @@ const char * getPathRemoveLastSlash(string pathStr)
 }
 
 
+bool MultiAssetsManager::createDirectorys()
+{
+    return createDirectory(_storagePath) && createDirectory(_tempStoragePath);
+}
+
 /*
  * Create a direcotry is platform depended.
+ * /A/B 若果不存在A,直接创建B会导致失败，文件末尾不能有/
  */
 bool MultiAssetsManager::createDirectory(string pathStr)
 {
     const char *path = getPathRemoveLastSlash(pathStr);
+    CCLOG("[MultiAssetsManager] 创建文件夹: %s", path);
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
     mode_t processMask = umask(0);
     int ret = mkdir(path, S_IRWXU | S_IRWXG | S_IRWXO);
@@ -122,24 +145,21 @@ bool MultiAssetsManager::createDirectory(string pathStr)
 
 void MultiAssetsManager::removeDownload()
 {
-    string pathStr = getPathRemoveLastSlash(_storagePath);
-    // Remove downloaded files
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
-    string command = "rm -r ";
-    // Path may include space.
-    command += "\"" + pathStr + "\"";
-    system(command.c_str());
-#else
-    string command = "rd /s /q ";
-    // Path may include space.
-    command += "\"" + pathStr + "\"";
-    system(command.c_str());
-#endif
+    removeDownloadByPath(_storagePath);
+    removeDownloadByPath(_tempStoragePath);
+    
     // Delete recorded version codes.
     deleteVersion();
     
     //re create storage dir if not exists
-    createDirectory(pathStr);
+    createDirectorys();
+}
+
+void MultiAssetsManager::removeDownloadByPath(string path)
+{
+    string pathStr = getPathRemoveLastSlash(path);
+    //system 不能删除ipad上得文件夹
+    DeviceUtils::shared()->removeDir(pathStr);
 }
 
 
@@ -154,7 +174,9 @@ void MultiAssetsManager::checkStoragePath()
     {
         _storagePath.append("/");
     }
-    CCLog("[MultiAssetsManager] Device Storage : %s", _storagePath.c_str());
+    temp = _storagePath;
+    _tempStoragePath = temp.insert(temp.size() - 1, DOWNLOAD_TEMP_DIR_SUBFIX);
+    CCLog("[MultiAssetsManager] Device Storage : %s\n temp dir: %s", _storagePath.c_str(), _tempStoragePath.c_str());
 }
 
 
@@ -206,6 +228,7 @@ void* assetsManagerDownloadAndUncompress(void *data)
         msg2->what = MultiAssetsManager_MESSAGE_UPDATE_SUCCEED;
         msg2->obj = self;
         self->_schedule->sendMessage(msg2);
+        CCLOG("[MultiAssetsManager] send msg : MultiAssetsManager_MESSAGE_UPDATE_SUCCEED");
     } while (0);
     
     if (self->_tid)
@@ -260,48 +283,50 @@ bool MultiAssetsManager::checkUpdate()
         return false;
     }
     
-    // Clear _version before assign new value.
-    _version.clear();
-    
-    CURLcode res;
-    //句柄上最经常设置的属性是URL
-    curl_easy_setopt(_curl, CURLOPT_URL, _versionFileUrl.c_str());
-    curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, 0L);
-    //指定URL上的远程主机的数据资源到本地
-//    如果你想自己处理得到的数据而不是直接显示在标准输出里，你可以写一个符合下面原型的函数
-//    size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp);
-    curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, getVersionCode);
-    //回调函数第四个参数得到的数据
-    curl_easy_setopt(_curl, CURLOPT_WRITEDATA, &_version);
-//    curl_easy_setopt(_curl, CURLOPT_VERBOSE, 1);
-    if (_connectionTimeout) curl_easy_setopt(_curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
-    res = curl_easy_perform(_curl);
-    
-    if (res != 0)
-    {
-        sendErrorMessage(kNetwork);
-        CCLOG("can not get version file content, error code is %d, %s", res, _versionFileUrl.c_str());
-        curl_easy_cleanup(_curl);
-        return false;
+    if(_version == ""){     //多次调用 checkUpdate 加入这个判断
+        // Clear _version before assign new value.
+        _version.clear();
+        
+        CURLcode res;
+        //句柄上最经常设置的属性是URL
+        curl_easy_setopt(_curl, CURLOPT_URL, _versionFileUrl.c_str());
+        curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, 0L);
+        //指定URL上的远程主机的数据资源到本地
+        //    如果你想自己处理得到的数据而不是直接显示在标准输出里，你可以写一个符合下面原型的函数
+        //    size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp);
+        curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, getVersionCode);
+        //回调函数第四个参数得到的数据
+        curl_easy_setopt(_curl, CURLOPT_WRITEDATA, &_version);
+        //    curl_easy_setopt(_curl, CURLOPT_VERBOSE, 1);
+        if (_connectionTimeout) curl_easy_setopt(_curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
+        res = curl_easy_perform(_curl);
+        
+        if (res != 0)
+        {
+            sendErrorMessage(kNetwork);
+            CCLOG("can not get version file content, error code is %d, %s", res, _versionFileUrl.c_str());
+            curl_easy_cleanup(_curl);
+            return false;
+        }
+        
+        string recordedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
+        _nLocalVersion = atoi(recordedVersion.c_str());
+        _nTotalVersion = atoi(_version.c_str());
+        if (recordedVersion == _version || _nLocalVersion >= _nTotalVersion)
+        {
+            sendErrorMessage(kNoNewVersion);
+            CCLOG("there is not new version");
+            // Set resource search path.
+            setSearchPath();
+            return false;
+        }
+        _nDownloadVersion = _nLocalVersion + 1;
+        //auto create download directory
+        createDirectorys();
+        
+        CCLOG("there is a new version: %s", _version.c_str());
+        CCLOG("Need Download %d new assets packages.", (_nTotalVersion - _nLocalVersion));
     }
-    
-    string recordedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
-    _nLocalVersion = atoi(recordedVersion.c_str());
-    _nTotalVersion = atoi(_version.c_str());
-    if (recordedVersion == _version || _nLocalVersion >= _nTotalVersion)
-    {
-        sendErrorMessage(kNoNewVersion);
-        CCLOG("there is not new version");
-        // Set resource search path.
-        setSearchPath();
-        return false;
-    }
-    _nDownloadVersion = _nLocalVersion + 1;
-    //auto create download directory
-    createDirectory(_storagePath);
-    
-    CCLOG("there is a new version: %s", _version.c_str());
-    CCLOG("Need Download %d new assets packages.", (_nTotalVersion - _nLocalVersion));
     
     return true;
 }
@@ -340,7 +365,7 @@ bool MultiAssetsManager::downLoad()
     CCLOG("[MultiAssetsManager] 3 downLoad");
     // Create a file to save package.
     string nextVersion = getDownloadVersion();
-    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME + nextVersion + TEMP_PACKAGE_FILE_FORMAT;
+    string outFileName = _tempStoragePath + TEMP_PACKAGE_FILE_NAME + nextVersion + TEMP_PACKAGE_FILE_FORMAT;
     //这就是w 和 wb的区别，w是以文本方式打开文件，wb是二进制方式打开文件，以文本方式打开文件时，fwrite函数每碰到一个0x0A时，就在它的前面加入0x0D.其它内容不做添加操作
     FILE *fp = fopen(outFileName.c_str(), "wb");
     if (! fp)
@@ -382,7 +407,7 @@ bool MultiAssetsManager::uncompress()
 {
     CCLOG("[MultiAssetsManager] 5 uncompress");
     // Open the zip file
-    string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME + getDownloadVersion() + TEMP_PACKAGE_FILE_FORMAT;
+    string outFileName = _tempStoragePath + TEMP_PACKAGE_FILE_NAME + getDownloadVersion() + TEMP_PACKAGE_FILE_FORMAT;
     unzFile zipfile = unzOpen(outFileName.c_str());
     if (! zipfile)
     {
@@ -425,7 +450,7 @@ bool MultiAssetsManager::uncompress()
             return false;
         }
         
-        string fullPath = _storagePath + fileName;
+        string fullPath = _tempStoragePath + fileName;
         //TODO: Need md5 Check!
         
         // Check if this entry is a directory or a file.
@@ -434,7 +459,8 @@ bool MultiAssetsManager::uncompress()
         {
             // Entry is a direcotry, so create it.
             // If the directory exists, it will failed scilently.
-            if (!createDirectory(fullPath))
+            string fullPathAssets = _storagePath + fileName;
+            if (!(createDirectory(fullPath) && createDirectory(fullPathAssets)))
             {
                 CCLOG("can not create directory %s", fullPath.c_str());
                 unzClose(zipfile);
@@ -483,6 +509,7 @@ bool MultiAssetsManager::uncompress()
             } while(error > 0);
             
             fclose(out);
+            _arrTempFilePaths.push_back(fileName);
         }
         
         unzCloseCurrentFile(zipfile);
@@ -618,7 +645,7 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
     manager->setSearchPath();
     
     // Delete unloaded zip file.
-    string zipfileName = manager->_storagePath + TEMP_PACKAGE_FILE_NAME + manager->getDownloadVersion() + TEMP_PACKAGE_FILE_FORMAT;
+    string zipfileName = manager->_tempStoragePath + TEMP_PACKAGE_FILE_NAME + manager->getDownloadVersion() + TEMP_PACKAGE_FILE_FORMAT;
     if (remove(zipfileName.c_str()) != 0)
     {
         CCLOG("can not remove downloaded zip file %s", zipfileName.c_str());
@@ -631,14 +658,57 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
             manager->_nDownloadVersion++;
             assetsManagerDownloadAndUncompress(manager);
         }else{
+            if(!manager->synchTempDir()){
+                CCLOG("[MultiAssetsManager] 同步临时文件失败！");
+                manager->sendErrorMessage(kCreateFile);
+                return;
+            }
             // Record new version code.
             CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, manager->_version.c_str());
             CCUserDefault::sharedUserDefault()->flush();
             if(manager->_delegate) manager->_delegate->onSuccess();
             curl_easy_cleanup(manager->_curl);
-            CCLOG("全部下载成功！");
+            CCLOG("[MultiAssetsManager] 全部下载成功！");
         }
     }
+}
+
+
+bool MultiAssetsManager::synchTempDir()
+{
+    CCLOG("[MultiAssetsManager] 同步临时文件!!");
+    ifstream in;
+    ofstream out;
+    string oldPath = "";
+    string newPath = "";
+    
+    for(int i=0,len=_arrTempFilePaths.size(); i<len; i++){
+        oldPath = _tempStoragePath + _arrTempFilePaths[i];
+        newPath = _storagePath + _arrTempFilePaths[i];
+        
+        in.open(oldPath.c_str());
+        if(in.fail()){
+            CCLOG("Cond't open file! %s", oldPath.c_str());
+            in.close();
+            out.close();
+            return false;
+        }
+        
+        out.open(newPath.c_str());
+        if(out.fail()){
+            CCLOG("创建文件失败");
+            in.close();
+            out.close();
+            return false;
+        }
+        
+        out << in.rdbuf();
+        out.close();
+        in.close();
+    }
+    //删除临时文件夹
+    removeDownloadByPath(_tempStoragePath);
+    return true;
 }
 
 

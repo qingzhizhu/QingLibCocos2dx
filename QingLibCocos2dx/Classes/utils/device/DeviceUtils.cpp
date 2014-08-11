@@ -98,4 +98,22 @@ NETSTATUS DeviceUtils::getNetStatusType()
     return NETSTATUS(ret);
 }
 
+bool BADevice::removeDir(string pathStr)
+{
+    int code = -1;
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
+    string command = "rm -r ";
+    // Path may include space.
+    command += "\"" + pathStr + "\"";
+    code = system(command.c_str());
+#else
+    string command = "rd /s /q ";
+    // Path may include space.
+    command += "\"" + pathStr + "\"";
+    code = system(command.c_str());
+#endif
+    CCLog("[Device] system: %s ; code: %d", command.c_str(), code);
+    return code == 0;
+}
+
 NS_QING_END
