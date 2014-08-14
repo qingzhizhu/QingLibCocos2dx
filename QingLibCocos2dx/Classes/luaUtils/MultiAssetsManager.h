@@ -126,7 +126,7 @@ public:
     
 #pragma mark  ------------------------ getter & setter ---------------------    
     /**正在下载的版本号*/
-    int getDownloadVersionIdx() { return _nDownloadVersion; }
+    int getDownloadVersionIdx() { return _nDownloadVersion - _nLocalVersion; }
     
     /**需要下载的版本数量*/
     int getDownloadVersionNum() { return _nTotalVersion - _nLocalVersion; }

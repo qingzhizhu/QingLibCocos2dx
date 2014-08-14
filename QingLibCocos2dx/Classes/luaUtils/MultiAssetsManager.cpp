@@ -652,17 +652,24 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
     }
     
     if (manager){
+        //在主线程
+        if(!manager->synchTempDir()){
+            CCLOG("[MultiAssetsManager] 同步临时文件失败！");
+            manager->sendErrorMessage(kCreateFile);
+            return;
+        }
         if(manager->needDownload()){
             CCLOG("[MultiAssetsManager] 下载下一个version");
+            // Record new version code.
+            CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, manager->getDownloadVersion().c_str());
+            CCUserDefault::sharedUserDefault()->flush();
             //下载下一个资源包
             manager->_nDownloadVersion++;
             assetsManagerDownloadAndUncompress(manager);
+            
         }else{
-            if(!manager->synchTempDir()){
-                CCLOG("[MultiAssetsManager] 同步临时文件失败！");
-                manager->sendErrorMessage(kCreateFile);
-                return;
-            }
+            //删除临时文件夹
+            manager->removeDownloadByPath(manager->_tempStoragePath);
             // Record new version code.
             CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, manager->_version.c_str());
             CCUserDefault::sharedUserDefault()->flush();
@@ -676,7 +683,7 @@ void MultiAssetsManager::Helper::handleUpdateSucceed(Message *msg)
 
 bool MultiAssetsManager::synchTempDir()
 {
-    CCLOG("[MultiAssetsManager] 同步临时文件!!");
+    CCLOG("[MultiAssetsManager] 同步版本%d的临时文件!!", _nDownloadVersion);
     ifstream in;
     ofstream out;
     string oldPath = "";
@@ -693,6 +700,13 @@ bool MultiAssetsManager::synchTempDir()
             out.close();
             return false;
         }
+        //判断文件是否存在，
+//        fstream file;
+//        file.open(newPath.c_str(), ios::in);
+//        if(file){
+//            CCLog("文件存在");
+//        }
+        
         
         out.open(newPath.c_str());
         if(out.fail()){
@@ -706,8 +720,7 @@ bool MultiAssetsManager::synchTempDir()
         out.close();
         in.close();
     }
-    //删除临时文件夹
-    removeDownloadByPath(_tempStoragePath);
+    _arrTempFilePaths.clear();
     return true;
 }
 
