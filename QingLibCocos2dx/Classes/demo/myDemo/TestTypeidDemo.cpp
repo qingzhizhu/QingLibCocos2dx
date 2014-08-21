@@ -207,6 +207,21 @@ CCLayer* TestTypeidDemo::getLayerByIndex()
         }
             break;
             
+        case 2:{
+            setTitle("二级指针!");
+            int ** ppI;
+            int * pI = NULL;
+            int num = 100;
+            pI = &num;
+            ppI = &pI;
+            
+            CCLOG("一级指针的值 %d", *pI);
+            CCLOG("二级指针的值 %d", **ppI);
+            CCLOG("二级指针的值 %d", **(int **)ppI); // *(*(int **)ppI)
+            
+        }
+            break;
+            
 		default:
             break;
     }

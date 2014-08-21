@@ -72,6 +72,10 @@ protected:
     CC_SYNTHESIZE_READONLY(int, m_nErrorCode, ErrorCode);
     
     
+private:
+    CCNode *m_pTestLua1;
+    CCNode *m_pTestLua2;
+    
 };
 
 NS_QING_END

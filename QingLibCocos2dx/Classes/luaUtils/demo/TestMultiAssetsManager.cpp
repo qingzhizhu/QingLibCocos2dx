@@ -7,6 +7,8 @@
 //
 
 #include "TestMultiAssetsManager.h"
+#include "LuaEngineUtils.h"
+#include "tolua++.h"
 
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
 #include <dirent.h>
@@ -35,12 +37,16 @@ TestMultiAssetsManager::TestMultiAssetsManager()
 , m_pCallbackTarget(NULL)
 , m_pCallbackFun(NULL)
 , m_pManager(NULL)
+, m_pTestLua1(NULL)
+, m_pTestLua2(NULL)
 {
     
 }
 
 TestMultiAssetsManager::~TestMultiAssetsManager()
 {
+//    CC_SAFE_RELEASE_NULL(m_pTestLua1);        //这里不能在release，否则崩溃
+//    CC_SAFE_RELEASE_NULL(m_pTestLua2);
     CC_SAFE_DELETE(m_pManager);
 }
 
@@ -78,7 +84,7 @@ void createLabel(CCNode *parent, string txt)
 void TestMultiAssetsManager::onEnter()
 {
 	TestBaseLayer::onEnter();
-    MultiAssetsManager *manager = new MultiAssetsManager("http://10.1.21.107/ra/");
+    MultiAssetsManager *manager = new MultiAssetsManager("http://10.1.21.18/demo/");
     manager->removeDownload();
     m_pManager = manager;
     //===== 外部设置 ===========
@@ -132,6 +138,45 @@ void TestMultiAssetsManager::onSuccess()
     CCLOG("MyAssetsManager::onSuccess ");
     m_bIsSuccessed = true;
     callBack();
+    
+    bool b = LuaEngineUtils::callLuaFunc("hello2.lua", "getNode", "");
+    if(b){
+        lua_State *ls = LuaEngineUtils::getLuaState();
+        if(lua_istable(ls, -1)){
+            lua_gettable(ls, -1);
+            CCLOG("是个tabelE");
+        }
+        if(lua_isuserdata(ls, -1)){
+            CCNode *luaNode = *(CCNode**) lua_touserdata(ls, -1);
+            CC_SAFE_RETAIN(luaNode);        //不加会崩溃
+            luaNode->setPosition(200, 200);
+            CCSprite *luaSprite = NULL;//*(CCSprite**) lua_touserdata(ls, -1);
+            CCLOG("lua getNode %p, %p, typeid: %s, %s", luaNode, luaSprite, typeid(luaNode).name(), typeid(luaSprite).name() );
+            this->addChild(luaNode);
+            CCLOG("转化成CCNode和CCSprite都对，都能显示");
+            m_pTestLua1 = luaNode;
+        }
+    }else{
+        CCLOG("调用 lua getNode 错误！");
+    }
+    
+    b = LuaEngineUtils::callLuaFunc("hello2.lua", "getLuaNode", "");
+    if(b){
+        lua_State *ls = LuaEngineUtils::getLuaState();
+        if(lua_isuserdata(ls, -1)){
+            CCNode *luaNode = *(CCNode **) lua_touserdata(ls, -1);
+            CC_SAFE_RETAIN(luaNode);
+            luaNode->setPosition(200, 500);
+            this->addChild(luaNode);
+            CCLabelTTF *label = CCLabelTTF::create("lua Node add c++ label ttf", FONT_NAME, FONT_SIZE);
+            luaNode->addChild(label);
+            label->setPositionY(-30);
+            m_pTestLua2 = luaNode;
+        }
+    }else{
+        CCLOG("调用 lua getLuaNode 错误！");
+    }
+    
 }
 
 void TestMultiAssetsManager::onError(MultiAssetsManager::ErrorCode errorCode)
