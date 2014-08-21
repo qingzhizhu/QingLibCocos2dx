@@ -25,6 +25,7 @@
 #include "TestNetworkDemo.h"
 #include "TestDeviceInfoDemo.h"
 #include "TestThreadDemo.h"
+#include "TestTypeidDemo.h"
 
 enum{
     TESTS_MYDEMO = 0,
@@ -41,7 +42,7 @@ enum{
     TESTS_NETWORK,
     TESTS_DEVICE_INFO,
     TESTS_PTHREAD,
-    TESTS_MYDEMO16,
+    TESTS_TYPEID_TEST,
     TESTS_MYDEMO21,
     TESTS_MYDEMO22,
     TESTS_MYDEMO23,
@@ -74,7 +75,7 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "NetWork Demo!",
     "Device Info!",
     "pthread Demo!",
-    "My Demo====16!",
+    "typeid compare class type!",
     "My Demo====21!",
     "My Demo====22!",
     "My Demo====23!",

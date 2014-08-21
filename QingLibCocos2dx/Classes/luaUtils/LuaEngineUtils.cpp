@@ -61,8 +61,8 @@ int LuaEngineUtils::executeLua(const char *luaFileName)
 
 lua_State * LuaEngineUtils::getLuaStateByFunName(const char *luaFileName, const char *funName)
 {
-    lua_State* ls = getLuaState();
     if(isOpenLua(luaFileName)){
+        lua_State* ls = getLuaState();
         lua_getglobal(ls, funName);
         return ls;
     }
@@ -130,23 +130,105 @@ const char* LuaEngineUtils::getLuaVarTableProp(const char *luaFileName, const ch
 }
 
 
-const char* LuaEngineUtils::callLuaFunc(const char *luaFileName, const char *funcName, ... )
+bool LuaEngineUtils::callLuaFunc(const char *luaFileName, const char *funcName, const char *format, va_list args)
 {
-    if(isOpenLua(luaFileName)){
-        lua_State* ls = getLuaState();
-        lua_getglobal(ls, funcName);
+    lua_State* ls = getLuaStateByFunName(luaFileName, funcName);
+    if(ls){
+        int argLen = 0;
+        char* theCursor = (char *)format;
+        char ch = 0;
+        while (*theCursor != '\0') {
+            ch = *theCursor;
+            if(ch != '%'){
+                CCLog("[LuaEngineUtils] callLuaFunc format 错误！format=%s", format);
+                return false;
+            }
+            ++theCursor;
+            ch = *theCursor;
+            switch (ch) {
+                case 'd':{
+                    int value = va_arg(args, int);
+                    lua_pushnumber(ls, value);
+                }
+                    break;
+                case 's':{
+                    char *value = va_arg(args, char *);
+                    lua_pushstring(ls, value);
+                }
+                    break;
+                case 'b':{
+                    int value = va_arg(args, int);
+                    lua_pushboolean(ls, value);
+                }
+                    break;
+                default:
+                    CCLog("[LuaEngineUtils] callLuaFunc 未实现的 format = %c", ch);
+                    break;
+            }
+            ++theCursor;
+            argLen++;
+        }
         
-        //TODO: 需要解析类型 [type,value...]
-        
-        lua_pushstring(ls, "?");
-        lua_pushnumber(ls, 1);
-        lua_pushboolean(ls, false);
-        
-        int nargs = 1;  //可变参数的个数
-        lua_call(ls, nargs, 1);
-        return lua_tostring(ls, -1);
+        lua_call(ls, argLen, 1);
+//        lua_close(ls);        要外部来调用，否则不能获取返回值
+        return true;
+    }
+    return false;
+}
+
+
+bool LuaEngineUtils::callLuaFunc(const char *luaFileName, const char *funcName, const char* format, ... )
+{
+    va_list args;
+    va_start(args, format);
+    bool b = callLuaFunc(luaFileName, funcName, format, args);
+    va_end(args);
+    return b;
+}
+
+int LuaEngineUtils::callLuaFuncReturnInt(const char *luaFileName, const char *funcName, const char *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    bool b = callLuaFunc(luaFileName, funcName, format, args);
+    va_end(args);
+    if(b){
+        lua_State *ls = getLuaState();
+        if(lua_isnumber(ls, -1)){
+            return lua_tonumber(ls, -1);
+        }
+    }
+    return 0;
+}
+
+const char * LuaEngineUtils::callLuaFuncReturnChar(const char *luaFileName, const char *funcName, const char *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    bool b = callLuaFunc(luaFileName, funcName, format, args);
+    va_end(args);
+    if(b){
+        lua_State *ls = getLuaState();
+        if(lua_isstring(ls, -1)){
+            return lua_tostring(ls, -1);
+        }
     }
     return NULL;
+}
+
+bool LuaEngineUtils::callLuaFuncReturnBool(const char *luaFileName, const char *funcName, const char *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    bool b = callLuaFunc(luaFileName, funcName, format, args);
+    va_end(args);
+    if(b){
+        lua_State *ls = getLuaState();
+        if(lua_isboolean(ls, -1)){
+            return lua_toboolean(ls, -1);
+        }
+    }
+    return false;
 }
 
 void LuaEngineUtils::callCppFunc()

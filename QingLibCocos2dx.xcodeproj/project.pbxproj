@@ -42,6 +42,7 @@
 		0A4B1E1018686E580088924F /* TestDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B1E0F18686E580088924F /* TestDemo.cpp */; };
 		0A595F691990E6E600B9AB80 /* TestThreadDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A595F671990E6E600B9AB80 /* TestThreadDemo.cpp */; };
 		0A651D93193D6FBB00630E04 /* TestXMLDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */; };
+		0A68035B19A4758000902BD3 /* TestTypeidDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A68035919A4758000902BD3 /* TestTypeidDemo.cpp */; };
 		0A68EB8519489C8500D9191B /* CommUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A68EB8319489C8500D9191B /* CommUtils.cpp */; };
 		0A84E316197FC69D00D80D64 /* lua in Resources */ = {isa = PBXBuildFile; fileRef = 0A84E315197FC69D00D80D64 /* lua */; };
 		0A84E31A197FC6EA00D80D64 /* TestLocalLuaDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A84E318197FC6EA00D80D64 /* TestLocalLuaDemo.cpp */; };
@@ -449,6 +450,8 @@
 		0A595F681990E6E600B9AB80 /* TestThreadDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestThreadDemo.h; sourceTree = "<group>"; };
 		0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestXMLDemo.cpp; sourceTree = "<group>"; };
 		0A651D92193D6FBB00630E04 /* TestXMLDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestXMLDemo.h; sourceTree = "<group>"; };
+		0A68035919A4758000902BD3 /* TestTypeidDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestTypeidDemo.cpp; sourceTree = "<group>"; };
+		0A68035A19A4758000902BD3 /* TestTypeidDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTypeidDemo.h; sourceTree = "<group>"; };
 		0A68EB8319489C8500D9191B /* CommUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommUtils.cpp; sourceTree = "<group>"; };
 		0A68EB8419489C8500D9191B /* CommUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommUtils.h; sourceTree = "<group>"; };
 		0A84E315197FC69D00D80D64 /* lua */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lua; path = Resources/lua; sourceTree = "<group>"; };
@@ -1321,6 +1324,8 @@
 				0A1EA245186C51E800C50BCE /* TestMyDemo.h */,
 				0AFE4C1E1887CA5700013A32 /* TestFontDemo.cpp */,
 				0AFE4C1F1887CA5800013A32 /* TestFontDemo.h */,
+				0A68035919A4758000902BD3 /* TestTypeidDemo.cpp */,
+				0A68035A19A4758000902BD3 /* TestTypeidDemo.h */,
 			);
 			path = myDemo;
 			sourceTree = "<group>";
@@ -1346,6 +1351,7 @@
 		0A651D8F193D6F6E00630E04 /* xml */ = {
 			isa = PBXGroup;
 			children = (
+				0AEF5974193C8C5C00CBA049 /* testUtils */,
 				0A651D91193D6FBB00630E04 /* TestXMLDemo.cpp */,
 				0A651D92193D6FBB00630E04 /* TestXMLDemo.h */,
 			);
@@ -1420,7 +1426,6 @@
 				0A595F651990E6C500B9AB80 /* thread */,
 				0A96335B198661A30096AD98 /* network */,
 				0A651D8F193D6F6E00630E04 /* xml */,
-				0AEF5974193C8C5C00CBA049 /* testUtils */,
 				0AC2FCAC18F7EA190069BF0F /* clippingNode */,
 				0A44ED5C18F3A1860074E948 /* sprite */,
 				0A89334B18EE9269001AB17C /* TestLayer */,
@@ -1661,7 +1666,8 @@
 				0A023769194065950085C7F8 /* TestFileUtils.cpp */,
 				0A02376A194065950085C7F8 /* TestFileUtils.h */,
 			);
-			path = testUtils;
+			name = testUtils;
+			path = ../testUtils;
 			sourceTree = "<group>";
 		};
 		0AF4225418D9D173001F800D /* luaUtils */ = {
@@ -3193,6 +3199,7 @@
 				0AF4251D18D9D1BF001F800D /* cpSpaceQuery.c in Sources */,
 				0AF4256718D9D1BF001F800D /* CCParticleSystem.cpp in Sources */,
 				0AF4254D18D9D1BF001F800D /* neon_matrix_impl.c in Sources */,
+				0A68035B19A4758000902BD3 /* TestTypeidDemo.cpp in Sources */,
 				0AF425E418D9D1C0001F800D /* HttpClient.cpp in Sources */,
 				0AE2F4AF195AAC88004E91A2 /* ltm.c in Sources */,
 				0AF4252118D9D1BF001F800D /* cpVect.c in Sources */,

@@ -280,6 +280,7 @@ private:
     CURL *_curl;
     Helper *_schedule;
     pthread_t *_tid;
+    /**请求超时时间，默认300s.*/
     unsigned int _connectionTimeout;
     
     MultiAssetsManagerDelegateProtocol *_delegate; // weak reference

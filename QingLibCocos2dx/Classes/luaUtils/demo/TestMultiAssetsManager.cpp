@@ -78,7 +78,7 @@ void createLabel(CCNode *parent, string txt)
 void TestMultiAssetsManager::onEnter()
 {
 	TestBaseLayer::onEnter();
-    MultiAssetsManager *manager = new MultiAssetsManager("http://10.1.21.107/demo/");
+    MultiAssetsManager *manager = new MultiAssetsManager("http://10.1.21.107/ra/");
     manager->removeDownload();
     m_pManager = manager;
     //===== 外部设置 ===========

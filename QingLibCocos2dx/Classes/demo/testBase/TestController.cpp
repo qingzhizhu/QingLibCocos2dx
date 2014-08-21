@@ -70,6 +70,10 @@ static TestBaseLayer* CreateTestScene(int index){
             layer = TestThreadDemo::create();
             break;
             
+        case TESTS_TYPEID_TEST:
+            layer = TestTypeidDemo::create();
+            break;
+            
         default:
             break;
     }

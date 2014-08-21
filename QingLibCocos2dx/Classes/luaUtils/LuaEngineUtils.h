@@ -72,12 +72,22 @@ public:
      */
     static const char* getLuaVarTableProp(const char* luaFileName, const char* varName, const char* key);
     
-    
     /**
-     * 调用lua 的函数
-     * @param args 可变参数 TODO:
+     * 调用lua 的函数， lua都返回一个参数！
+     * @param luaFileName lua文件名称
+     * @param funcName 函数名称
+     * @param format 格式必须是 %d%s,  现在支持的有d(number),s(string),b(boolean)
+     * @param args 可变参数，传给lua的值
      */
-    static const char* callLuaFunc(const char* luaFileName, const char* funcName, ... );
+    static bool callLuaFunc(const char* luaFileName, const char* funcName, const char* format, va_list args);
+    
+    static bool callLuaFunc(const char* luaFileName, const char* funcName, const char* format, ... );
+    
+    static int callLuaFuncReturnInt(const char* luaFileName, const char* funcName, const char* format, ... );
+    
+    static const char * callLuaFuncReturnChar(const char* luaFileName, const char* funcName, const char* format, ... );
+    
+    static bool callLuaFuncReturnBool(const char* luaFileName, const char* funcName, const char* format, ... );
     
     
     

@@ -133,8 +133,8 @@ AssetsManager* MyAssetsManager::getAssetsManager()
      m_sPackageUrl.size() == 0 ||
      std::string::npos == m_sPackageUrl.find(".zip")){
         CCLOG("没设置资源包url和版本");
-        m_sPackageUrl = "http://10.1.21.154:8099/demo/package.zip";
-        m_sVersionUrl = "http://10.1.21.154:8099/demo/version";
+        m_sPackageUrl = "http://10.1.21.107/demo/package.zip";
+        m_sVersionUrl = "http://10.1.21.107/demo/version";
     }
     
     if (! pAssetsManager)// || pAssetsManager->getPackageUrl() != m_sPackageUrl )

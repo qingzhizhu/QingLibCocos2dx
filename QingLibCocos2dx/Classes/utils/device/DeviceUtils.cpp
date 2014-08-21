@@ -98,7 +98,7 @@ NETSTATUS DeviceUtils::getNetStatusType()
     return NETSTATUS(ret);
 }
 
-bool BADevice::removeDir(string pathStr)
+bool DeviceUtils::removeDir(string pathStr)
 {
     int code = -1;
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)

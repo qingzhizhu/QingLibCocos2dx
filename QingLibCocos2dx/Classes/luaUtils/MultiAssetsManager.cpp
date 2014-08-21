@@ -70,7 +70,7 @@ MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePre
 , _downloadedVersion("")
 , _curl(NULL)
 , _tid(NULL)
-, _connectionTimeout(0)
+, _connectionTimeout(3)
 , _delegate(NULL)
 , _nLocalVersion(0)
 , _nTotalVersion(0)
