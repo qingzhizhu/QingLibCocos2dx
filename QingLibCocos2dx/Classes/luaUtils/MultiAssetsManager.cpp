@@ -121,7 +121,7 @@ bool MultiAssetsManager::createDirectorys()
  */
 bool MultiAssetsManager::createDirectory(string pathStr)
 {
-    const char *path = getPathRemoveLastSlash(pathStr);
+    const char *path = pathStr.c_str(); //getPathRemoveLastSlash(pathStr);  在android上有奇怪的bug
     CCLOG("[MultiAssetsManager] 创建文件夹: %s", path);
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
     mode_t processMask = umask(0);
@@ -321,6 +321,8 @@ bool MultiAssetsManager::checkUpdate()
             return false;
         }
         _nDownloadVersion = _nLocalVersion + 1;
+//        //auto delete temp directory, 不管你上次临时的包下载完成，直接删除。以防开着游戏删数据，中途断电导致问题。
+//        removeDownloadByPath(_tempStoragePath);
         //auto create download directory
         createDirectorys();
         

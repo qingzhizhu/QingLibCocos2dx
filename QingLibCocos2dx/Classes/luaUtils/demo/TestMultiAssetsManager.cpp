@@ -148,6 +148,7 @@ void TestMultiAssetsManager::onSuccess()
         }
         if(lua_isuserdata(ls, -1)){
             CCNode *luaNode = *(CCNode**) lua_touserdata(ls, -1);
+            lua_pop(ls, 1);     //从堆栈中弹出,清除
             CC_SAFE_RETAIN(luaNode);        //不加会崩溃
             luaNode->setPosition(200, 200);
             CCSprite *luaSprite = NULL;//*(CCSprite**) lua_touserdata(ls, -1);
@@ -165,6 +166,7 @@ void TestMultiAssetsManager::onSuccess()
         lua_State *ls = LuaEngineUtils::getLuaState();
         if(lua_isuserdata(ls, -1)){
             CCNode *luaNode = *(CCNode **) lua_touserdata(ls, -1);
+            lua_pop(ls, 1);     //从堆栈中弹出,清除
             CC_SAFE_RETAIN(luaNode);
             luaNode->setPosition(200, 500);
             this->addChild(luaNode);
