@@ -8,6 +8,7 @@
 
 #include "TestTypeidDemo.h"
 #include "MultiAssetsManager.h"
+#include "CommUtils.h"
 
 NS_QING_BEGIN
 
@@ -218,6 +219,37 @@ CCLayer* TestTypeidDemo::getLayerByIndex()
             CCLOG("一级指针的值 %d", *pI);
             CCLOG("二级指针的值 %d", **ppI);
             CCLOG("二级指针的值 %d", **(int **)ppI); // *(*(int **)ppI)
+            
+        }
+            break;
+            
+        case 3:{
+            setTitle("基本操作");
+            int num = -123456789;
+            string str = CommUtils::intToString(num);
+            CCLOG("int2string : %s", str.c_str());
+            char s[32] = {0};
+            CommUtils::itoa(num, s);
+            CCLOG("itoa : %s", s);
+            str = CommUtils::itoa2(num);
+            CCLOG("itoa2 : %s", str.c_str());
+            
+            string tempS = "987654321";
+            int tempI = CommUtils::stringToInt(tempS);
+            CCLOG("stringToInt : %d", tempI);
+            
+            float tempF = -12345.12f;
+            str = CommUtils::numberToString(tempF);
+            CCLOG("numberToString float : %s", str.c_str());
+            
+            str = CommUtils::numberToString(-12345);
+            CCLOG("numberToString int : %s", str.c_str());
+            
+            float tempF2 = CommUtils::stringToNumber<float>("12345.12f");
+            CCLOG("stringToNumber float : %f", tempF2);
+            
+            tempI = CommUtils::stringToNumber<int>("-12345");
+            CCLOG("stringToNumber int : %d", tempI);
             
         }
             break;

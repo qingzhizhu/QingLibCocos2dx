@@ -46,8 +46,43 @@ public:
     static bool isPassword(string& str);
     
     
-#pragma mark-
     
+#pragma mark- basic method
+        
+    //c++ 11 都支持下面的函数
+    static int strLenMy(char s[]);
+    static void reverseStr(char s[]);
+    
+    static string intToString(int value);
+    static void itoa(int value, char s[]);
+    static const char* itoa2(int value);
+    static int stringToInt(string value);
+    static int atoiMy(char s[]);
+    
+    static string floatToString(float value);
+    static float stringToFloat(string value);
+    
+    /**
+     * 数字转字符串
+     * Usage: NumberToString ( Number );
+     */
+    template <typename T> static inline string numberToString(T number)
+    {
+        ostringstream ss;
+        ss << number;
+        return ss.str();
+    }
+    
+    /**
+     * 字符串转数字
+     * Usage: StringToNumber<Type> ( String );
+     */
+    template <typename T> static inline T stringToNumber(const string &str)
+    {
+        istringstream ss(str);
+        T result;
+        return ss >> result ? result : 0;
+    }
     
     
     

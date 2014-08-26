@@ -81,4 +81,101 @@ bool CommUtils::isPassword(string& str)
 
 
 
-#pragma mark-
+#pragma mark- basic method
+
+int CommUtils::strLenMy(char s[])
+{
+    int i =0;
+    while(s[i] != '\0'){
+        i++;
+    }
+    return i;
+}
+
+
+void CommUtils::reverseStr(char s[])
+{
+    char c;
+    for(int i=0,j=strLenMy(s)-1; i<j; i++, j--){
+        c = s[i];
+        s[i] = s[j];
+        s[j] = c;
+    }
+}
+
+
+string CommUtils::intToString(int value)
+{
+//    char buffer[32];
+//    sprintf(buffer, "%d", value);
+//    return buffer;
+    return string(itoa2(value));
+}
+
+
+void CommUtils::itoa(int value, char s[])
+{
+    int i = 0, sign = 0;
+    if((sign = value) < 0){
+        value = -value;
+    }
+    do{
+        s[i++] = value % 10 + '0';
+    }while ( (value/=10) > 0);
+    if(sign < 0){
+        s[i++] = '-';
+    }
+    s[i] = '\0';
+    reverseStr(s);
+}
+
+static map<int, string> s_dicStrNum;
+const char* CommUtils::itoa2(int value)
+{
+    auto iter = s_dicStrNum.find(value);
+    if(iter != s_dicStrNum.end()){
+        return iter->second.c_str();
+    }
+    static char strBuffer[24] = {0};
+    strBuffer[sprintf(strBuffer, "%d", value)] = '\0';
+    s_dicStrNum.insert(make_pair(value, strBuffer));
+    iter = s_dicStrNum.find(value);
+    if(iter != s_dicStrNum.end()){
+        return iter->second.c_str();
+    }
+    return NULL;
+}
+
+int CommUtils::stringToInt(string value)
+{
+    return atoi(value.c_str());
+}
+
+
+int CommUtils::atoiMy(char *s)
+{
+    int n = 0;
+    for(int i=0; s[i]>= '0' && s[i] <= '9'; ++i){
+        n = n * 10 + (s[i] - '0');
+    }
+    return n;
+}
+
+
+string CommUtils::floatToString(float value)
+{
+    stringstream os;
+    os << value;
+    return os.str();
+}
+
+
+
+
+
+
+
+
+
+
+
