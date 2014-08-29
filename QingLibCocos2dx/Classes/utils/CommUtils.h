@@ -17,10 +17,8 @@ NS_QING_BEGIN
 class CommUtils
 {
 public:
-    CommUtils();
-	~CommUtils();
     
-    
+#pragma mark- 颜色
     static uint getColor(unsigned char r, unsigned char g, unsigned char b);
     
     /**
@@ -46,9 +44,35 @@ public:
     static bool isPassword(string& str);
     
     
+#pragma mark- 时间
+    /**获取时间*/
+    static string getTime();
+    /**获取时间 time*/
+    static string getTime(int time);
+    /**日期*/
+    static string getTimeDate(int time);
+    /**时间差*/
+    static string getTimeAgo(int time);
+    /**
+     * 时钟时间
+     * limitMaxSpan 显示精确度
+     * shortFlag true: xx天xx时xx分 ; false: xx天xx小时xx分钟
+     */
+    static string getClockTime(int time, int limitMaxSpan = 3, bool shortFlag = true);
+    
+    /**时间戳*/
+    static int getTimeStamp();
+    /**获取当前时间 秒*/
+    static int secondNow();
+    /**获取当前时间 毫秒*/
+    static int64_t millSecondNow();
+    /**获取当前时间 微秒*/
+    static int64_t microSecondNow();
+    
+    
     
 #pragma mark- basic method
-        
+    /*
     //c++ 11 都支持下面的函数
     static int strLenMy(char s[]);
     static void reverseStr(char s[]);
@@ -61,6 +85,7 @@ public:
     
     static string floatToString(float value);
     static float stringToFloat(string value);
+    */
     
     /**
      * 数字转字符串
@@ -85,6 +110,9 @@ public:
     }
     
     
+private:
+    CommUtils();
+	~CommUtils();
     
 };
 

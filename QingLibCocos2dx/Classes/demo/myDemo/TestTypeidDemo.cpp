@@ -226,18 +226,19 @@ CCLayer* TestTypeidDemo::getLayerByIndex()
         case 3:{
             setTitle("基本操作");
             int num = -123456789;
-            string str = CommUtils::intToString(num);
-            CCLOG("int2string : %s", str.c_str());
-            char s[32] = {0};
-            CommUtils::itoa(num, s);
-            CCLOG("itoa : %s", s);
-            str = CommUtils::itoa2(num);
-            CCLOG("itoa2 : %s", str.c_str());
+//            string str = CommUtils::intToString(num);
+//            CCLOG("int2string : %s", str.c_str());
+//            char s[32] = {0};
+//            CommUtils::itoa(num, s);
+//            CCLOG("itoa : %s", s);
+//            str = CommUtils::itoa2(num);
+//            CCLOG("itoa2 : %s", str.c_str());
+//            
+//            string tempS = "987654321";
+//            int tempI = CommUtils::stringToInt(tempS);
+//            CCLOG("stringToInt : %d", tempI);
             
-            string tempS = "987654321";
-            int tempI = CommUtils::stringToInt(tempS);
-            CCLOG("stringToInt : %d", tempI);
-            
+            string str = "";
             float tempF = -12345.12f;
             str = CommUtils::numberToString(tempF);
             CCLOG("numberToString float : %s", str.c_str());
@@ -248,9 +249,26 @@ CCLayer* TestTypeidDemo::getLayerByIndex()
             float tempF2 = CommUtils::stringToNumber<float>("12345.12f");
             CCLOG("stringToNumber float : %f", tempF2);
             
-            tempI = CommUtils::stringToNumber<int>("-12345");
+            int tempI = CommUtils::stringToNumber<int>("-12345");
             CCLOG("stringToNumber int : %d", tempI);
             
+        }
+            break;
+            
+        case 4:{
+            setTitle("时间相关！");
+            time_t now = time(0);
+            string str = "";
+            str = str + "现在时间" + CommUtils::getTime() + "\n";
+            //2014/8/28 21:56:9
+            int tempT = 1409234169;
+            str += "2014/8/28 21:56:9 == " + CommUtils::getTime(tempT) + "\n";
+            str += "相距时间:" + CommUtils::getTimeAgo(tempT) +"\n";
+            str += "年月日:" + CommUtils::getTimeDate(tempT) + "\n";
+            str += "现在时间戳：" + CommUtils::numberToString(CommUtils::getTimeStamp()) + "\n";
+            str += "现在时间戳：毫秒" + CommUtils::numberToString(CommUtils::millSecondNow()) + "\n";
+            str += "clock time 显示日期和小时:" + CommUtils::getClockTime(now, 2);
+            createLabel(layer, str);
         }
             break;
             

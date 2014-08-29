@@ -79,10 +79,143 @@ bool CommUtils::isPassword(string& str)
     return result;
 }
 
+#pragma mark- 时间
+
+string CommUtils::getTime()
+{
+    time_t t = time(0);
+    char tmp[64];
+    strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S", localtime(&t));
+    return tmp;
+}
+
+string CommUtils::getTime(int time)
+{
+    struct cc_timeval now;
+    now.tv_sec = time;
+    char tmp[64];
+    strftime(tmp, sizeof(tmp), "%Y-%m-%d %H:%M:%S", localtime(&now.tv_sec));
+    return tmp;
+}
+
+string CommUtils::getTimeDate(int time)
+{
+    struct cc_timeval now;
+    now.tv_sec = time;
+    char tmp[64];
+    strftime(tmp, sizeof(tmp), "%Y-%m-%d", localtime(&now.tv_sec));
+    return tmp;
+}
+
+string CommUtils::getTimeAgo(int nTime)
+{
+    time_t t = time(0);
+    t -= nTime;
+    if(t <= 0){
+        return "now";
+    }
+    int d = t / 86400;
+    int h = (t / 3600) % 24;
+    int m = (t / 60) % 60;
+    int s = t % 60;
+    
+    string str = "";
+    if(d > 0){
+        str += numberToString(d);
+        str + "D";
+    }
+    
+    if(h > 0){
+        str += numberToString(h);
+        str += "H";
+    }
+    
+    if(m > 0){
+        str += numberToString(m);
+        str += "M";
+    }
+    
+    if(s > 0){
+        str += numberToString(s);
+        str += "S";
+    }
+    
+    return str;
+}
+
+string CommUtils::getClockTime(int time, int limitMaxSpan, bool shortFlag)
+{
+    struct cc_timeval now;
+    now.tv_sec = time;
+    struct tm *tm = localtime(&now.tv_sec);
+    string str = "";
+    //最多显示两个单位， 例如：“1天12小时”， “12小时30分”，“30分40秒”
+    int curSpan = 0;
+    if(tm->tm_mday > 0 && curSpan < limitMaxSpan){
+        str += numberToString(tm->tm_mday);
+        str += "D";
+        curSpan++;
+    }
+    
+    if(tm->tm_hour > 0 && curSpan < limitMaxSpan){
+        str += numberToString(tm->tm_hour);
+        str += "H";
+        curSpan++;
+    }
+    
+    if(tm->tm_min > 0 && curSpan < limitMaxSpan){
+        str += numberToString(tm->tm_min);
+        str += shortFlag ? "M" : "Min";
+        curSpan++;
+    }
+    
+    if(tm->tm_sec > 0 && curSpan < limitMaxSpan){
+        str += numberToString(tm->tm_sec);
+        str += shortFlag ? "S" : "Secs";
+        curSpan++;
+    }
+    
+    return str;
+}
+
+int CommUtils::getTimeStamp()
+{
+    //2种方式都ok
+//    time_t now;
+//    time(&now);
+//    return now;
+    return secondNow();
+}
+
+int CommUtils::secondNow()
+{
+    struct cc_timeval now;
+    CCTime::gettimeofdayCocos2d(&now, NULL);
+    return now.tv_sec;
+
+}
+
+int64_t CommUtils::millSecondNow()
+{
+    struct cc_timeval now;
+    CCTime::gettimeofdayCocos2d(&now, NULL);
+    int64_t millSecond = (int64_t)now.tv_sec * (int64_t)1000 + now.tv_usec / 1000;
+    return millSecond;
+}
+
+int64_t CommUtils::microSecondNow()
+{
+    struct cc_timeval now;
+    CCTime::gettimeofdayCocos2d(&now, NULL);    
+    int64_t microSecond = (int64_t)now.tv_sec * (int64_t)1000000 + now.tv_usec;
+    return microSecond;
+}
+
+
 
 
 #pragma mark- basic method
-
+/*
 int CommUtils::strLenMy(char s[])
 {
     int i =0;
@@ -168,6 +301,7 @@ string CommUtils::floatToString(float value)
     os << value;
     return os.str();
 }
+*/
 
 
 
