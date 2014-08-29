@@ -77,6 +77,7 @@ MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePre
 , _nDownloadVersion(0)
 , _schedule(NULL)
 , _tempStoragePath(DOWNLOAD_TEMP_DIR_SUBFIX)
+, _httpGetParams("?t=123")
 {
     if(useAssetsPlatform){
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -85,8 +86,14 @@ MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePre
         packagePrefix.append(MULTIASSETSMANAGER_ASSETS_IOS);
 #endif
     }
+    time_t now;
+    time(&now);
+    char nowTimec[64] = {0};
+    sprintf(nowTimec, "?t=%ld", now);
+    _httpGetParams = nowTimec;
+    
     _packagePerfix = packagePrefix;
-    _versionFileUrl = assetsServerUrl + versionFileName;
+    _versionFileUrl = assetsServerUrl + versionFileName + _httpGetParams;
     checkStoragePath();
     _schedule = new Helper();
     _arrTempFilePaths.clear();

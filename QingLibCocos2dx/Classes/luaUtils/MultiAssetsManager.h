@@ -264,7 +264,8 @@ private:
     /**临时文件中的所有路径*/
     vector<string> _arrTempFilePaths;
     
-    
+    /**get请求参数 时间戳*/
+    string _httpGetParams;
 private:
     //! The path to store downloaded resources.
     std::string _storagePath;
