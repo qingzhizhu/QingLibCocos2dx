@@ -9,6 +9,7 @@
 #include "TestTypeidDemo.h"
 #include "MultiAssetsManager.h"
 #include "CommUtils.h"
+#include "StringUtils.h"
 
 NS_QING_BEGIN
 
@@ -269,6 +270,35 @@ CCLayer* TestTypeidDemo::getLayerByIndex()
             str += "现在时间戳：毫秒" + CommUtils::numberToString(CommUtils::millSecondNow()) + "\n";
             str += "clock time 显示日期和小时:" + CommUtils::getClockTime(now, 2);
             createLabel(layer, str);
+        }
+            break;
+            
+        case 5:{
+            setTitle("string 相关 ");
+            string str = "";
+            string temp = "Kevin Geng";
+            StringUtils::toUpper(temp);
+            str += "大写:" + temp  + "\n";
+            StringUtils::toLower(temp);
+            str += "小写:" + temp  + "\n";
+            
+            temp = "  Hello Format！ ";
+            int len = temp.length();
+            StringUtils::trim(temp, true, false);
+            str += StringUtils::format("删除左空格：%s原有长度%d，现有长度%d", temp.c_str(), len, temp.length()) + "\n" ;
+            
+            temp = "Test a repleace Test func.";
+            str += "Test 替换成Hi:" + StringUtils::replaceAll(temp, "Test", "Hi") + "\n";
+            
+            temp = "1;2;2;a,b,c";
+            vector<string> vect ;
+            StringUtils::split(temp.c_str(), ";,", vect);
+            str += "分割字符串：" + temp + "\n";
+            str += "join:" + StringUtils::join(vect, "@") + "\n";
+            
+            str += StringUtils::format("calcHash:%d", StringUtils::calcHashKey("gengkun123@gmail.com")) + "\n";
+            createLabel(layer, str);
+            
         }
             break;
             
