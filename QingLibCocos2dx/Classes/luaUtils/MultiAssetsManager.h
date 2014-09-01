@@ -239,6 +239,7 @@ private:
         virtual void update(float dt);
         void sendMessage(Message *msg);
         
+        void clear();
     private:
         void handleUpdateSucceed(Message *msg);
         

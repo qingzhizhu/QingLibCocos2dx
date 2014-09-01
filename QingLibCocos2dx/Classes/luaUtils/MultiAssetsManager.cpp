@@ -101,7 +101,10 @@ MultiAssetsManager::MultiAssetsManager(string assetsServerUrl, string packagePre
 
 MultiAssetsManager::~MultiAssetsManager()
 {
-    CC_SAFE_DELETE(_schedule);
+    //解决内存崩溃bug
+    _schedule->clear();
+    CC_SAFE_RELEASE(_schedule);
+
 }
 
 /**
@@ -325,6 +328,7 @@ bool MultiAssetsManager::checkUpdate()
             CCLOG("there is not new version");
             // Set resource search path.
             setSearchPath();
+            curl_easy_cleanup(_curl);
             return false;
         }
         _nDownloadVersion = _nLocalVersion + 1;
@@ -570,8 +574,14 @@ MultiAssetsManager::Helper::Helper()
 
 MultiAssetsManager::Helper::~Helper()
 {
-    CCDirector::sharedDirector()->getScheduler()->unscheduleAllForTarget(this);
     delete _messageQueue;
+}
+
+void MultiAssetsManager::Helper::clear()
+{
+    //由于helper继承ccobject，这里才会触发真正的helper析构函数
+    CCDirector::sharedDirector()->getScheduler()->unscheduleAllForTarget(this);
+    CCLOG("MultiAssetsManager::Helper clear()!!");
 }
 
 void MultiAssetsManager::Helper::sendMessage(Message *msg)
