@@ -109,7 +109,7 @@ public:
      * @param storagePath 保存路径
      * @param useAssetsPlatform 是否使用平台差异资源前缀
      */
-    MultiAssetsManager(string assetsServerUrl="http://localhost/~Kevin/demo/", string packagePrefix="package", string versionFileName="version", string storagePath = ".Elextech_RAM/", bool useAssetsPlatform=false);
+    MultiAssetsManager(string assetsServerUrl="http://localhost/~Kevin/demo/", string packagePrefix="package", string versionFileName="version", string storagePath = "Elextech_RAM/", bool useAssetsPlatform=false);
     
     
     virtual ~MultiAssetsManager();

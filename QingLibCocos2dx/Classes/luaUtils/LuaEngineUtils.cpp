@@ -58,7 +58,7 @@ int LuaEngineUtils::executeLua(const char *luaFileName)
         // register lua engine
         CCScriptEngineManager::sharedManager()->setScriptEngine(pEngine);
     }
-    return pEngine->executeScriptFile(fullPathForFilename(luaFileName));
+    return pEngine->executeScriptFile(luaFileName);
 }
 
 

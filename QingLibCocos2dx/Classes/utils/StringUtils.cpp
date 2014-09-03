@@ -7,7 +7,7 @@
 //
 
 #include "StringUtils.h"
-
+#include <algorithm>
 
 USING_NS_QING;
 
