@@ -84,7 +84,7 @@ void createLabel(CCNode *parent, string txt)
 void TestMultiAssetsManager::onEnter()
 {
 	TestBaseLayer::onEnter();
-    MultiAssetsManager *manager = new MultiAssetsManager("http://10.1.21.18/demo/");
+    MultiAssetsManager *manager = new MultiAssetsManager("http://10.1.21.18/~Kevin/demo/");
     manager->removeDownload();
     m_pManager = manager;
     //===== 外部设置 ===========
@@ -138,8 +138,9 @@ void TestMultiAssetsManager::onSuccess()
     CCLOG("MyAssetsManager::onSuccess ");
     m_bIsSuccessed = true;
     callBack();
-    
-    bool b = LuaEngineUtils::callLuaFunc("hello2.lua", "getNode", "");
+    string luafile = "hello2.lua";
+    LuaEngineUtils::executeLua(luafile.c_str());
+    bool b = LuaEngineUtils::callLuaFunc(luafile.c_str(), "getNode", "");
     if(b){
         lua_State *ls = LuaEngineUtils::getLuaState();
         if(lua_istable(ls, -1)){
@@ -161,7 +162,7 @@ void TestMultiAssetsManager::onSuccess()
         CCLOG("调用 lua getNode 错误！");
     }
     
-    b = LuaEngineUtils::callLuaFunc("hello2.lua", "getLuaNode", "");
+    b = LuaEngineUtils::callLuaFunc(luafile.c_str(), "getLuaNode", "");
     if(b){
         lua_State *ls = LuaEngineUtils::getLuaState();
         if(lua_isuserdata(ls, -1)){

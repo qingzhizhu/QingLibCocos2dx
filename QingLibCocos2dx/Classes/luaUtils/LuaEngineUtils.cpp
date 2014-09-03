@@ -39,11 +39,14 @@ lua_State* LuaEngineUtils::getLuaState()
 
 bool LuaEngineUtils::isOpenLua(const char *luaFileName)
 {
-    int result = luaL_dofile(getLuaState(), fullPathForFilename(luaFileName));
-    if(result != 0){
-        CCLOG("Open lua error = %d ", result);
-    }
-    return result == 0;
+//      这个会导致每次加载&运行lua
+//    int result = luaL_dofile(getLuaState(), fullPathForFilename(luaFileName));
+//    if(result != 0){
+//        CCLOG("Open lua error = %d ", result);
+//    }
+//    return result == 0;
+    
+    return CCFileUtils::sharedFileUtils()->isFileExist(CCFileUtils::sharedFileUtils()->fullPathForFilename(luaFileName));
 }
 
 

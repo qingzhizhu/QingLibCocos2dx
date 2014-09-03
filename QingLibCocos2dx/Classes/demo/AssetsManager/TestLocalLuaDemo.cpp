@@ -39,7 +39,7 @@ CCLayer* TestLocalLuaDemo::getLayerByIndex()
 	switch (m_nLayerIndex) {
         case 0:{
             setTitle("C++ 调用 Lua 方法");
-//            lua_State* ls = LuaEngineUtils::getLuaStateByFunName("lua/hello2.lua", "myadd");
+//            lua_State* ls = LuaEngineUtils::getLuaStateByFunName(luafile.c_str(), "myadd");
 //            if(!ls){
 //                CCLOG("错误！！！");
 //                return layer;
@@ -67,26 +67,27 @@ CCLayer* TestLocalLuaDemo::getLayerByIndex()
             temp-= 3;
             CCLOG("temp0 值=%s", temp);
              */
-            
+            string luafile = "lua/hello2.lua";
+            LuaEngineUtils::executeLua(luafile.c_str());
             //抽象后调用
             string str = "";
-            int result = LuaEngineUtils::callLuaFuncReturnInt("lua/hello2.lua", "myadd", "%d%d", 54, 23);
+            int result = LuaEngineUtils::callLuaFuncReturnInt(luafile.c_str(), "myadd", "%d%d", 54, 23);
             CCLOG("result = %d", result);
             str += "调用lua function myadd(x, y) ";
             str += result == 77 ? " ok!" : "Error";
             str += "\n";
             
-            result = LuaEngineUtils::callLuaFuncReturnInt("lua/hello2.lua", "funReturnInt", "%d%s%b", 100, "aaa", true);
+            result = LuaEngineUtils::callLuaFuncReturnInt(luafile.c_str(), "funReturnInt", "%d%s%b", 100, "aaa", true);
             str += "调用lua funReturnInt(nNum, str, bIsOk) ";
             str += result == 1000 ? " ok!" : "Error";
             str += "\n";
             
-            string resultStr = LuaEngineUtils::callLuaFuncReturnChar("lua/hello2.lua", "funReturnString", "%d%s%b", 999, ";Kevin;", true);
+            string resultStr = LuaEngineUtils::callLuaFuncReturnChar(luafile.c_str(), "funReturnString", "%d%s%b", 999, ";Kevin;", true);
             str += "调用lua callLuaFuncReturnChar(nNum, str, bIsOk) ";
             str += resultStr == "999;Kevin;true" ? " ok!" : "Error";
             str += "\n";
             
-            bool resultB = LuaEngineUtils::callLuaFuncReturnBool("lua/hello2.lua", "funReturnBool", "%d%s%b", 100, "aaa", true);
+            bool resultB = LuaEngineUtils::callLuaFuncReturnBool(luafile.c_str(), "funReturnBool", "%d%s%b", 100, "aaa", true);
             str += "调用lua callLuaFuncReturnBool(nNum, str, bIsOk) ";
             str += resultB ? " ok!" : "Error";
             str += "\n";

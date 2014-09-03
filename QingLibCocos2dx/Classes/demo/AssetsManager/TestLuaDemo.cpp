@@ -58,7 +58,8 @@ void TestLuaDemo::runLua()
     CCLuaEngine* pEngine = CCLuaEngine::defaultEngine();
     CCScriptEngineManager::sharedManager()->setScriptEngine(pEngine);
     
-    std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("hello.lua");
+    //android 下会将路径里的点号换成斜杠!!
+    std::string path = "hello.lua";// CCFileUtils::sharedFileUtils()->fullPathForFilename("hello.lua");
     pEngine->executeScriptFile(path.c_str());
     
     
