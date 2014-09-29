@@ -34,6 +34,7 @@
 		0A02376719400E5F0085C7F8 /* FileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A02376519400E5F0085C7F8 /* FileUtils.cpp */; };
 		0A02376B194065950085C7F8 /* TestFileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A023769194065950085C7F8 /* TestFileUtils.cpp */; };
 		0A02376D19406C260085C7F8 /* ZangHuaYin.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0A02376C19406C260085C7F8 /* ZangHuaYin.txt */; };
+		0A0D7C6A19D9B4630089B781 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0D7C6919D9B4630089B781 /* Default-568h@2x.png */; };
 		0A147B321948A4340028B6A7 /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A147B301948A4340028B6A7 /* StringUtils.cpp */; };
 		0A1EA22B186BF7C800C50BCE /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA229186BF7C800C50BCE /* BaseObject.cpp */; };
 		0A1EA23F186C0BE000C50BCE /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1EA23D186C0BDF00C50BCE /* VisibleRect.cpp */; };
@@ -400,6 +401,7 @@
 		0A023769194065950085C7F8 /* TestFileUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestFileUtils.cpp; sourceTree = "<group>"; };
 		0A02376A194065950085C7F8 /* TestFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFileUtils.h; sourceTree = "<group>"; };
 		0A02376C19406C260085C7F8 /* ZangHuaYin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ZangHuaYin.txt; path = Resources/ZangHuaYin.txt; sourceTree = "<group>"; };
+		0A0D7C6919D9B4630089B781 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
 		0A147B301948A4340028B6A7 /* StringUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
 		0A147B311948A4340028B6A7 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
 		0A1EA229186BF7C800C50BCE /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
@@ -1154,6 +1156,7 @@
 		0A00AF421864417400775320 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0A0D7C6919D9B4630089B781 /* Default-568h@2x.png */,
 				0A91AAFE1981F21C00A30051 /* 1_s.png */,
 				0A84E31E1980D97400D80D64 /* socket.lua */,
 				0A84E31B197FD06C00D80D64 /* mobdebug.lua */,
@@ -2735,6 +2738,7 @@
 				0A00AF461864417400775320 /* CloseSelected.png in Resources */,
 				0A00AF481864417400775320 /* Default.png in Resources */,
 				0AE2F4BA195AAC88004E91A2 /* build_ios.sh in Resources */,
+				0A0D7C6A19D9B4630089B781 /* Default-568h@2x.png in Resources */,
 				0AF4250218D9D1BF001F800D /* LICENSE.txt in Resources */,
 				0A00AF4A1864417400775320 /* HelloWorld.png in Resources */,
 				0AF4250118D9D1BF001F800D /* chipmunk-docs.html in Resources */,
