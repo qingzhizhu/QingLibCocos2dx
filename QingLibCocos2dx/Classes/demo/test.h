@@ -26,6 +26,7 @@
 #include "TestDeviceInfoDemo.h"
 #include "TestThreadDemo.h"
 #include "TestTypeidDemo.h"
+#include "TestJsonDemo.h"
 
 enum{
     TESTS_MYDEMO = 0,
@@ -39,11 +40,12 @@ enum{
     TESTS_UTILS_STORAGE,
     TESTS_IO_FILE,
     TESTS_IO_XML,
+    TESTS_JSON,
     TESTS_NETWORK,
     TESTS_DEVICE_INFO,
     TESTS_PTHREAD,
     TESTS_TYPEID_TEST,
-    TESTS_MYDEMO21,
+    
     TESTS_MYDEMO22,
     TESTS_MYDEMO23,
     TESTS_MYDEMO24,
@@ -60,7 +62,7 @@ enum{
 };
 
 
-const std::string g_aTestNames[TESTS_COUNT] = {
+const std::string g_aTestNames[] = {
     "My Demo!",
     "Font Test",
     "Lua Demo",
@@ -72,6 +74,7 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "Storage Utils Test.",
     "IO - File Test!",
     "IO - XML Test!",
+    "JSON Test",
     "NetWork Demo!",
     "Device Info!",
     "pthread Demo!",
@@ -87,7 +90,6 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "My Demo====213!",
     "My Demo====214!",
     "My Demo====215!",
-    "My Demo====216!",
 };
 
 

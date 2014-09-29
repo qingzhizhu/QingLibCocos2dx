@@ -54,6 +54,10 @@ static TestBaseLayer* CreateTestScene(int index){
             layer = TestXMLDemo::create();
             break;
             
+        case TESTS_JSON:
+            layer = TestJsonDemo::create();
+            break;
+            
         case TESTS_IO_FILE:
             layer = TestFileUtils::create();
             break;
