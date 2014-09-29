@@ -302,6 +302,17 @@ CCLayer* TestTypeidDemo::getLayerByIndex()
         }
             break;
             
+        case 6:{
+            setTitle("CCApplication ");
+            string str = "";
+            str += "language:" + CommUtils::numberToString(CCApplication::sharedApplication()->getCurrentLanguage()) + "\n";
+            
+            TargetPlatform ePlatform = CCApplication::sharedApplication()->getTargetPlatform();
+            str += "platform:" + CommUtils::numberToString(ePlatform) + "\n";
+            
+            createLabel(layer, str);
+        }
+            break;
 		default:
             break;
     }
